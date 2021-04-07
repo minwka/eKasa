@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="PasswordManager.Installer.Controls.error"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PasswordManager.Installer.Controls"
+             mc:Ignorable="d">
+	<Grid x:Name="mainGrid" Width="400" Height="535">
+		<TextBlock x:Name="title" Text="Bir Şeyler Ters Gitti!" TextWrapping="Wrap" Margin="10,0,10,0" Height="50" VerticalAlignment="Top" Foreground="#FFFF003C" FontSize="34"/>
+		<TextBlock x:Name="description" TextWrapping="Wrap" Margin="10,50,10,0" Height="110" VerticalAlignment="Top" Foreground="#FFFF003C" FontSize="18" FontStyle="Italic" Text="Uygulamanızı yüklerken beklenmedik bir şey ile karşılaştık. Lütfen destek ekibimiz ile iletişime geçin!"/>
+		<Image x:Name="logo" HorizontalAlignment="Center" Height="257" Margin="0,219,0,0" VerticalAlignment="Top" Width="256" Source="/Controls/ekasa_logo.png"/>
+	</Grid>
+</UserControl>

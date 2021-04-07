@@ -1,0 +1,60 @@
+﻿<Application x:Class="PasswordManager.Core.App"
+				 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				 xmlns:local="clr-namespace:PasswordManager.Core"
+				 StartupUri="MainWindow.xaml">
+	<Application.Resources>
+		<ControlTemplate x:Key="defaultButton" TargetType="Button">
+			<Grid>
+				<VisualStateManager.VisualStateGroups>
+					<VisualStateGroup Name="CommonStates">
+						<VisualState Name="Normal">
+							<Storyboard>
+								<ColorAnimation Storyboard.TargetName="backgroundElement" 
+									Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+									To="#FF2D2D30"
+									Duration="0"/>
+							</Storyboard>
+						</VisualState>
+						<VisualState Name="MouseOver">
+							<Storyboard>
+								<ColorAnimation Storyboard.TargetName="backgroundElement" 
+									Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" 
+									To="#FF1A1A1D"
+									Duration="0"/>
+							</Storyboard>
+						</VisualState>
+					</VisualStateGroup>
+				</VisualStateManager.VisualStateGroups>
+				<Rectangle Name="backgroundElement" Fill="#FF2D2D30" Stroke="#FF0078D7"/>
+				<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			</Grid>
+		</ControlTemplate>
+		<ControlTemplate x:Key="navigationButton" TargetType="Button">
+			<Grid>
+				<VisualStateManager.VisualStateGroups>
+					<VisualStateGroup Name="CommonStates">
+						<VisualState Name="Normal">
+							<Storyboard>
+								<ColorAnimation Storyboard.TargetName="backgroundElement" 
+									Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+									To="#FF3C3C41"
+									Duration="0"/>
+							</Storyboard>
+						</VisualState>
+						<VisualState Name="MouseOver">
+							<Storyboard>
+								<ColorAnimation Storyboard.TargetName="backgroundElement" 
+									Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" 
+									To="#FF2D2D30"
+									Duration="0"/>
+							</Storyboard>
+						</VisualState>
+					</VisualStateGroup>
+				</VisualStateManager.VisualStateGroups>
+				<Rectangle Name="backgroundElement" Fill="#FF3C3C41"/>
+				<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			</Grid>
+		</ControlTemplate>
+	</Application.Resources>
+</Application>

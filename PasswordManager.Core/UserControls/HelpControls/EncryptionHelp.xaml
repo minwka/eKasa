@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="PasswordManager.Core.UserControls.HelpControls.EncryptionHelp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PasswordManager.Core.UserControls.HelpControls"
+             mc:Ignorable="d">
+	<Grid x:Name="mainGrid" Width="629" Height="498">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<TextBlock x:Name="titleLabel" Margin="10,10,10,0" Text="Veritabanı &amp; Şifreleme Hakkında" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" Height="40" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="6"/>
+		<Separator x:Name="titleSeperator" Margin="10,10,10,0" VerticalAlignment="Top" Foreground="{x:Null}" Background="#FF0078D7" Grid.ColumnSpan="6" Grid.Row="1"/>
+		<ScrollViewer x:Name="helpScroller" Grid.Row="1" Grid.RowSpan="11" Grid.ColumnSpan="6" Margin="10,20,10,10" FontWeight="Bold" VerticalScrollBarVisibility="Auto">
+			<TextBlock x:Name="helpContent" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="14" FontWeight="Normal" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" FontStyle="Italic"><Run Text="Veritabanı:"/><LineBreak/><Run/><LineBreak/><Run Text="Uygulamanın kurulumunu ve kullanımını kolaylaştırmak için uygulama, harici bir veritabanı sunucusu kullanmak yerine bilgilerinizi yerel dosyalarda saklamaktadır."/><LineBreak/><Run Text="Bu dosyalar *.JSON formatında olup barındırdıkları bilgiler Gelişmiş Şifreleme Standartı (AES) algoritması ile şifrelidir."/><LineBreak/><Run Text="Veritabanı dosyalarınızı bilgisayardan bilgisayara taşıyabilir, farklı depolama birimlerinde saklayabilir ve güvenle bulut depolama hizmetlerine yükleyebilirisiniz."/><LineBreak/><Run/><LineBreak/><Run Text="Veritabanı dosyası, şifreleme/şifre çözme işlemi için şifrenizi doğrulamak adına şifrenizin parmakizini içerir. Bu parmakizi, tek yönlü özetleme (hash) fonksiyonlarından biri olan SHA-512 algoritması ile oluşturulur ve her girişinizde, kullandığınız şifrenin parmakizi ile karşılaştırılır. Bu parmakizi, şifreniz değildir, parmakizinden şifrenize geri ulaşılamaz."/><LineBreak/><Run/><LineBreak/><Run Text="Şifreleme:"/><LineBreak/><Run/><LineBreak/><Run Text="Veritabanındaki tüm kayıtlar, anaşifreniz kullanılarak AES algoritması ile şifrelenir. Bu şifre veritabanınızda depolanmaz. Veritabanınızı her açtığınızda belirttiğiniz şifre ile kayıtların şifresi çözülür, veritabanı kilitlenirken de aynı şifre ile şifrelenir ve şifreniz uygulama belleğinden silinir."/><LineBreak/><Run/><LineBreak/><Run Text="Anaşifreniz veritabanında depolanmadığı için bu şifreyi unutmanız halinde kurtarmanın bir yolu yoktur. O şifreyi kullanan veritabanına olan erişiminizi tamamen kaybedersiniz."/></TextBlock>
+		</ScrollViewer>
+	</Grid>
+</UserControl>
