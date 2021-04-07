@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,35 +11,39 @@ namespace PasswordManager.Core.UserControls
 		public OptionsUserControl()
 		{ InitializeComponent(); }
 
+		Canvas canvas;
+		Grid grid;
+		Window window;
+		EntryModel entry;
+		private void optionsUserControl_Loaded(object sender, RoutedEventArgs e)
+		{
+			canvas = (Canvas)Parent;
+			grid = (Grid)(canvas.Parent);
+			window = (Window)(grid.Parent);
+			entry = (EntryModel)ManageDBWindow.homeuc.entriesDataGrid.SelectedItem;
+		}
+
 		private void copyUserButton_Click(object sender, RoutedEventArgs e)
 		{
-			var entry = (EntryModel)ManageDBWindow.homeuc.entriesDataGrid.SelectedItem;
 			if (entry != null) {
 				Clipboard.SetText(entry.username);
 				ManageDBWindow.homeuc.tooltipLabel.Content = "Kullanıcı adı panoya kopyalandı!";
-				var canvas = (Canvas)Parent;
 				canvas.Children.Remove(this);
 			}
 		}
 
 		private void copyPwdButton_Click(object sender, RoutedEventArgs e)
 		{
-			var entry = (EntryModel)ManageDBWindow.homeuc.entriesDataGrid.SelectedItem;
 			if (entry != null) {
 				Clipboard.SetText(entry.password);
 				ManageDBWindow.homeuc.tooltipLabel.Content = "Şifre panoya kopyalandı!";
-				var canvas = (Canvas)Parent;
 				canvas.Children.Remove(this);
 			}
 		}
 
 		private void typeUserButton_Click(object sender, RoutedEventArgs e)
 		{
-			var entry = (EntryModel)ManageDBWindow.homeuc.entriesDataGrid.SelectedItem;
 			if (entry != null) {
-				var canvas = (Canvas)Parent;
-				var grid = (Grid)(canvas.Parent);
-				var window = (Window)(grid.Parent);
 				window.WindowState = WindowState.Minimized;
 				Process.Start("AutofillHelper.exe", $"s {entry.username}");
 				canvas.Children.Remove(this);
@@ -49,11 +52,7 @@ namespace PasswordManager.Core.UserControls
 
 		private void typePwdButton_Click(object sender, RoutedEventArgs e)
 		{
-			var entry = (EntryModel)ManageDBWindow.homeuc.entriesDataGrid.SelectedItem;
 			if (entry != null) {
-				var canvas = (Canvas)Parent;
-				var grid = (Grid)(canvas.Parent);
-				var window = (Window)(grid.Parent);
 				window.WindowState = WindowState.Minimized;
 				Process.Start("AutofillHelper.exe", $"s {entry.password}");
 				canvas.Children.Remove(this);
@@ -62,11 +61,7 @@ namespace PasswordManager.Core.UserControls
 
 		private void typeCredsButton_Click(object sender, RoutedEventArgs e)
 		{
-			var entry = (EntryModel)ManageDBWindow.homeuc.entriesDataGrid.SelectedItem;
 			if (entry != null) {
-				var canvas = (Canvas)Parent;
-				var grid = (Grid)(canvas.Parent);
-				var window = (Window)(grid.Parent);
 				window.WindowState = WindowState.Minimized;
 				Process.Start("AutofillHelper.exe", $"m {entry.username} {entry.password}");
 				canvas.Children.Remove(this);
