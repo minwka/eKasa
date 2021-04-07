@@ -1,0 +1,18 @@
+﻿<UserControl x:Name="mainControl" x:Class="PasswordManager.Installer.Controls.license"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PasswordManager.Installer.Controls"
+             mc:Ignorable="d">
+	<Grid x:Name="mainGrid" Width="400" Height="535">
+		<TextBlock x:Name="title" Text="Sözleşme" TextWrapping="Wrap" Margin="10,0,10,0" Height="50" VerticalAlignment="Top" Foreground="#FFFF003C" FontSize="34"/>
+		<TextBlock x:Name="description" TextWrapping="Wrap" Margin="10,50,10,0" Height="60" VerticalAlignment="Top" Foreground="#FFFF003C" FontSize="18" FontStyle="Italic" Text="Uygulamayı yükleyebilmemiz için lütfen kullanım sözleşmesini okuyun ve kabul edin."/>
+		<ScrollViewer x:Name="scroler" HorizontalAlignment="Center" Height="350" Margin="0,139,0,0" VerticalAlignment="Top" Width="380" VerticalScrollBarVisibility="Auto">
+			<TextBlock x:Name="agreement" TextWrapping="Wrap" FontSize="18" FontStyle="Italic">
+				<TextBlock.Foreground>
+					<SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+				</TextBlock.Foreground><Run Text="Sözleşme:"/><LineBreak/><Run/><LineBreak/><Run Text="• Bu uygulamanın tüm hakları Ferit 'NAMI' Uzun'a aittir."/><LineBreak/><Run/><LineBreak/><Run Text="• Yalnızca geçerli bir lisans anahtarınız var ise bu uygulamayı kullanabilirsiniz. NAMI, kullanım koşullarını ihlal halinde bu lisansı herhangi bir zamanda feshetme hakkını saklı tutar."/><LineBreak/><Run/><LineBreak/><Run Text="• Bu uygulama ticari amaçlarla izinsiz olarak dağıtılamaz, satılamaz, üzerinde tersine mühendislik yapılamaz."/><LineBreak/><Run/><LineBreak/><Run Text="• Bu uygulamayı kişisel kullanımınız için kopyalayabilir ve saklayabilirsiniz."/><LineBreak/><Run/><LineBreak/><Run Text="• NAMI, bu uygulama aracılığıyla sizden hiçbir kişisel bilgi toplamaz."/><LineBreak/><Run/><LineBreak/><Run Text="• Uygulamanın yanlış kullanımı dolayısıyla oluşabilecek maddi, manevi hiçbir NAMI sorumlu tutulamaz."/><LineBreak/><Run/><LineBreak/><Run Text="Bu uygulamayı yüklemeye devam ederek yukarıdaki koşulları kabul etmiş bulunursunuz."/></TextBlock>
+		</ScrollViewer>
+	</Grid>
+</UserControl>
