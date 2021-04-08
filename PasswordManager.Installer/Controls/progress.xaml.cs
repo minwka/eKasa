@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using IWshRuntimeLibrary;
 using Microsoft.Win32;
 using PasswordManager.Installer.Classes;
 using File = System.IO.File;
@@ -63,36 +62,18 @@ namespace PasswordManager.Installer.Controls
 			#endregion
 
 			if (InstallParameters.desktopShortcut) {
-				var startupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-				var shell = new WshShell();
-				var shortCutLinkFilePath = $"{startupFolderPath}\\Desktop\\eKasa.lnk";
-				var windowsApplicationShortcut = (IWshShortcut)shell.CreateShortcut(shortCutLinkFilePath);
-				windowsApplicationShortcut.Description = "eKasa. Şifre yöneticisinde tercihiniz.";
-				windowsApplicationShortcut.WorkingDirectory = $"{InstallParameters.installPath}";
-				windowsApplicationShortcut.TargetPath = $"{InstallParameters.installPath}\\eKasa.exe";
-				windowsApplicationShortcut.Save();
+				var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+				WinShortcut.Create($"{desktopPath}\\eKasa.lnk", $"{InstallParameters.installPath}\\eKasa.exe", "", InstallParameters.installPath, "eKasa. Şifre yöneticiniz", "", "");
 			}
 
 			if (InstallParameters.startmenuShortcut) {
-				var startupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
-				var shell = new WshShell();
-				var shortCutLinkFilePath = $"{startupFolderPath}\\eKasa.lnk";
-				var windowsApplicationShortcut = (IWshShortcut)shell.CreateShortcut(shortCutLinkFilePath);
-				windowsApplicationShortcut.Description = "eKasa. Şifre yöneticisinde tercihiniz.";
-				windowsApplicationShortcut.WorkingDirectory = $"{InstallParameters.installPath}";
-				windowsApplicationShortcut.TargetPath = $"{InstallParameters.installPath}\\eKasa.exe";
-				windowsApplicationShortcut.Save();
+				var startmenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
+				WinShortcut.Create($"{startmenuPath}\\eKasa.lnk", $"{InstallParameters.installPath}\\eKasa.exe", "", startmenuPath, "eKasa. Şifre yöneticiniz", "", "");
 			}
 
 			if (InstallParameters.launchatStartup) {
-				var startupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-				var shell = new WshShell();
-				var shortCutLinkFilePath = $"{startupFolderPath}\\eKasa.lnk";
-				var windowsApplicationShortcut = (IWshShortcut)shell.CreateShortcut(shortCutLinkFilePath);
-				windowsApplicationShortcut.Description = "eKasa. Şifre yöneticisinde tercihiniz.";
-				windowsApplicationShortcut.WorkingDirectory = $"{InstallParameters.installPath}";
-				windowsApplicationShortcut.TargetPath = $"{InstallParameters.installPath}\\eKasa.exe";
-				windowsApplicationShortcut.Save();
+				var startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+				WinShortcut.Create($"{startupPath}\\eKasa.lnk", $"{InstallParameters.installPath}\\eKasa.exe", "", startupPath, "eKasa. Şifre yöneticiniz", "", "");
 			}
 
 			Dispatcher.Invoke(() => {
