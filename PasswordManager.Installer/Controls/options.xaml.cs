@@ -3,7 +3,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using PasswordManager.Installer.Classes;
 
 namespace PasswordManager.Installer.Controls
 {
