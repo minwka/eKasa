@@ -16,7 +16,7 @@ namespace PasswordManager.Core.UserControls
 
 		private void visitButton_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
-			Process.Start("powershell","start https://t.me/anth4");
+			Process.Start("powershell", "start https://t.me/anth4");
 		}
 	}
 }
