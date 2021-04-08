@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using PasswordManager.Installer.Classes;
 using PasswordManager.Installer.Controls;
 
 namespace PasswordManager.Installer
