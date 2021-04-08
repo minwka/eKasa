@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using IWshRuntimeLibrary;
 using PasswordManager.Installer.Classes;
 
@@ -27,11 +28,17 @@ namespace PasswordManager.Installer.Controls
 			var window = (Window)grid.Parent;
 
 			try {
-				Process.Start($"cmd.exe", $"/c Binaries\\7z\\7za.exe x -p\"enc765_-_-_inst05\" -o\"{InstallParameters.installPath}\" Binaries\\Install\\package.7z");
-				CreateShortcuts();
-				canvas.Children.Clear();
-				canvas.Children.Add(MainWindow.uclaunch);
-				MainWindow.uclaunch.finishInstall();
+				ProcessStartInfo psi = new();
+				psi.FileName = "cmd.exe";
+				psi.Arguments = $"/c Binaries\\7z\\7za.exe x -p\"enc765_-_-_inst05\" -o\"{InstallParameters.installPath}\" Binaries\\Install\\package.7z -y";
+				psi.CreateNoWindow = true;
+				psi.WindowStyle = ProcessWindowStyle.Hidden;
+
+				Process p = new();
+				p.EnableRaisingEvents = true;
+				p.Exited += new EventHandler(CreateShortcutsAndLaunch);
+				p.StartInfo = psi;
+				p.Start();
 			} catch (Exception ex) {
 				canvas.Children.Clear();
 				canvas.Children.Add(MainWindow.ucerror);
@@ -42,7 +49,7 @@ namespace PasswordManager.Installer.Controls
 			}
 		}
 
-		public void CreateShortcuts()
+		void CreateShortcutsAndLaunch(object sender, EventArgs e)
 		{
 			if (InstallParameters.desktopShortcut) {
 				var startupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -76,6 +83,31 @@ namespace PasswordManager.Installer.Controls
 				windowsApplicationShortcut.TargetPath = $"{InstallParameters.installPath}\\eKasa.exe";
 				windowsApplicationShortcut.Save();
 			}
+
+			Dispatcher.Invoke(() => {
+				var canvas = (Canvas)Parent;
+				var grid = (Grid)canvas.Parent;
+				var window = (MainWindow)grid.Parent;
+
+				canvas.Children.Clear();
+				canvas.Children.Add(MainWindow.uclaunch);
+
+				window.next.Content = "ÇIK";
+				window.next.IsEnabled = true;
+				window.next.Foreground = new SolidColorBrush(Color.FromRgb(0, 120, 215));
+				window.next.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 120, 215));
+				window.next.Click += terminate;
+				window.back.Visibility = Visibility.Hidden;
+				window.terminate.Visibility = Visibility.Hidden;
+			});
+		}
+
+		void terminate(object sender, RoutedEventArgs e)
+		{
+			if (MainWindow.uclaunch.scLaunch.IsChecked == true) {
+				Process.Start($"{InstallParameters.installPath}\\eKasa.exe");
+			}
+			Application.Current.Shutdown();
 		}
 	}
 }
