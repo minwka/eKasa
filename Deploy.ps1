@@ -45,6 +45,27 @@ New-Item -ItemType Directory Install_Package\Binaries\Install
 Copy-Item Binaries\7z\* Install_Package\Binaries\7z
 
 .\Binaries\7z\7za.exe a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on -mhe=on -p"$key" .\Install_Package\Binaries\Install\package.7z .\Executables\*
+Set-Location ..;
+#endregion
+
+#region Post compilation cleanup
+Write-Warning "Cleaning post-compilation artifacts"
+Set-Location PasswordManager.AutofillHelper
+Remove-Item bin -Recurse
+Remove-Item obj -Recurse
+
+Set-Location ..; Set-Location PasswordManager.Core          
+Remove-Item bin -Recurse
+Remove-Item obj -Recurse
+
+Set-Location ..; Set-Location PasswordManager.Installer     
+Remove-Item bin -Recurse
+Remove-Item obj -Recurse
+
+Set-Location ..; Set-Location PasswordManager.Uninstaller
+Remove-Item bin -Recurse
+Remove-Item obj -Recurse
+Set-Location ..;
 #endregion
 
 #region Wait for user
