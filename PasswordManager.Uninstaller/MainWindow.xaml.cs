@@ -1,16 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using PasswordManager.Installer.Controls;
+using PasswordManager.Uninstaller.Controls;
 
-namespace PasswordManager.Installer
+namespace PasswordManager.Uninstaller
 {
 	public partial class MainWindow : Window
 	{
 		static public welcome ucwelcome = new();
-		static public license uclicense = new();
 		static public options ucoptions = new();
 		static public progress ucprogress = new();
-		static public launch uclaunch = new();
+		static public done ucdone = new();
 		static public error ucerror = new();
 
 		public MainWindow()
@@ -18,7 +17,6 @@ namespace PasswordManager.Installer
 			InitializeComponent();
 
 			content.Children.Add(ucwelcome);
-			back.Visibility = Visibility.Hidden;
 		}
 
 		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -42,43 +40,21 @@ namespace PasswordManager.Installer
 			content.Children.Clear();
 			switch (page) {
 				case 0:
-					content.Children.Add(uclicense);
-					next.Content = "KABUL EDİYORUM";
-					back.Visibility = Visibility.Visible;
+					content.Children.Clear();
+					content.Children.Add(ucoptions);
+					next.Content = "KALDIR";
 					break;
 				case 1:
-					content.Children.Add(ucoptions);
-					next.Content = "YÜKLE";
-					break;
-				case 2:
+					content.Children.Clear();
 					content.Children.Add(ucprogress);
-					ucprogress.CopyPreferences();
-					next.Content = "YÜKLENİYOR";
+					next.Content = "KALDIRILIYOR";
 					next.IsEnabled = false;
-					back.IsEnabled = false;
-					terminate.IsEnabled = false;
-					ucprogress.BeginInstall();
+					terminate.Visibility = Visibility.Hidden;
+					ucprogress.BeginUninstall();
+					terminate.Click -= terminate_Click;
 					break;
 			}
 			page++;
-		}
-
-		private void back_Click(object sender, RoutedEventArgs e)
-		{
-			content.Children.Clear();
-			switch (page) {
-				case 2:
-					content.Children.Add(uclicense);
-					next.Content = "KABUL EDİYORUM";
-					next.IsEnabled = true;
-					break;
-				case 1:
-					content.Children.Add(ucwelcome);
-					next.Content = "İLERİ";
-					back.Visibility = Visibility.Hidden;
-					break;
-			}
-			page--;
 		}
 	}
 }
