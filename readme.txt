@@ -7,3 +7,4 @@ Notlar:
 • <Install_Package> klasörünü kullanıcılara dağıtabilirsiniz.
 • Proje, yerel Git repo'su kullanmaktadır. Proje kod geçmişini orada bulabilirsiniz.
 • Bunlar dışında projeyi, diğer projeler gibi, aynı şekilde Visual Studio üzerinden kullanabilirsiniz.
+• <Cleanup.ps1> script'i, derleme sonrası uygulama dosyalarını <Deployment_Package> dizini altındaki paketleri temizler.
