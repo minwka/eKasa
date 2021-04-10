@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using PasswordManager.Core.Classes;
-using PasswordManager.Core.Models;
 
 namespace PasswordManager.Core.UserControls
 {
@@ -14,59 +12,53 @@ namespace PasswordManager.Core.UserControls
 		{
 			InitializeComponent();
 
-			titleLabel.Text = $"Hoşgeldin, {DTO.InternalDB.owner}!";
-			entriesDataGrid.ItemsSource = DTO.InternalDB.entries;
+			titleLabel.Text = $"Hoşgeldin, {Settings.dbSettings.InternalDb.Owner}!";
+			entriesDataGrid.ItemsSource = Settings.dbSettings.InternalDb.Entries;
 			updateDbInfo();
 		}
 
 		int[] RSL = { 1, 1, 1 };
 
-		private void copyPwdButton_Click(object sender, RoutedEventArgs e)
-		{
-			var entry = (EntryModel)entriesDataGrid.SelectedItem;
-			if (entry != null) {
-				Clipboard.SetText(entry.password);
-				tooltipLabel.Content = "Şifre panoya kopyalandı!";
-			}
-		}
-
-		private void copyUsernameButton_Click(object sender, RoutedEventArgs e)
-		{
-			var entry = (EntryModel)entriesDataGrid.SelectedItem;
-			if (entry != null) {
-				Clipboard.SetText(entry.name);
-				tooltipLabel.Content = "Kullanıcı adı panoya kopyalandı!";
-			}
-		}
-
 		private void updateDbInfo()
 		{
-			titleLabel.Text = $"Hoşgeldin, {DTO.InternalDB.owner}!";
+			ref var idb = ref Settings.dbSettings.InternalDb;
+			titleLabel.Text = $"Hoşgeldin, {idb.Owner}!";
 
-			var lmsd = DTO.InternalDB.last_modified.ToLocalTime().ToShortDateString();
-			var lmst = DTO.InternalDB.last_modified.ToLocalTime().ToShortTimeString();
-			var dbn = DTO.InternalDB.name;
+			var lmsd = Convert.ToDateTime(idb.ModifiedDate).ToLocalTime().ToShortDateString();
+			var lmst = Convert.ToDateTime(idb.ModifiedDate).ToLocalTime().ToShortTimeString();
+			var dbn = idb.Name;
 			dbDataLabel.Content = $"DB: {dbn}, Son değişiklik: {lmsd} - {lmst}";
 
 			entriesDataGrid.SelectedIndex = -1;
+		}
+
+		private void optionsButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (entriesDataGrid.SelectedIndex == -1) { entriesDataGrid.SelectedIndex = 0; }
+
+			var canvas = (Canvas)Parent;
+			var ouc = new OptionsUserControl();
+			canvas.Children.Add(ouc);
 		}
 
 		private void editButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entriesDataGrid.SelectedIndex == -1) { entriesDataGrid.SelectedIndex = 0; }
 			var oldEntry = (EntryModel)entriesDataGrid.SelectedItem;
-			ManageDBWindow.edituc.idPreview.Text = oldEntry.guid.ToString();
-			ManageDBWindow.edituc.namePreview.Text = oldEntry.name;
-			ManageDBWindow.edituc.usernamePreview.Text = oldEntry.username;
-			ManageDBWindow.edituc.pwdPreview.Password = oldEntry.password;
-			ManageDBWindow.edituc.tagPreview.Text = oldEntry.tag;
-			ManageDBWindow.edituc.nameInput.Text = oldEntry.name;
-			ManageDBWindow.edituc.usernameInput.Text = oldEntry.username;
-			ManageDBWindow.edituc.tagInput.Text = oldEntry.tag;
+			if (oldEntry != null) {
+				ManageDbWindow.edituc.idPreview.Text = oldEntry.Id.ToString();
+				ManageDbWindow.edituc.namePreview.Text = oldEntry.Name;
+				ManageDbWindow.edituc.usernamePreview.Text = oldEntry.Username;
+				ManageDbWindow.edituc.pwdPreview.Password = oldEntry.Password;
+				ManageDbWindow.edituc.tagPreview.Text = oldEntry.Tag;
+				ManageDbWindow.edituc.nameInput.Text = oldEntry.Name;
+				ManageDbWindow.edituc.usernameInput.Text = oldEntry.Username;
+				ManageDbWindow.edituc.tagInput.Text = oldEntry.Tag;
 
-			var parent = (Canvas)Parent;
-			parent.Children.Clear();
-			parent.Children.Add(ManageDBWindow.edituc);
+				var parent = (Canvas)Parent;
+				parent.Children.Clear();
+				parent.Children.Add(ManageDbWindow.edituc);
+			}
 		}
 
 		private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -74,47 +66,14 @@ namespace PasswordManager.Core.UserControls
 			var r = MessageBox.Show("Bu kaydı silmek istediğinize emin misiniz?", "Kayıt silme işlemini onayla!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (r == MessageBoxResult.Yes) {
-				var entry = (EntryModel)ManageDBWindow.homeuc.entriesDataGrid.SelectedItem;
-				DTO.InternalDB.entries.Remove(entry);
+				var entry = (EntryModel)ManageDbWindow.homeuc.entriesDataGrid.SelectedItem;
+				Settings.dbSettings.InternalDb.Entries.Remove(entry);
 
-				ManageDBWindow.homeuc.entriesDataGrid.ItemsSource = new List<EntryModel>();
-				ManageDBWindow.homeuc.entriesDataGrid.ItemsSource = DTO.InternalDB.entries;
+				ManageDbWindow.homeuc.entriesDataGrid.ItemsSource = new List<EntryModel>();
+				ManageDbWindow.homeuc.entriesDataGrid.ItemsSource = Settings.dbSettings.InternalDb.Entries;
 
 				tooltipLabel.Content = "Kayıt silindi!";
 			}
-		}
-
-		private void refreshButton_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBoxResult r;
-			if (RSL[0] == 1) {
-				r = MessageBox.Show("Dahili veritabanını yenilemek istediğinize emin misiniz?\nHarici veritabanına kaydetmediğiniz tüm değişiklikler kaybolacaktır!", "Dahili veritabanını yenile!", MessageBoxButton.YesNo, MessageBoxImage.Question);
-			} else {
-				r = MessageBoxResult.Yes;
-			}
-
-			if (r == MessageBoxResult.Yes) {
-				var json = "";
-				var dbm = new DatabaseModel();
-				DbFunctions.ReadJson(DTO.FilePath, ref json);
-				DbFunctions.JsonToDb(ref json, ref dbm);
-				DTO.InternalDB = dbm;
-
-				if (DTO.InternalDB.entries != null) {
-					var ueList = new List<EntryModel>();
-					DbFunctions.DecryptEntries(DTO.InternalDB.entries, ref ueList);
-					DTO.InternalDB.entries = ueList;
-				}
-
-				entriesDataGrid.ItemsSource = DTO.InternalDB.entries;
-				updateDbInfo();
-				tooltipLabel.Content = "Veritabanı yenilendi!";
-
-				entriesDataGrid.SelectedIndex = -1;
-			}
-
-			int[] def = { 1, 1, 1 };
-			RSL = def;
 		}
 
 		public void forceRefresh()
@@ -122,7 +81,41 @@ namespace PasswordManager.Core.UserControls
 			object s = null;
 			RoutedEventArgs e = null;
 			RSL[0] = 0;
-			refreshButton_Click(s, e);
+			reloadButton_Click(s, e);
+		}
+
+		private void reloadButton_Click(object sender, RoutedEventArgs e)
+		{
+			try {
+				MessageBoxResult r;
+				if (RSL[0] == 1) {
+					r = MessageBox.Show("Dahili veritabanını yenilemek istediğinize emin misiniz?\nHarici veritabanına kaydetmediğiniz tüm değişiklikler kaybolacaktır!", "Dahili veritabanını yenile!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+				} else {
+					r = MessageBoxResult.Yes;
+				}
+
+				if (r == MessageBoxResult.Yes) {
+					ref var idb = ref Settings.dbSettings.InternalDb;
+					idb = Database.FromJson(Settings.dbSettings.Path);
+
+					idb.Entries = Database.DecryptEntries(ref idb);
+					// idb = Database.DecryptAttributes(ref idb);
+					idb.Owner = AES.Decrypt(idb.Owner, Settings.dbSettings.Password);
+					idb.Name = AES.Decrypt(idb.Name, Settings.dbSettings.Password);
+					idb.ModifiedDate = AES.Decrypt(idb.ModifiedDate, Settings.dbSettings.Password);
+
+					entriesDataGrid.ItemsSource = idb.Entries;
+					updateDbInfo();
+					tooltipLabel.Content = "Veritabanı yenilendi!";
+					entriesDataGrid.SelectedIndex = -1;
+				}
+
+				int[] def = { 1, 1, 1 };
+				RSL = def;
+			} catch (Exception ex) {
+				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
+				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+			}
 		}
 
 		private void saveButton_Click(object sender, RoutedEventArgs e)
@@ -138,21 +131,17 @@ namespace PasswordManager.Core.UserControls
 				if (r == MessageBoxResult.Yes) {
 					RSL[0] = 0;
 
-					List<EntryModel> ueList = (List<EntryModel>)entriesDataGrid.ItemsSource;
-					List<EntryModel> eList = new();
+					ref var idb = ref Settings.dbSettings.InternalDb;
+					idb.Entries = (List<EntryModel>)entriesDataGrid.ItemsSource;
+					idb.Entries = Database.EncryptEntries(ref idb);
+					// idb = Database.DecryptAttributes(ref idb);
+					idb.Owner = AES.Encrypt(idb.Owner, Settings.dbSettings.Password);
+					idb.Name = AES.Encrypt(idb.Name, Settings.dbSettings.Password);
+					idb.ModifiedDate = AES.Encrypt(DateTime.UtcNow.ToString(), Settings.dbSettings.Password);
 
-					if (ueList != null) {
-						DbFunctions.EncryptEntries(ref ueList, ref eList);
-						DTO.InternalDB.entries = eList;
-					}
-					DTO.InternalDB.last_modified = DateTime.UtcNow;
+					File.WriteAllText(Settings.dbSettings.Path, Database.ToJson(ref idb));
 
-					string json = "";
-					DbFunctions.DbToJson(DTO.InternalDB, ref json);
-					DbFunctions.WriteJson(ref json, DTO.FilePath);
-
-					refreshButton_Click(sender, e);
-
+					reloadButton_Click(sender, e);
 					tooltipLabel.Content = "Veritabanı kaydedildi!";
 				} else {
 					RSL[0] = 1;
@@ -188,15 +177,6 @@ namespace PasswordManager.Core.UserControls
 				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
 				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
-		}
-
-		private void optionsButton_Click(object sender, RoutedEventArgs e)
-		{
-			if (entriesDataGrid.SelectedIndex == -1) { entriesDataGrid.SelectedIndex = 0; }
-
-			var canvas = (Canvas)Parent;
-			var ouc = new OptionsUserControl();
-			canvas.Children.Add(ouc);
 		}
 	}
 }

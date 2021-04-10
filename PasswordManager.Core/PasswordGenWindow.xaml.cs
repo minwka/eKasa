@@ -68,10 +68,10 @@ namespace PasswordManager.Core
 
 		private void savePwdButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (ManageDBWindow.createuc.pwdToggle.IsChecked == true) {
-				ManageDBWindow.createuc.clearPasswordInput.Text = randomString;
+			if (ManageDbWindow.createuc.pwdToggle.IsChecked == true) {
+				ManageDbWindow.createuc.clearPasswordInput.Text = randomString;
 			} else {
-				ManageDBWindow.createuc.passwordInput.Password = randomString;
+				ManageDbWindow.createuc.passwordInput.Password = randomString;
 			}
 			Close();
 		}

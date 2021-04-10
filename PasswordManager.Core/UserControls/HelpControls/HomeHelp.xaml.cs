@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using PasswordManager.Core.Classes;
 
 namespace PasswordManager.Core.UserControls.HelpControls
 {
@@ -9,7 +8,7 @@ namespace PasswordManager.Core.UserControls.HelpControls
 		{
 			InitializeComponent();
 
-			var owner = DTO.InternalDB == null ? "Kullanıcı" : DTO.InternalDB.owner;
+			var owner = string.IsNullOrEmpty(Settings.dbSettings.InternalDb.Owner) ? "Kullanıcı" : Settings.dbSettings.InternalDb.Owner;
 			titleLabel.Text = $"Hoşgeldin, {owner}!";
 		}
 	}

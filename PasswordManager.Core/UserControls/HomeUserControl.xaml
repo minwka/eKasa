@@ -47,13 +47,13 @@
 				<SolidColorBrush Color="#FF0078D7" Opacity="0.5"/>
 			</DataGrid.VerticalGridLinesBrush>
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Etiket" Binding="{Binding tag}"/>
-				<DataGridTextColumn Header="Kayıt Adı" Binding="{Binding name}"/>
-				<DataGridTextColumn Header="Kullanıcı Adı" Binding="{Binding username}"/>
+				<DataGridTextColumn Header="Etiket" Binding="{Binding Tag}"/>
+				<DataGridTextColumn Header="Kayıt Adı" Binding="{Binding Name}"/>
+				<DataGridTextColumn Header="Kullanıcı Adı" Binding="{Binding Username}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		<Button x:Name="optionsButton" Content="Seçenekler" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="optionsButton_Click" Grid.Row="10" Grid.Column="4" Margin="0,0,10,10" IsDefault="True" TabIndex="50" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="refreshButton" Content='Yenile' Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="refreshButton_Click" FontFamily="Segoe UI" Grid.Row="10" Grid.Column="5" Margin="0,0,10,10" TabIndex="51" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="reloadButton" Content='Yenile' Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="reloadButton_Click" FontFamily="Segoe UI" Grid.Row="10" Grid.Column="5" Margin="0,0,10,10" TabIndex="51" Template="{StaticResource defaultButton}"/>
 		<Button x:Name="editButton" Content="Kaydı Düzenle" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="editButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="52" Template="{StaticResource defaultButton}"/>
 		<Button x:Name="deleteButton" Content="Kaydı Sil" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="deleteButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,10" TabIndex="53" Template="{StaticResource defaultButton}"/>
 		<Button x:Name="saveButton" Content="Veritabanını Kaydet" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Left" Click="saveButton_Click" Grid.Row="10" Grid.ColumnSpan="2" Margin="10,0,0,10" Width="125" TabIndex="54" Template="{StaticResource defaultButton}"/>

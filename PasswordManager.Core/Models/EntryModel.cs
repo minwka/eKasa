@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace PasswordManager.Core.Models
+namespace PasswordManager.Core
 {
 	public class EntryModel
 	{
-		[JsonPropertyName("entry_guid")]
-		public Guid guid { get; set; }
+		[JsonPropertyName("entry_id")]
+		public Guid Id { get; set; }
 		[JsonPropertyName("entry_name")]
-		public string name { get; set; }
-		[JsonPropertyName("entry_username")]
-		public string username { get; set; }
-		[JsonPropertyName("entry_password")]
-		public string password { get; set; }
+		public string Name { get; set; }
 		[JsonPropertyName("entry_tag")]
-		public string tag { get; set; }
+		public string Tag { get; set; }
+		[JsonPropertyName("username")]
+		public string Username { get; set; }
+		[JsonPropertyName("password")]
+		public string Password { get; set; }
 	}
 }

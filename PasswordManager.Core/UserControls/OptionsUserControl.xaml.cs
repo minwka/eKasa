@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using PasswordManager.Core.Models;
 
 namespace PasswordManager.Core.UserControls
 {
@@ -20,14 +19,14 @@ namespace PasswordManager.Core.UserControls
 			canvas = (Canvas)Parent;
 			grid = (Grid)(canvas.Parent);
 			window = (Window)(grid.Parent);
-			entry = (EntryModel)ManageDBWindow.homeuc.entriesDataGrid.SelectedItem;
+			entry = (EntryModel)ManageDbWindow.homeuc.entriesDataGrid.SelectedItem;
 		}
 
 		private void copyUserButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entry != null) {
-				Clipboard.SetText(entry.username);
-				ManageDBWindow.homeuc.tooltipLabel.Content = "Kullanıcı adı panoya kopyalandı!";
+				Clipboard.SetText(entry.Username);
+				ManageDbWindow.homeuc.tooltipLabel.Content = "Kullanıcı adı panoya kopyalandı!";
 				canvas.Children.Remove(this);
 			}
 		}
@@ -35,8 +34,8 @@ namespace PasswordManager.Core.UserControls
 		private void copyPwdButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entry != null) {
-				Clipboard.SetText(entry.password);
-				ManageDBWindow.homeuc.tooltipLabel.Content = "Şifre panoya kopyalandı!";
+				Clipboard.SetText(entry.Password);
+				ManageDbWindow.homeuc.tooltipLabel.Content = "Şifre panoya kopyalandı!";
 				canvas.Children.Remove(this);
 			}
 		}
@@ -45,7 +44,7 @@ namespace PasswordManager.Core.UserControls
 		{
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
-				Process.Start("AutofillHelper.exe", $"s {entry.username}");
+				Process.Start("AutofillHelper.exe", $"s {entry.Username}");
 				canvas.Children.Remove(this);
 			}
 		}
@@ -54,7 +53,7 @@ namespace PasswordManager.Core.UserControls
 		{
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
-				Process.Start("AutofillHelper.exe", $"s {entry.password}");
+				Process.Start("AutofillHelper.exe", $"s {entry.Password}");
 				canvas.Children.Remove(this);
 			}
 		}
@@ -63,7 +62,7 @@ namespace PasswordManager.Core.UserControls
 		{
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
-				Process.Start("AutofillHelper.exe", $"m {entry.username} {entry.password}");
+				Process.Start("AutofillHelper.exe", $"m {entry.Username} {entry.Password}");
 				canvas.Children.Remove(this);
 			}
 		}
