@@ -1,24 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
-using PasswordManager.Core.Classes;
-using PasswordManager.Core.Models;
 
 namespace PasswordManager.Core
 {
-	public partial class CreateDBWindow : Window
+	public partial class CreateDbWindow : Window
 	{
-		OpenFileDialog ofd = new OpenFileDialog();
-		public CreateDBWindow()
+		OpenFileDialog ofd = new();
+		public CreateDbWindow()
 		{ InitializeComponent(); }
 
 		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
 				DragMove();
+		}
+
+		private void terminateButton_Click(object sender, RoutedEventArgs e)
+		{ Close(); }
+
+		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		{
+			if (pwdToggle.IsChecked == true) {
+				clearPwdInput.Text = passwordInput.Password;
+
+				passwordInput.Visibility = Visibility.Collapsed;
+				clearPwdInput.Visibility = Visibility.Visible;
+			} else {
+				passwordInput.Password = clearPwdInput.Text;
+
+				clearPwdInput.Visibility = Visibility.Collapsed;
+				passwordInput.Visibility = Visibility.Visible;
+			}
 		}
 
 		private void pickerButton_Click(object sender, RoutedEventArgs e)
@@ -40,18 +55,14 @@ namespace PasswordManager.Core
 					passwordInput.Password = clearPwdInput.Text;
 				}
 
-				using (File.Create(ofd.FileName)) { };
 				DatabaseModel dbm = new() {
-					name = nameInput.Text.Length == 0 ? "FDBX" : nameInput.Text,
-					owner = "Kullanıcı",
-					pwd_hash = Hash.ComputeSha256(passwordInput.Password),
-					entries = new List<EntryModel>(),
-					last_modified = DateTime.UtcNow
+					Name = string.IsNullOrEmpty(nameInput.Text) ? AES.Encrypt("FDBX", passwordInput.Password) : AES.Encrypt(nameInput.Text, passwordInput.Password),
+					Owner = string.IsNullOrEmpty("") ? AES.Encrypt("Kullanıcı", passwordInput.Password) : AES.Encrypt("", passwordInput.Password),
+					PwdHash = AES.Hash(passwordInput.Password),
+					ModifiedDate = AES.Encrypt(DateTime.UtcNow.ToString(), passwordInput.Password)
 				};
 
-				string json = "";
-				DbFunctions.DbToJson(dbm, ref json);
-				DbFunctions.WriteJson(ref json, ofd.FileName);
+				File.WriteAllText(ofd.FileName, Database.ToJson(ref dbm));
 
 				MessageBox.Show("Dosya başarıyla oluşturuldu!", "Bildirim!", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -61,23 +72,5 @@ namespace PasswordManager.Core
 				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
-
-		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
-		{
-			if (pwdToggle.IsChecked == true) {
-				clearPwdInput.Text = passwordInput.Password;
-
-				passwordInput.Visibility = Visibility.Collapsed;
-				clearPwdInput.Visibility = Visibility.Visible;
-			} else {
-				passwordInput.Password = clearPwdInput.Text;
-
-				clearPwdInput.Visibility = Visibility.Collapsed;
-				passwordInput.Visibility = Visibility.Visible;
-			}
-		}
-
-		private void terminateButton_Click(object sender, RoutedEventArgs e)
-		{ Close(); }
 	}
 }

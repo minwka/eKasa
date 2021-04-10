@@ -4,15 +4,15 @@ using PasswordManager.Core.UserControls;
 
 namespace PasswordManager.Core
 {
-	public partial class ManageDBWindow : Window
+	public partial class ManageDbWindow : Window
 	{
 		static public HomeUserControl homeuc = new();
-		static public CreateUserControl createuc = new();
+		static public NewDbUserControl createuc = new();
 		static public EditUserControl edituc = new();
 		static public AboutUserControl aboutuc = new();
 		static public SettingsUserControl settingsuc = new();
 
-		public ManageDBWindow()
+		public ManageDbWindow()
 		{
 			InitializeComponent();
 			contentCanvas.Children.Add(homeuc);
