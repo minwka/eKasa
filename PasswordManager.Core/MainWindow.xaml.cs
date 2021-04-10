@@ -17,6 +17,7 @@ namespace PasswordManager.Core
 			SettingsManager<AppSettingsModel>.Restore(@"Settings\settings.xml", ref Settings.appSettings);
 			ofd.FileName = Settings.appSettings.LastDbLocation;
 			locationInput.Text = Path.GetFileName(Settings.appSettings.LastDbLocation);
+			passwordInput.Focus();
 		}
 
 		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -46,6 +47,8 @@ namespace PasswordManager.Core
 			ofd.Filter = "Veritabanı dosyaları (*fdbx)|*.fdbx|JSON dosyaları (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
 			if (ofd.ShowDialog() == true)
 				locationInput.Text = ofd.SafeFileName;
+
+			passwordInput.Focus();
 		}
 
 		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
@@ -80,6 +83,11 @@ namespace PasswordManager.Core
 					idb.Owner = AES.Decrypt(idb.Owner, Settings.dbSettings.Password);
 					idb.Name = AES.Decrypt(idb.Name, Settings.dbSettings.Password);
 					idb.ModifiedDate = AES.Decrypt(idb.ModifiedDate, passwordInput.Password);
+
+					if (rememberDb.IsChecked == true) {
+						Settings.appSettings.LastDbLocation = ofd.FileName;
+						SettingsManager<AppSettingsModel>.Save(@"Settings\settings.xml", ref Settings.appSettings);
+					}
 
 					ManageDbWindow mdbw = new();
 					mdbw.Show();
