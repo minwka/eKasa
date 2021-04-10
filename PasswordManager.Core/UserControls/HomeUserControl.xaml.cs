@@ -63,6 +63,8 @@ namespace PasswordManager.Core.UserControls
 
 		private void deleteButton_Click(object sender, RoutedEventArgs e)
 		{
+			if (entriesDataGrid.SelectedIndex == -1) { entriesDataGrid.SelectedIndex = 0; }
+
 			var r = MessageBox.Show("Bu kaydı silmek istediğinize emin misiniz?", "Kayıt silme işlemini onayla!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (r == MessageBoxResult.Yes) {
