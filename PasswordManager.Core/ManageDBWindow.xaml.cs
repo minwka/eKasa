@@ -6,20 +6,20 @@ namespace PasswordManager.Core
 {
 	public partial class ManageDbWindow : Window
 	{
-		static public HomeUserControl homeuc = new();
-		static public NewDbUserControl createuc = new();
-		static public EditUserControl edituc = new();
-		static public AboutUserControl aboutuc = new();
-		static public SettingsUserControl settingsuc = new();
+		readonly static public HomeUserControl homeuc = new();
+		readonly static public NewDbUserControl createuc = new();
+		readonly static public EditUserControl edituc = new();
+		readonly static public AboutUserControl aboutuc = new();
+		readonly static public SettingsUserControl settingsuc = new();
 
 		public ManageDbWindow()
 		{
 			InitializeComponent();
 			contentCanvas.Children.Add(homeuc);
-			homeuc.forceRefresh();
+			homeuc.ForceRefresh();
 		}
 
-		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left) {
 				DragMove();
@@ -28,43 +28,43 @@ namespace PasswordManager.Core
 			}
 		}
 
-		private void homeButton_Click(object sender, RoutedEventArgs e)
+		private void HomeButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(homeuc);
 		}
 
-		private void createButton_Click(object sender, RoutedEventArgs e)
+		private void CreateButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(createuc);
 		}
 
-		private void editButton_Click(object sender, RoutedEventArgs e)
+		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(edituc);
 		}
 
-		private void aboutButton_Click(object sender, RoutedEventArgs e)
+		private void AboutButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(aboutuc);
 		}
 
-		private void helpButton_Click(object sender, RoutedEventArgs e)
+		private void HelpButton_Click(object sender, RoutedEventArgs e)
 		{
 			HelpWindow hw = new();
 			hw.Show();
 		}
 
-		private void settingsButton_Click(object sender, RoutedEventArgs e)
+		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(settingsuc);
 		}
 
-		private void terminateButton_Click(object sender, RoutedEventArgs e)
+		private void TerminateButton_Click(object sender, RoutedEventArgs e)
 		{
 			var r = MessageBox.Show("Uygulamadan çıkmak istediğinize emin misiniz?\nKaydedilmemiş tüm değişiklikleriniz kaybolacaktır!", "Çıkışı onayla!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (r == MessageBoxResult.Yes) {

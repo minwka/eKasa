@@ -1,6 +1,6 @@
 ﻿namespace PasswordManager.AutofillHelper
 {
-	partial class mainForm
+	partial class MainForm
 	{
 		private System.ComponentModel.IContainer components = null;
 

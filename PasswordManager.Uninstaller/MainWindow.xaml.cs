@@ -6,27 +6,25 @@ namespace PasswordManager.Uninstaller
 {
 	public partial class MainWindow : Window
 	{
-		static public welcome ucwelcome = new();
-		static public options ucoptions = new();
-		static public progress ucprogress = new();
-		static public done ucdone = new();
-		static public error ucerror = new();
+		readonly static public Welcome ucwelcome = new();
+		readonly static public Options ucoptions = new();
+		readonly static public Progress ucprogress = new();
+		readonly static public Done ucdone = new();
+		readonly static public Error ucerror = new();
 
 		public MainWindow()
 		{
 			InitializeComponent();
-
 			content.Children.Add(ucwelcome);
 		}
 
-		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.ChangedButton == MouseButton.Left) {
+			if (e.ChangedButton == MouseButton.Left)
 				DragMove();
-			}
 		}
 
-		private void terminate_Click(object sender, RoutedEventArgs e)
+		private void Terminate_Click(object sender, RoutedEventArgs e)
 		{
 			var result = MessageBox.Show("Kaldırma işlemini iptal etmek istediğinize emin misiniz?", "Çıkışı Onayla!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (result == MessageBoxResult.Yes) {
@@ -35,7 +33,7 @@ namespace PasswordManager.Uninstaller
 		}
 
 		int page = 0;
-		private void next_Click(object sender, RoutedEventArgs e)
+		private void Next_Click(object sender, RoutedEventArgs e)
 		{
 			content.Children.Clear();
 			switch (page) {
@@ -51,7 +49,7 @@ namespace PasswordManager.Uninstaller
 					next.IsEnabled = false;
 					terminate.Visibility = Visibility.Hidden;
 					ucprogress.BeginUninstall();
-					terminate.Click -= terminate_Click;
+					terminate.Click -= Terminate_Click;
 					break;
 			}
 			page++;

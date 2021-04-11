@@ -8,9 +8,9 @@ using Microsoft.Win32;
 
 namespace PasswordManager.Uninstaller.Controls
 {
-	public partial class progress : UserControl
+	public partial class Progress : UserControl
 	{
-		public progress()
+		public Progress()
 		{ InitializeComponent(); }
 
 		public void BeginUninstall()
@@ -23,7 +23,7 @@ namespace PasswordManager.Uninstaller.Controls
 			try {
 				((MainWindow)window).next.Visibility = Visibility.Hidden;
 				((MainWindow)window).terminate.Visibility = Visibility.Hidden;
-				((MainWindow)window).terminate.Click += terminate;
+				((MainWindow)window).terminate.Click += Terminate;
 
 				RegistryKey iSettings = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\eKasa");
 				if (iSettings != null) {
@@ -66,7 +66,7 @@ namespace PasswordManager.Uninstaller.Controls
 			}
 		}
 
-		public void terminate(object sender, RoutedEventArgs e)
+		public void Terminate(object sender, RoutedEventArgs e)
 		{
 			try {
 				if (MainWindow.ucdone.scVisit.IsChecked == true) {

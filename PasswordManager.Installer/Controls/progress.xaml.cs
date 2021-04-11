@@ -9,18 +9,13 @@ using File = System.IO.File;
 
 namespace PasswordManager.Installer.Controls
 {
-	public partial class progress : UserControl
+	public partial class Progress : UserControl
 	{
-		public progress()
+		public Progress()
 		{ InitializeComponent(); }
 
-		public void CopyPreferences()
-		{
-			InstallParameters.installPath = MainWindow.ucoptions.path.Text;
-			InstallParameters.desktopShortcut = (bool)MainWindow.ucoptions.scDesktop.IsChecked;
-			InstallParameters.startmenuShortcut = (bool)MainWindow.ucoptions.scStart.IsChecked;
-			InstallParameters.launchatStartup = (bool)MainWindow.ucoptions.launchAtStartup.IsChecked;
-		}
+		public static void CopyPreferences()
+		{			InstallParameters.InstallPath = MainWindow.ucoptions.path.Text;		}
 
 		public void BeginInstall()
 		{
@@ -31,7 +26,7 @@ namespace PasswordManager.Installer.Controls
 			try {
 				ProcessStartInfo psi = new();
 				psi.FileName = "cmd.exe";
-				psi.Arguments = $"/c Binaries\\7z\\7za.exe x -p\"enc765_-_-_inst05\" -o\"{InstallParameters.installPath}\" Binaries\\Install\\package.7z -y";
+				psi.Arguments = $"/c Binaries\\7z\\7za.exe x -p\"enc765_-_-_inst05\" -o\"{InstallParameters.InstallPath}\" Binaries\\Install\\package.7z -y";
 				psi.CreateNoWindow = true;
 				psi.WindowStyle = ProcessWindowStyle.Hidden;
 
@@ -52,28 +47,28 @@ namespace PasswordManager.Installer.Controls
 
 		void FinalizeAndLaunch(object sender, EventArgs e)
 		{
-			#region Replace w/ app.config
+			#region Replace w/ settings file
 			RegistryKey iSettings = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\eKasa");
-			iSettings.SetValue("install_path", InstallParameters.installPath);
+			iSettings.SetValue("install_path", InstallParameters.InstallPath);
 			//iSettings.SetValue("license_type", "Developer");
 			//iSettings.SetValue("licensed_by", "NAMI");
 			//iSettings.SetValue("license_key", @"owGbwMvMwCH2Lv3x/GtxmgGMa8ST2HMyk1PzilMT8pLiXVzDLCJ0XfxDuTpKWRjEOBhkxRRZzv1z6E6RvRAkxBpbBNPIygRSzsDFKQAT0ZNhZPggst5mvfaB6fyxuUnHz77cc22bl+3Pc11ve/f3pfZuzFjLyLCkRqL/suG74s5K1a2yvE13UqevvlQvJXUtYF9pib3sFl4A");
 			iSettings.Close();
 			#endregion
 
-			if (InstallParameters.desktopShortcut) {
+			if ((bool)MainWindow.ucoptions.scDesktop.IsChecked) {
 				var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-				WinShortcut.Create($"{desktopPath}\\eKasa.lnk", $"{InstallParameters.installPath}\\eKasa.exe", "", InstallParameters.installPath, "eKasa. Şifre yöneticiniz", "", "");
+				WinShortcut.Create($"{desktopPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\eKasa.exe", "", InstallParameters.InstallPath, "eKasa. Şifre yöneticiniz", "", "");
 			}
 
-			if (InstallParameters.startmenuShortcut) {
+			if ((bool)MainWindow.ucoptions.scStart.IsChecked) {
 				var startmenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
-				WinShortcut.Create($"{startmenuPath}\\eKasa.lnk", $"{InstallParameters.installPath}\\eKasa.exe", "", startmenuPath, "eKasa. Şifre yöneticiniz", "", "");
+				WinShortcut.Create($"{startmenuPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\eKasa.exe", "", startmenuPath, "eKasa. Şifre yöneticiniz", "", "");
 			}
 
-			if (InstallParameters.launchatStartup) {
+			if ((bool)MainWindow.ucoptions.launchAtStartup.IsChecked) {
 				var startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-				WinShortcut.Create($"{startupPath}\\eKasa.lnk", $"{InstallParameters.installPath}\\eKasa.exe", "", startupPath, "eKasa. Şifre yöneticiniz", "", "");
+				WinShortcut.Create($"{startupPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\eKasa.exe", "", startupPath, "eKasa. Şifre yöneticiniz", "", "");
 			}
 
 			Dispatcher.Invoke(() => {
@@ -89,7 +84,7 @@ namespace PasswordManager.Installer.Controls
 				window.next.IsEnabled = true;
 				window.next.Foreground = new SolidColorBrush(Color.FromRgb(0, 120, 215));
 				window.next.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 120, 215));
-				window.next.Click += terminate;
+				window.next.Click += Terminate;
 				window.back.Visibility = Visibility.Hidden;
 				window.terminate.Visibility = Visibility.Hidden;
 
@@ -98,11 +93,10 @@ namespace PasswordManager.Installer.Controls
 			});
 		}
 
-		void terminate(object sender, RoutedEventArgs e)
+		void Terminate(object sender, RoutedEventArgs e)
 		{
-			if (MainWindow.uclaunch.scLaunch.IsChecked == true) {
-				Process.Start($"{InstallParameters.installPath}\\eKasa.exe");
-			}
+			if (MainWindow.uclaunch.scLaunch.IsChecked == true) 
+				Process.Start($"{InstallParameters.InstallPath}\\eKasa.exe");
 			Application.Current.Shutdown();
 		}
 	}

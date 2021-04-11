@@ -14,7 +14,7 @@ namespace PasswordManager.Core.UserControls
 			license.Text = "Developer";
 		}
 
-		private void visitButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		private void VisitButton_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
 			Process.Start("powershell", "start https://t.me/anth4");
 		}

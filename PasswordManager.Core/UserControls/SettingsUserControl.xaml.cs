@@ -17,7 +17,7 @@ namespace PasswordManager.Core.UserControls
 			usernameTextBox.Text = idb.Owner;
 		}
 
-		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
 		{
 			if (pwdToggle.IsChecked == true) {
 				clearPwdInput.Text = pwdInput.Password;
@@ -32,7 +32,7 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void reloadButton_Click(object sender, RoutedEventArgs e)
+		private void ReloadButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				ref var idb = ref Settings.dbSettings.InternalDb;
@@ -50,11 +50,11 @@ namespace PasswordManager.Core.UserControls
 				tooltipLabel.Content = "Ayarlar kaydedildi!";
 			} catch (Exception ex) {
 				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+				File.AppendAllText("error.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
 
-		private void saveButton_Click(object sender, RoutedEventArgs e)
+		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				if (pwdToggle.IsChecked == true) {
@@ -71,11 +71,11 @@ namespace PasswordManager.Core.UserControls
 
 				File.WriteAllText(Settings.dbSettings.Path, Database.ToJson(ref idb));
 
-				ManageDbWindow.homeuc.forceRefresh();
-				reloadButton_Click(sender, e);
+				ManageDbWindow.homeuc.ForceRefresh();
+				ReloadButton_Click(sender, e);
 			} catch (Exception ex) {
 				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+				File.AppendAllText("error.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
 	}

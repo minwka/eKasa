@@ -6,16 +6,16 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace PasswordManager.Installer.Controls
 {
-	public partial class options : UserControl
+	public partial class Options : UserControl
 	{
-		public options()
+		public Options()
 		{
 			InitializeComponent();
 			path.Text = @"C:\Program Files\eKasa";
 		}
 
-		CommonOpenFileDialog cofd = new();
-		private void browse_Click(object sender, RoutedEventArgs e)
+		readonly CommonOpenFileDialog cofd = new();
+		private void Browse_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				cofd.IsFolderPicker = true;

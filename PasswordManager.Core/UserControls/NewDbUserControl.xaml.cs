@@ -11,13 +11,13 @@ namespace PasswordManager.Core.UserControls
 		public NewDbUserControl()
 		{ InitializeComponent(); }
 
-		private void genPwdButton_Click(object sender, RoutedEventArgs e)
+		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
 		{
 			var gpw = new PasswordGenWindow();
 			gpw.Show();
 		}
 
-		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
 		{
 			if (pwdToggle.IsChecked == true) {
 				clearPasswordInput.Text = passwordInput.Password;
@@ -32,7 +32,7 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void addButton_Click(object sender, RoutedEventArgs e)
+		private void AddButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				if (pwdToggle.IsChecked == true) {
@@ -57,14 +57,16 @@ namespace PasswordManager.Core.UserControls
 				clearPasswordInput.Text = "";
 				passwordInput.Password = "";
 
-				var parent = (Canvas)Parent;
-				parent.Children.Clear();
-				parent.Children.Add(ManageDbWindow.homeuc);
+				if (stayHereToggle.IsChecked==false) {
+					var parent = (Canvas)Parent;
+					parent.Children.Clear();
+					parent.Children.Add(ManageDbWindow.homeuc);
+				}
 
 				ManageDbWindow.homeuc.tooltipLabel.Content = "Kayıt eklendi!";
 			} catch (Exception ex) {
 				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+				File.AppendAllText("error.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
 	}

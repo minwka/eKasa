@@ -14,12 +14,12 @@ namespace PasswordManager.Core.UserControls
 
 			titleLabel.Text = $"Hoşgeldin, {Settings.dbSettings.InternalDb.Owner}!";
 			entriesDataGrid.ItemsSource = Settings.dbSettings.InternalDb.Entries;
-			updateDbInfo();
+			UpdateDbInfo();
 		}
 
 		int[] RSL = { 1, 1, 1 };
 
-		private void updateDbInfo()
+		private void UpdateDbInfo()
 		{
 			ref var idb = ref Settings.dbSettings.InternalDb;
 			titleLabel.Text = $"Hoşgeldin, {idb.Owner}!";
@@ -32,7 +32,7 @@ namespace PasswordManager.Core.UserControls
 			entriesDataGrid.SelectedIndex = -1;
 		}
 
-		private void optionsButton_Click(object sender, RoutedEventArgs e)
+		private void OptionsButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entriesDataGrid.SelectedIndex == -1) { entriesDataGrid.SelectedIndex = 0; }
 
@@ -41,7 +41,7 @@ namespace PasswordManager.Core.UserControls
 			canvas.Children.Add(ouc);
 		}
 
-		private void editButton_Click(object sender, RoutedEventArgs e)
+		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entriesDataGrid.SelectedIndex == -1) { entriesDataGrid.SelectedIndex = 0; }
 			var oldEntry = (EntryModel)entriesDataGrid.SelectedItem;
@@ -61,7 +61,7 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void deleteButton_Click(object sender, RoutedEventArgs e)
+		private void DeleteButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entriesDataGrid.SelectedIndex == -1) { entriesDataGrid.SelectedIndex = 0; }
 
@@ -78,15 +78,15 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		public void forceRefresh()
+		public void ForceRefresh()
 		{
 			object s = null;
 			RoutedEventArgs e = null;
 			RSL[0] = 0;
-			reloadButton_Click(s, e);
+			ReloadButton_Click(s, e);
 		}
 
-		private void reloadButton_Click(object sender, RoutedEventArgs e)
+		private void ReloadButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				MessageBoxResult r;
@@ -107,7 +107,7 @@ namespace PasswordManager.Core.UserControls
 					idb.ModifiedDate = AES.Decrypt(idb.ModifiedDate, Settings.dbSettings.Password);
 
 					entriesDataGrid.ItemsSource = idb.Entries;
-					updateDbInfo();
+					UpdateDbInfo();
 					tooltipLabel.Content = "Veritabanı yenilendi!";
 					entriesDataGrid.SelectedIndex = -1;
 				}
@@ -116,11 +116,11 @@ namespace PasswordManager.Core.UserControls
 				RSL = def;
 			} catch (Exception ex) {
 				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+				File.AppendAllText("error.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
 
-		private void saveButton_Click(object sender, RoutedEventArgs e)
+		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				MessageBoxResult r;
@@ -140,28 +140,29 @@ namespace PasswordManager.Core.UserControls
 					idb.Owner = AES.Encrypt(idb.Owner, Settings.dbSettings.Password);
 					idb.Name = AES.Encrypt(idb.Name, Settings.dbSettings.Password);
 					idb.ModifiedDate = AES.Encrypt(DateTime.UtcNow.ToString(), Settings.dbSettings.Password);
+					idb.Salt = Convert.ToBase64String(AES.sessionSalt);
 
 					File.WriteAllText(Settings.dbSettings.Path, Database.ToJson(ref idb));
 
-					reloadButton_Click(sender, e);
+					ReloadButton_Click(sender, e);
 					tooltipLabel.Content = "Veritabanı kaydedildi!";
 				} else {
 					RSL[0] = 1;
 				}
 			} catch (Exception ex) {
 				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+				File.AppendAllText("error.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
 
-		private void lockButton_Click(object sender, RoutedEventArgs e)
+		private void LockButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				var r = MessageBox.Show("Veritabanını kilitlemek istediğinize emin misiniz?\nKaydedilmemiş tüm değişiklikler kaydedilip harici veritabanına yazılacaktır!", "Veritabanını kaydet ve kilitle!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 				if (r == MessageBoxResult.Yes) {
 					RSL[1] = 0;
-					saveButton_Click(sender, e);
+					SaveButton_Click(sender, e);
 
 					var canvas = (Canvas)Parent;
 					var grid = (Grid)(canvas.Parent);
@@ -177,7 +178,7 @@ namespace PasswordManager.Core.UserControls
 				}
 			} catch (Exception ex) {
 				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+				File.AppendAllText("error.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
 	}

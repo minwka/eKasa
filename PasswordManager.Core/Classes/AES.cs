@@ -7,10 +7,11 @@ namespace PasswordManager.Core
 {
 	public static class AES
 	{
+		readonly static public byte[] sessionSalt = GenerateRandomEntropy();
 		public static string Encrypt(string message, string key)
 		{
 			byte[] clearBytes = Encoding.Unicode.GetBytes(message);
-			byte[] salt = new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 };
+			byte[] salt = sessionSalt;
 			using (Aes encryptor = Aes.Create()) {
 				Rfc2898DeriveBytes pdb = new(key, salt);
 				encryptor.Key = pdb.GetBytes(32);
@@ -28,7 +29,7 @@ namespace PasswordManager.Core
 		public static string Decrypt(string message, string key)
 		{
 			message = message.Replace(" ", "+");
-			byte[] salt = new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 };
+			byte[] salt = Convert.FromBase64String(Settings.dbSettings.InternalDb.Salt);
 			byte[] cipherBytes = Convert.FromBase64String(message);
 			using (Aes encryptor = Aes.Create()) {
 				Rfc2898DeriveBytes pdb = new(key, salt);
@@ -44,7 +45,7 @@ namespace PasswordManager.Core
 			return message;
 		}
 
-		private static byte[] Generate256BitsOfRandomEntropy()
+		private static byte[] GenerateRandomEntropy()
 		{
 			var randomBytes = new byte[32];
 			using (var rngCsp = new RNGCryptoServiceProvider()) {

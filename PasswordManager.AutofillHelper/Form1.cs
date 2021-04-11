@@ -3,16 +3,16 @@ using System.Windows.Forms;
 
 namespace PasswordManager.AutofillHelper
 {
-	public partial class mainForm : Form
+	public partial class MainForm : Form
 	{
-		string[] args = Environment.GetCommandLineArgs();
-		public mainForm()
+		readonly string[] args = Environment.GetCommandLineArgs();
+		public MainForm()
 		{
 			InitializeComponent();
-			type();
+			Type();
 		}
 
-		public void type()
+		public void Type()
 		{
 			try {
 				WindowState = FormWindowState.Minimized;

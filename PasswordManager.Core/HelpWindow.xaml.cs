@@ -6,15 +6,15 @@ namespace PasswordManager.Core
 {
 	public partial class HelpWindow : Window
 	{
-		HomeHelp homeHelp = new();
-		CreateHelp createHelp = new();
-		EditHelp editHelp = new();
-		SettingsHelp settingsHelp = new();
-		LoginHelp loginHelp = new();
-		NewDbHelp newDbHelp = new();
-		PwdGenHelp pwdGenHelp = new();
-		AutofillHelp autofillHelp = new();
-		EncryptionHelp encryptionHelp = new();
+		readonly HomeHelp homeHelp = new();
+		readonly CreateHelp createHelp = new();
+		readonly EditHelp editHelp = new();
+		readonly SettingsHelp settingsHelp = new();
+		readonly LoginHelp loginHelp = new();
+		readonly NewDbHelp newDbHelp = new();
+		readonly PwdGenHelp pwdGenHelp = new();
+		readonly AutofillHelp autofillHelp = new();
+		readonly EncryptionHelp encryptionHelp = new();
 
 		public HelpWindow()
 		{
@@ -23,70 +23,67 @@ namespace PasswordManager.Core
 			contentCanvas.Children.Add(homeHelp);
 		}
 
-		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.ChangedButton == MouseButton.Left) {
+			if (e.ChangedButton == MouseButton.Left)
 				DragMove();
-			}
 		}
 
-		private void homeButton_Click(object sender, RoutedEventArgs e)
+		private void HomeButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(homeHelp);
 		}
 
-		private void addButton_Click(object sender, RoutedEventArgs e)
+		private void AddButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(createHelp);
 		}
 
-		private void editButton_Click(object sender, RoutedEventArgs e)
+		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(editHelp);
 		}
 
-		private void settingsButton_Click(object sender, RoutedEventArgs e)
+		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(settingsHelp);
 		}
 
-		private void loginButton_Click(object sender, RoutedEventArgs e)
+		private void LoginButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(loginHelp);
 		}
 
-		private void newDbButton_Click(object sender, RoutedEventArgs e)
+		private void NewDbButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(newDbHelp);
 		}
 
-		private void pwdGenButton_Click(object sender, RoutedEventArgs e)
+		private void PwdGenButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(pwdGenHelp);
 		}
 
-		private void autofillButton_Click(object sender, RoutedEventArgs e)
+		private void AutofillButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(autofillHelp);
 		}
 
-		private void encryptionButton_Click(object sender, RoutedEventArgs e)
+		private void EncryptionButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(encryptionHelp);
 		}
 
-		private void terminateButton_Click(object sender, RoutedEventArgs e)
-		{
-			Close();
-		}
+		private void TerminateButton_Click(object sender, RoutedEventArgs e)
+		{ Close(); }
 	}
 }

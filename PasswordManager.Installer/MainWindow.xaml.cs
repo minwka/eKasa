@@ -6,29 +6,27 @@ namespace PasswordManager.Installer
 {
 	public partial class MainWindow : Window
 	{
-		static public welcome ucwelcome = new();
-		static public license uclicense = new();
-		static public options ucoptions = new();
-		static public progress ucprogress = new();
-		static public launch uclaunch = new();
-		static public error ucerror = new();
+		readonly static public Welcome ucwelcome = new();
+		readonly static public License uclicense = new();
+		readonly static public Options ucoptions = new();
+		readonly static public Progress ucprogress = new();
+		readonly static public Launch uclaunch = new();
+		readonly static public Error ucerror = new();
 
 		public MainWindow()
 		{
 			InitializeComponent();
-
 			content.Children.Add(ucwelcome);
 			back.Visibility = Visibility.Hidden;
 		}
 
-		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.ChangedButton == MouseButton.Left) {
+			if (e.ChangedButton == MouseButton.Left) 
 				DragMove();
-			}
 		}
 
-		private void terminate_Click(object sender, RoutedEventArgs e)
+		private void Terminate_Click(object sender, RoutedEventArgs e)
 		{
 			var result = MessageBox.Show("Kaldırma işlemini iptal etmek istediğinize emin misiniz?", "Çıkışı Onayla!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (result == MessageBoxResult.Yes) {
@@ -37,7 +35,7 @@ namespace PasswordManager.Installer
 		}
 
 		int page = 0;
-		private void next_Click(object sender, RoutedEventArgs e)
+		private void Next_Click(object sender, RoutedEventArgs e)
 		{
 			content.Children.Clear();
 			switch (page) {
@@ -52,7 +50,7 @@ namespace PasswordManager.Installer
 					break;
 				case 2:
 					content.Children.Add(ucprogress);
-					ucprogress.CopyPreferences();
+					Progress.CopyPreferences();
 					next.Content = "YÜKLENİYOR";
 					next.IsEnabled = false;
 					back.IsEnabled = false;
@@ -63,7 +61,7 @@ namespace PasswordManager.Installer
 			page++;
 		}
 
-		private void back_Click(object sender, RoutedEventArgs e)
+		private void Back_Click(object sender, RoutedEventArgs e)
 		{
 			content.Children.Clear();
 			switch (page) {

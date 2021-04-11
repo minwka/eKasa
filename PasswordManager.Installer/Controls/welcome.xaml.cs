@@ -2,9 +2,9 @@
 
 namespace PasswordManager.Installer.Controls
 {
-	public partial class welcome : UserControl
+	public partial class Welcome : UserControl
 	{
-		public welcome()
+		public Welcome()
 		{ InitializeComponent(); }
 	}
 }

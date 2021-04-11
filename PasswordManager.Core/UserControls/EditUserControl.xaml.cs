@@ -12,7 +12,7 @@ namespace PasswordManager.Core.UserControls
 		public EditUserControl()
 		{ InitializeComponent(); }
 
-		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
 		{
 			if (pwdToggle.IsChecked == true) {
 				clearPwdInput.Text = pwdInput.Password;
@@ -33,7 +33,7 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void editButton_Click(object sender, RoutedEventArgs e)
+		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				if (pwdToggle.IsChecked == true) {
@@ -80,7 +80,7 @@ namespace PasswordManager.Core.UserControls
 				ManageDbWindow.homeuc.tooltipLabel.Content = "Kayıt düzenlendi!";
 			} catch (Exception ex) {
 				MessageBox.Show("Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+				File.AppendAllText("error.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
 	}
