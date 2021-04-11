@@ -2,11 +2,9 @@
 
 namespace PasswordManager.Uninstaller.Controls
 {
-	public partial class welcome : UserControl
+	public partial class Welcome : UserControl
 	{
-		public welcome()
-		{
-			InitializeComponent();
-		}
+		public Welcome()
+		{ InitializeComponent(); }
 	}
 }

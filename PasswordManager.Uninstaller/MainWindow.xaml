@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordManager.Uninstaller"
         mc:Ignorable="d"
-        Title="Uninstaller" Width="400" Height="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF1A1A1D" BorderBrush="#FFFF4343" Foreground="#FFFF4343" WindowStyle="None" MouseDown="mainWindow_MouseDown" BorderThickness="1,0,1,1">
+        Title="Uninstaller" Width="400" Height="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF1A1A1D" BorderBrush="#FFFF4343" Foreground="#FFFF4343" WindowStyle="None" MouseDown="MainWindow_MouseDown" BorderThickness="1,0,1,1">
 	<Grid x:Name="mainGrid">
 		<Rectangle x:Name="topBar" Stroke="#FFFF4343" Height="15" VerticalAlignment="Top" Fill="#FFFF4343"/>
 
 		<Canvas x:Name="content" Margin="0,15,0,50"/>
-		<Button x:Name="next" Content="İLERİ" HorizontalAlignment="Right" Height="35" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="110" Background="#FF1A1A1D" BorderBrush="#FFFF4343" Foreground="#FFFF4343" Click="next_Click"/>
-		<Button x:Name="terminate" Content="ÇIK" HorizontalAlignment="Left" Height="35" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="80" Background="#FF1A1A1D" BorderBrush="#FFFF4343" Foreground="#FFFF4343" Click="terminate_Click"/>
+		<Button x:Name="next" Content="İLERİ" HorizontalAlignment="Right" Height="35" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="110" Background="#FF1A1A1D" BorderBrush="#FFFF4343" Foreground="#FFFF4343" Click="Next_Click"/>
+		<Button x:Name="terminate" Content="ÇIK" HorizontalAlignment="Left" Height="35" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="80" Background="#FF1A1A1D" BorderBrush="#FFFF4343" Foreground="#FFFF4343" Click="Terminate_Click"/>
 
 	</Grid>
 </Window>

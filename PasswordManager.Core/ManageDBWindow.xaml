@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordManager.Core"
         mc:Ignorable="d"
-        Title="Manage Database" Height="500" Width="800" Background="#FF2D2D30" BorderBrush="#FF0078D7" WindowStyle="None" BorderThickness="1,1,1,1" MouseDown="mainWindow_MouseDown" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Manage Database" Height="500" Width="800" Background="#FF2D2D30" BorderBrush="#FF0078D7" WindowStyle="None" BorderThickness="1,1,1,1" MouseDown="MainWindow_MouseDown" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
 	<Window.Resources>
 
@@ -151,13 +151,13 @@
 
 	<Grid x:Name="mainGrid">
 		<Grid x:Name="navigationGrid" Width="65" d:LayoutOverrides="VerticalAlignment, Width" HorizontalAlignment="Left" Background="#FF3C3C41">
-			<Button x:Name="homeButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xEA8A;' VerticalAlignment="Top" Margin="0,20,0,0" Click="homeButton_Click" TabIndex="10" Template="{StaticResource navigationButton}"/>
-			<Button x:Name="createButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xF8AA;' VerticalAlignment="Top" RenderTransformOrigin="0.585,1.374" Click="createButton_Click" TabIndex="11" Template="{StaticResource navigationButton}" Margin="0,65,0,0"/>
-			<Button x:Name="editButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE70F;' VerticalAlignment="Top" Margin="0,110,0,0" Click="editButton_Click" TabIndex="12" Template="{StaticResource navigationButton}"/>
-			<Button x:Name="helpButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xF167;' VerticalAlignment="Top" Margin="0,366,0,0" Click="helpButton_Click" TabIndex="13" Template="{StaticResource navigationButton}"/>
-			<Button x:Name="settingsButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE713;' VerticalAlignment="Top" Margin="0,410,0,0" Click="settingsButton_Click" TabIndex="14" Template="{StaticResource navigationButton}"/>
-			<Button x:Name="terminateButton" Click="terminateButton_Click" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" Content='&#xE7E8;' VerticalAlignment="Top" Margin="0,454,0,0" IsCancel="True" TabIndex="15" Template="{StaticResource navigationButton}"/>
-			<Button x:Name="aboutButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE943;' VerticalAlignment="Top" Margin="0,322,0,0" Click="aboutButton_Click" TabIndex="13" Template="{StaticResource navigationButton}"/>
+			<Button x:Name="homeButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xEA8A;' VerticalAlignment="Top" Margin="0,10,0,0" Click="HomeButton_Click" TabIndex="10" Template="{StaticResource navigationButton}" Height="40"/>
+			<Button x:Name="createButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xF8AA;' VerticalAlignment="Top" RenderTransformOrigin="0.585,1.374" Click="CreateButton_Click" TabIndex="11" Template="{StaticResource navigationButton}" Margin="0,55,0,0" Height="40"/>
+			<Button x:Name="editButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE70F;' VerticalAlignment="Top" Margin="0,100,0,0" Click="EditButton_Click" TabIndex="12" Template="{StaticResource navigationButton}" Height="40"/>
+			<Button x:Name="helpButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xF167;' VerticalAlignment="Top" Click="HelpButton_Click" TabIndex="13" Template="{StaticResource navigationButton}" Height="40" Margin="0,313,0,0"/>
+			<Button x:Name="aboutButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE943;' VerticalAlignment="Top" Click="AboutButton_Click" TabIndex="13" Template="{StaticResource navigationButton}" Height="40" Margin="0,358,0,0"/>
+			<Button x:Name="settingsButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE713;' VerticalAlignment="Top" Click="SettingsButton_Click" TabIndex="14" Template="{StaticResource navigationButton}" Height="40" Margin="0,403,0,0"/>
+			<Button x:Name="terminateButton" Click="TerminateButton_Click" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" Content='&#xE7E8;' VerticalAlignment="Bottom" IsCancel="True" TabIndex="15" Template="{StaticResource navigationButton}" Height="40" Margin="0,0,0,10"/>
 		</Grid>
 		<Canvas x:Name="contentCanvas" Margin="65,0,0,0" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
 	</Grid>

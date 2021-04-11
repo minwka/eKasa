@@ -2,11 +2,9 @@
 
 namespace PasswordManager.Installer.Controls
 {
-	public partial class license : UserControl
+	public partial class License : UserControl
 	{
-		public license()
-		{
-			InitializeComponent();
-		}
+		public License()
+		{ InitializeComponent(); }
 	}
 }

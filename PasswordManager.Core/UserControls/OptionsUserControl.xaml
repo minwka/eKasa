@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PasswordManager.Core.UserControls"
-             mc:Ignorable="d" Loaded="optionsUserControl_Loaded">
-	<Grid x:Name="canvasGrid" Width="733" Height="498" Background="#66000000" MouseDown="canvasGrid_MouseDown">
+             mc:Ignorable="d" Loaded="OptionsUserControl_Loaded">
+	<Grid x:Name="canvasGrid" Width="733" Height="498" Background="#66000000" MouseDown="CanvasGrid_MouseDown">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
 			<ColumnDefinition/>
@@ -29,11 +29,11 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 
-		<Button x:Name="copyUserButton" Content="Kullanıcı Adını Kopyala" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="copyUserButton_Click" Grid.Row="5" Grid.Column="4" Margin="0,0,10,10" Grid.ColumnSpan="2" TabIndex="20" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="copyPwdButton" Content="Şifreyi Kopyala" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" HorizontalAlignment="Stretch" Click="copyPwdButton_Click" VerticalAlignment="Stretch" Margin="0,0,10,10" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" TabIndex="21" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="typeUserButton" Content="Kullanıcı Adını Yazdır" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" HorizontalAlignment="Stretch" Click="typeUserButton_Click" VerticalAlignment="Stretch" Margin="0,0,10,10" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" TabIndex="2" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="typePwdButton" Content="Şifreyi Yazdır" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="typePwdButton_Click" Margin="0,0,10,10" Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" TabIndex="23" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="typeCredsButton" Content="Giriş Bilgilerini Otomatik Yaz" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="typeCredsButton_Click" Margin="0,0,10,10" Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="2" TabIndex="24" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="returnButton" Content="Geri Dön" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="returnButton_Click" Grid.Row="10" Grid.Column="4" Margin="0,0,10,10" TabIndex="25" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="copyUserButton" Content="Kullanıcı Adını Kopyala" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="CopyUserButton_Click" Grid.Row="5" Grid.Column="4" Margin="0,0,10,10" Grid.ColumnSpan="2" TabIndex="20" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="copyPwdButton" Content="Şifreyi Kopyala" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" HorizontalAlignment="Stretch" Click="CopyPwdButton_Click" VerticalAlignment="Stretch" Margin="0,0,10,10" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" TabIndex="21" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="typeUserButton" Content="Kullanıcı Adını Yazdır" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" HorizontalAlignment="Stretch" Click="TypeUserButton_Click" VerticalAlignment="Stretch" Margin="0,0,10,10" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" TabIndex="2" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="typePwdButton" Content="Şifreyi Yazdır" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="TypePwdButton_Click" Margin="0,0,10,10" Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" TabIndex="23" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="typeCredsButton" Content="Giriş Bilgilerini Otomatik Yaz" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="TypeCredsButton_Click" Margin="0,0,10,10" Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="2" TabIndex="24" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="returnButton" Content="Geri Dön" Background="#FF2D2D30" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ReturnButton_Click" Grid.Row="10" Grid.Column="4" Margin="0,0,10,10" TabIndex="25" Template="{StaticResource defaultButton}"/>
 	</Grid>
 </UserControl>

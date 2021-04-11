@@ -13,6 +13,10 @@ namespace PasswordManager.Core
 		public string PwdHash { get; set; }
 		[JsonPropertyName("last_modified_date")]
 		public string ModifiedDate { get; set; }
+		[JsonPropertyName("database_version")]
+		public string Version { get; set; }
+		[JsonPropertyName("salt")]
+		public string Salt { get; set; }
 		[JsonPropertyName("entry_list")]
 		public List<EntryModel> Entries { get; set; }
 	}

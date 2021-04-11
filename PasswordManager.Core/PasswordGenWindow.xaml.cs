@@ -10,13 +10,13 @@ namespace PasswordManager.Core
 		public PasswordGenWindow()
 		{ InitializeComponent(); }
 
-		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
 				DragMove();
 		}
 
-		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
 		{
 			if (pwdToggle.IsChecked == true) {
 				clearPasswordInput.Text = passwordInput.Password;
@@ -31,7 +31,7 @@ namespace PasswordManager.Core
 			}
 		}
 
-		private void pwdLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+		private void PwdLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
 			if (pwdLength != null) {
 				pwdLength.Content = $"{(int)pwdLengthSlider.Value}";
@@ -39,7 +39,7 @@ namespace PasswordManager.Core
 		}
 
 		string randomString = "";
-		private void genPwdButton_Click(object sender, RoutedEventArgs e)
+		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				const string uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -66,7 +66,7 @@ namespace PasswordManager.Core
 			}
 		}
 
-		private void savePwdButton_Click(object sender, RoutedEventArgs e)
+		private void SavePwdButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (ManageDbWindow.createuc.pwdToggle.IsChecked == true) {
 				ManageDbWindow.createuc.clearPasswordInput.Text = randomString;

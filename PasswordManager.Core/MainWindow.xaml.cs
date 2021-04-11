@@ -9,39 +9,49 @@ namespace PasswordManager.Core
 {
 	public partial class MainWindow : Window
 	{
-		readonly OpenFileDialog ofd = new();
+		readonly static public OpenFileDialog ofd = new();
 		public MainWindow()
 		{
 			InitializeComponent();
 
 			SettingsManager<AppSettingsModel>.Restore(@"Settings\settings.xml", ref Settings.appSettings);
-			ofd.FileName = Settings.appSettings.LastDbLocation;
-			locationInput.Text = Path.GetFileName(Settings.appSettings.LastDbLocation);
-			passwordInput.Focus();
+			if (!string.IsNullOrEmpty(Settings.appSettings.LastDbLocation)) {
+				ofd.FileName = Settings.appSettings.LastDbLocation;
+				locationInput.Text = Path.GetFileName(Settings.appSettings.LastDbLocation);
+				rememberDb.IsChecked = true;
+				passwordInput.Focus();
+			}
 		}
 
-		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
 				DragMove();
 		}
 
-		private void createButton_Click(object sender, RoutedEventArgs e)
+		private void CreateButton_Click(object sender, RoutedEventArgs e)
 		{
 			CreateDbWindow cdb = new();
 			cdb.ShowDialog();
+			if (!string.IsNullOrEmpty(cdb.ofd.FileName)) {
+				ofd.FileName = cdb.ofd.FileName;
+				locationInput.Text = ofd.SafeFileName;
+				rememberDb.IsChecked = true;
+				passwordInput.Password = cdb.passwordInput.Password;
+				ConfirmButton_Click(sender, e);
+			}
 		}
 
-		private void helpButton_Click(object sender, RoutedEventArgs e)
+		private void HelpButton_Click(object sender, RoutedEventArgs e)
 		{
 			HelpWindow hw = new();
 			hw.Show();
 		}
 
-		private void terminateButton_Click(object sender, RoutedEventArgs e)
+		private void TerminateButton_Click(object sender, RoutedEventArgs e)
 		{ Application.Current.Shutdown(); }
 
-		private void pickerButton_Click(object sender, RoutedEventArgs e)
+		private void PickerButton_Click(object sender, RoutedEventArgs e)
 		{
 			ofd.Title = "Bir veritabanı dosyası seçin";
 			ofd.Filter = "Veritabanı dosyaları (*fdbx)|*.fdbx|JSON dosyaları (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
@@ -51,7 +61,7 @@ namespace PasswordManager.Core
 			passwordInput.Focus();
 		}
 
-		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
 		{
 			if (pwdToggle.IsChecked == true) {
 				clearPwdInput.Text = passwordInput.Password;
@@ -66,7 +76,7 @@ namespace PasswordManager.Core
 			}
 		}
 
-		private void confirmButton_Click(object sender, RoutedEventArgs e)
+		private void ConfirmButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				if (pwdToggle.IsChecked == true) { passwordInput.Password = clearPwdInput.Text; }
@@ -84,10 +94,9 @@ namespace PasswordManager.Core
 					idb.Name = AES.Decrypt(idb.Name, Settings.dbSettings.Password);
 					idb.ModifiedDate = AES.Decrypt(idb.ModifiedDate, passwordInput.Password);
 
-					if (rememberDb.IsChecked == true) {
-						Settings.appSettings.LastDbLocation = ofd.FileName;
-						SettingsManager<AppSettingsModel>.Save(@"Settings\settings.xml", ref Settings.appSettings);
-					}
+					if (rememberDb.IsChecked == true) Settings.appSettings.LastDbLocation = ofd.FileName;
+					else Settings.appSettings.LastDbLocation = "";
+					SettingsManager<AppSettingsModel>.Save(@"Settings\settings.xml", ref Settings.appSettings);
 
 					ManageDbWindow mdbw = new();
 					mdbw.Show();

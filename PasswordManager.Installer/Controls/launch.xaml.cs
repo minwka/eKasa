@@ -6,12 +6,12 @@ using PasswordManager.Installer.Classes;
 
 namespace PasswordManager.Installer.Controls
 {
-	public partial class launch : UserControl
+	public partial class Launch : UserControl
 	{
-		public launch()
+		public Launch()
 		{ InitializeComponent(); }
 
-		public void finishInstall()
+		public void FinishInstall()
 		{
 			var canvas = (Canvas)Parent;
 			var grid = (Grid)canvas.Parent;
@@ -27,21 +27,18 @@ namespace PasswordManager.Installer.Controls
 			window.next.IsEnabled = true;
 			window.back.IsEnabled = true;
 			window.back.Visibility = Visibility.Visible;
-			window.next.Click += launcher;
-			window.back.Click += terminate;
+			window.next.Click += Launcher;
+			window.back.Click += Terminate;
 		}
 
-		void launcher(object sender, RoutedEventArgs e)
+		void Launcher(object sender, RoutedEventArgs e)
 		{
-			if (scLaunch.IsChecked == true) {
-				Process.Start($"{InstallParameters.installPath}\\eKasa.exe");
-			}
+			if (scLaunch.IsChecked == true)
+				Process.Start($"{InstallParameters.InstallPath}\\eKasa.exe");
 			Application.Current.Shutdown();
 		}
 
-		void terminate(object sender, RoutedEventArgs e)
-		{
-			Application.Current.Shutdown();
-		}
+		void Terminate(object sender, RoutedEventArgs e)
+		{ Application.Current.Shutdown(); }
 	}
 }

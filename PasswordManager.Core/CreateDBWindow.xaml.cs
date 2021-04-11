@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
@@ -8,20 +9,20 @@ namespace PasswordManager.Core
 {
 	public partial class CreateDbWindow : Window
 	{
-		OpenFileDialog ofd = new();
+		readonly public OpenFileDialog ofd = new();
 		public CreateDbWindow()
 		{ InitializeComponent(); }
 
-		private void mainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
 				DragMove();
 		}
 
-		private void terminateButton_Click(object sender, RoutedEventArgs e)
+		private void TerminateButton_Click(object sender, RoutedEventArgs e)
 		{ Close(); }
 
-		private void pwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
 		{
 			if (pwdToggle.IsChecked == true) {
 				clearPwdInput.Text = passwordInput.Password;
@@ -36,7 +37,7 @@ namespace PasswordManager.Core
 			}
 		}
 
-		private void pickerButton_Click(object sender, RoutedEventArgs e)
+		private void PickerButton_Click(object sender, RoutedEventArgs e)
 		{
 			ofd.Title = "Yeni veritabanını kaydedecek konum seçin";
 			ofd.Filter = "Veritabanı dosyaları (*fdbx)|*.fdbx|JSON dosyaları (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
@@ -48,7 +49,7 @@ namespace PasswordManager.Core
 			}
 		}
 
-		private void createButton_Click(object sender, RoutedEventArgs e)
+		private void CreateButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
 				if (pwdToggle.IsChecked == true) {
@@ -57,9 +58,11 @@ namespace PasswordManager.Core
 
 				DatabaseModel dbm = new() {
 					Name = string.IsNullOrEmpty(nameInput.Text) ? AES.Encrypt("FDBX", passwordInput.Password) : AES.Encrypt(nameInput.Text, passwordInput.Password),
-					Owner = string.IsNullOrEmpty("") ? AES.Encrypt("Kullanıcı", passwordInput.Password) : AES.Encrypt("", passwordInput.Password),
+					Owner = string.IsNullOrEmpty(ownerInput.Text) ? AES.Encrypt("Kullanıcı", passwordInput.Password) : AES.Encrypt(ownerInput.Text, passwordInput.Password),
 					PwdHash = AES.Hash(passwordInput.Password),
-					ModifiedDate = AES.Encrypt(DateTime.UtcNow.ToString(), passwordInput.Password)
+					ModifiedDate = AES.Encrypt(DateTime.UtcNow.ToString(), passwordInput.Password),
+					Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
+					Salt = Convert.ToBase64String(AES.sessionSalt)
 				};
 
 				File.WriteAllText(ofd.FileName, Database.ToJson(ref dbm));
@@ -69,7 +72,7 @@ namespace PasswordManager.Core
 				Close();
 			} catch (Exception ex) {
 				MessageBox.Show("Dosya oluşturulurken bir hata meydana geldi.\nLütfen tekrar deneyin.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-				File.AppendAllText("err.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
+				File.AppendAllText("error.log", $"Error date/time: {DateTime.UtcNow.ToLocalTime()}\nError message: {ex.Message}\nError stacktrace: {ex.StackTrace}\nError inner exception: {ex.InnerException}\n\n\n");
 			}
 		}
 	}

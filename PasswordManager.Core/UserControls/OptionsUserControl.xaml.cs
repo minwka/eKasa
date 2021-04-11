@@ -14,7 +14,7 @@ namespace PasswordManager.Core.UserControls
 		Grid grid;
 		Window window;
 		EntryModel entry;
-		private void optionsUserControl_Loaded(object sender, RoutedEventArgs e)
+		private void OptionsUserControl_Loaded(object sender, RoutedEventArgs e)
 		{
 			canvas = (Canvas)Parent;
 			grid = (Grid)(canvas.Parent);
@@ -22,7 +22,7 @@ namespace PasswordManager.Core.UserControls
 			entry = (EntryModel)ManageDbWindow.homeuc.entriesDataGrid.SelectedItem;
 		}
 
-		private void copyUserButton_Click(object sender, RoutedEventArgs e)
+		private void CopyUserButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entry != null) {
 				Clipboard.SetText(entry.Username);
@@ -31,7 +31,7 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void copyPwdButton_Click(object sender, RoutedEventArgs e)
+		private void CopyPwdButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entry != null) {
 				Clipboard.SetText(entry.Password);
@@ -40,7 +40,7 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void typeUserButton_Click(object sender, RoutedEventArgs e)
+		private void TypeUserButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
@@ -49,7 +49,7 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void typePwdButton_Click(object sender, RoutedEventArgs e)
+		private void TypePwdButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
@@ -58,7 +58,7 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void typeCredsButton_Click(object sender, RoutedEventArgs e)
+		private void TypeCredsButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
@@ -67,15 +67,13 @@ namespace PasswordManager.Core.UserControls
 			}
 		}
 
-		private void returnButton_Click(object sender, RoutedEventArgs e)
+		private void ReturnButton_Click(object sender, RoutedEventArgs e)
 		{
 			var huc = (Canvas)Parent;
 			huc.Children.Remove(this);
 		}
 
-		private void canvasGrid_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			returnButton_Click(sender, e);
-		}
+		private void CanvasGrid_MouseDown(object sender, MouseButtonEventArgs e)
+		{ ReturnButton_Click(sender, e); }
 	}
 }
