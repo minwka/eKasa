@@ -16,12 +16,10 @@ namespace PasswordManager.Core
 				Rfc2898DeriveBytes pdb = new(key, salt);
 				encryptor.Key = pdb.GetBytes(32);
 				encryptor.IV = pdb.GetBytes(16);
-				using (MemoryStream ms = new()) {
-					using (CryptoStream cs = new(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write)) {
-						cs.Write(clearBytes, 0, clearBytes.Length);
-					}
-					message = Convert.ToBase64String(ms.ToArray());
+				using MemoryStream ms = new(); using (CryptoStream cs = new(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write)) {
+					cs.Write(clearBytes, 0, clearBytes.Length);
 				}
+				message = Convert.ToBase64String(ms.ToArray());
 			}
 			return message;
 		}
@@ -35,12 +33,10 @@ namespace PasswordManager.Core
 				Rfc2898DeriveBytes pdb = new(key, salt);
 				encryptor.Key = pdb.GetBytes(32);
 				encryptor.IV = pdb.GetBytes(16);
-				using (MemoryStream ms = new()) {
-					using (CryptoStream cs = new(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write)) {
-						cs.Write(cipherBytes, 0, cipherBytes.Length);
-					}
-					message = Encoding.Unicode.GetString(ms.ToArray());
+				using MemoryStream ms = new(); using (CryptoStream cs = new(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write)) {
+					cs.Write(cipherBytes, 0, cipherBytes.Length);
 				}
+				message = Encoding.Unicode.GetString(ms.ToArray());
 			}
 			return message;
 		}
@@ -56,15 +52,13 @@ namespace PasswordManager.Core
 
 		public static string Hash(string input)
 		{
-			using (SHA256 sha256Hash = SHA256.Create()) {
-				byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+			using SHA256 sha256Hash = SHA256.Create(); byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-				StringBuilder builder = new StringBuilder();
-				for (int i = 0; i < bytes.Length; i++) {
-					builder.Append(bytes[i].ToString("x2"));
-				}
-				return builder.ToString();
+			StringBuilder builder = new();
+			for (int i = 0; i < bytes.Length; i++) {
+				builder.Append(bytes[i].ToString("x2"));
 			}
+			return builder.ToString();
 		}
 	}
 }
