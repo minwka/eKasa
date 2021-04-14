@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Win32;
+using static System.Environment;
 
 namespace PasswordManager.Uninstaller.Controls
 {
@@ -33,9 +34,9 @@ namespace PasswordManager.Uninstaller.Controls
 					}
 
 					if (MainWindow.ucoptions.removeShortcuts.IsChecked == true) {
-						var shortcutDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-						var shortcutStartMenu = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
-						var shortcutStartup = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+						var shortcutDesktop = GetFolderPath(SpecialFolder.DesktopDirectory);
+						var shortcutStartMenu = GetFolderPath(SpecialFolder.StartMenu);
+						var shortcutStartup = GetFolderPath(SpecialFolder.Startup);
 						if (MainWindow.ucoptions.removeRegistries.IsChecked == true) {
 							File.Delete($"{shortcutDesktop}\\eKasa.lnk");
 							File.Delete($"{shortcutStartMenu}\\eKasa.lnk");
@@ -43,7 +44,7 @@ namespace PasswordManager.Uninstaller.Controls
 						}
 					}
 
-					Directory.Delete(installPath, true);
+					Directory.Delete(Path.Combine(installPath,"App"), true);
 					iSettings.Close();
 				}
 
@@ -80,7 +81,6 @@ namespace PasswordManager.Uninstaller.Controls
 					p.EnableRaisingEvents = true;
 					p.StartInfo = psi;
 					p.Start();
-
 				}
 			} catch (Exception) { }
 			Application.Current.Shutdown();

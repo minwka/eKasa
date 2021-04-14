@@ -15,7 +15,7 @@ namespace PasswordManager.Installer.Controls
 		{ InitializeComponent(); }
 
 		public static void CopyPreferences()
-		{			InstallParameters.InstallPath = MainWindow.ucoptions.path.Text;		}
+		{ InstallParameters.InstallPath = MainWindow.ucoptions.path.Text; }
 
 		public void BeginInstall()
 		{
@@ -26,7 +26,7 @@ namespace PasswordManager.Installer.Controls
 			try {
 				ProcessStartInfo psi = new();
 				psi.FileName = "cmd.exe";
-				psi.Arguments = $"/c Binaries\\7z\\7za.exe x -p\"enc765_-_-_inst05\" -o\"{InstallParameters.InstallPath}\" Binaries\\Install\\package.7z -y";
+				psi.Arguments = $"/c Binaries\\7z\\7za.exe x -o\"{InstallParameters.InstallPath}\\App\" Binaries\\Install\\package.7z -y";
 				psi.CreateNoWindow = true;
 				psi.WindowStyle = ProcessWindowStyle.Hidden;
 
@@ -35,6 +35,8 @@ namespace PasswordManager.Installer.Controls
 				p.Exited += new EventHandler(FinalizeAndLaunch);
 				p.StartInfo = psi;
 				p.Start();
+
+				File.Copy("Uninstall.exe",$"{InstallParameters.InstallPath}\\Uninstall.exe");
 			} catch (Exception ex) {
 				canvas.Children.Clear();
 				canvas.Children.Add(MainWindow.ucerror);
@@ -56,22 +58,25 @@ namespace PasswordManager.Installer.Controls
 			iSettings.Close();
 			#endregion
 
-			if ((bool)MainWindow.ucoptions.scDesktop.IsChecked) {
-				var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-				WinShortcut.Create($"{desktopPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\eKasa.exe", "", InstallParameters.InstallPath, "eKasa. Şifre yöneticiniz", "", "");
-			}
-
-			if ((bool)MainWindow.ucoptions.scStart.IsChecked) {
-				var startmenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
-				WinShortcut.Create($"{startmenuPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\eKasa.exe", "", startmenuPath, "eKasa. Şifre yöneticiniz", "", "");
-			}
-
-			if ((bool)MainWindow.ucoptions.launchAtStartup.IsChecked) {
-				var startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-				WinShortcut.Create($"{startupPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\eKasa.exe", "", startupPath, "eKasa. Şifre yöneticiniz", "", "");
-			}
-
 			Dispatcher.Invoke(() => {
+				#region Shortcuts
+				if ((bool)MainWindow.ucoptions.scDesktop.IsChecked) {
+					var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+					WinShortcut.Create($"{desktopPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\App\\eKasa.exe", "", InstallParameters.InstallPath, "eKasa. Şifre yöneticiniz", "", "");
+				}
+
+				if ((bool)MainWindow.ucoptions.scStart.IsChecked) {
+					var startmenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
+					WinShortcut.Create($"{startmenuPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\App\\eKasa.exe", "", startmenuPath, "eKasa. Şifre yöneticiniz", "", "");
+				}
+
+				if ((bool)MainWindow.ucoptions.launchAtStartup.IsChecked) {
+					var startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+					WinShortcut.Create($"{startupPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\App\\eKasa.exe", "", startupPath, "eKasa. Şifre yöneticiniz", "", "");
+				}
+				#endregion
+
+				#region Colors and Actions
 				var canvas = (Canvas)Parent;
 				var grid = (Grid)canvas.Parent;
 				var window = (MainWindow)grid.Parent;
@@ -87,6 +92,7 @@ namespace PasswordManager.Installer.Controls
 				window.next.Click += Terminate;
 				window.back.Visibility = Visibility.Hidden;
 				window.terminate.Visibility = Visibility.Hidden;
+				#endregion
 
 				canvas.Children.Clear();
 				canvas.Children.Add(MainWindow.uclaunch);
@@ -95,8 +101,8 @@ namespace PasswordManager.Installer.Controls
 
 		void Terminate(object sender, RoutedEventArgs e)
 		{
-			if (MainWindow.uclaunch.scLaunch.IsChecked == true) 
-				Process.Start($"{InstallParameters.InstallPath}\\eKasa.exe");
+			if (MainWindow.uclaunch.scLaunch.IsChecked == true)
+				Process.Start($"{InstallParameters.InstallPath}\\App\\eKasa.exe");
 			Application.Current.Shutdown();
 		}
 	}
