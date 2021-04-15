@@ -17,9 +17,8 @@
 mono_crash.*
 
 # Build results
-Deployment_Package/
-Install/
-Installer/
+Executables/
+Install_Package/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
