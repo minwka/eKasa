@@ -1,7 +1,8 @@
 #region Initialize script
+$ErrorActionPreference = 'SilentlyContinue'
 Write-Warning "Purging solution..."
 # Get project list (can get from solution)
-$projects = Get-ChildItem -Directory -Name | Select-String PasswordManager
+$projects = Get-ChildItem -Directory -Name | Select-String eKasa
 #endregion
 
 #region Purge deployment directory (Solution-specific)
@@ -22,6 +23,7 @@ foreach ($project in $projects) {
 #endregion
 
 #region Wait for user
+$ErrorActionPreference = 'Continue'
 Write-Warning "Purge completed. Moving on in 2 seconds."
 Start-Sleep 2
 #endregion
