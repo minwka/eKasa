@@ -2,13 +2,13 @@
 
 <p align="center" id="version">
 <a href="https://github.com/minwka/eKasa"><img title="eKasa" src="https://img.shields.io/badge/Uygulama-eKasa-blue.svg"></a>
-<a href="https://github.com/minwka/eKasa"><img title="Version" src="https://img.shields.io/badge/Sürüm-4.2-blue.svg"></a>
+<a href="https://github.com/minwka/eKasa/releases/tag/v4.2"><img title="Version" src="https://img.shields.io/badge/Sürüm-4.2-blue.svg"></a>
 <a href="https://github.com/minwka/eKasa"><img title="Language" src="https://img.shields.io/badge/Dil-C%23-purple"></a>
 <a href="https://github.com/minwka/eKasa"><img title="Framework" src="https://img.shields.io/badge/Framework-.NET%20Core-purple"></a>
 </p>
 
 <p align="center" id="logo">  
-<a href="https://github.com/minwka/eKasa"><img title="sqlimother" width="300" height="300" src="eKasa.Installer/Controls/ekasa_logo.png"></img></a>
+<a href="https://github.com/minwka/eKasa"><img title="eKasa" width="300" height="300" src="eKasa.Installer/Controls/ekasa_logo.png"></img></a>
 </p>
 
 <p align="center" id="socials">
@@ -17,10 +17,10 @@
 </p>
 
 <p align="center" id="stats">
-<a href="https://github.com/minwka/eKasa"><img title="Followers" src="https://img.shields.io/github/followers/minwka?color=darkblue"></a>
-<a href="https://github.com/minwka/eKasa"><img title="Stars" src="https://img.shields.io/github/stars/minwka/eKasa?color=darkblue"></a>
-<a href="https://github.com/minwka/eKasa"><img title="Forks" src="https://img.shields.io/github/forks/minwka/eKasa?color=darkblue"></a>
-<a href="https://github.com/minwka/eKasa"><img title="Watching" src="https://img.shields.io/github/watchers/minwka/eKasa?label=Watchers&color=darkblue"></a>
+<a href="https://github.com/minwka?tab=followers"><img title="Followers" src="https://img.shields.io/github/followers/minwka?color=darkblue"></a>
+<a href="https://github.com/minwka/eKasa/stargazers"><img title="Stars" src="https://img.shields.io/github/stars/minwka/eKasa?color=darkblue"></a>
+<a href="https://github.com/minwka/eKasa/network/members"><img title="Forks" src="https://img.shields.io/github/forks/minwka/eKasa?color=darkblue"></a>
+<a href="https://github.com/minwka/eKasa/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/minwka/eKasa?label=Watchers&color=darkblue"></a>
 <a href="https://github.com/minwka/eKasa"><img title="Licence" src="https://img.shields.io/badge/License-TBD-red.svg"></a>
 </p>
 
