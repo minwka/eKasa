@@ -8,6 +8,7 @@ namespace eKasa.Core
 {
 	public partial class CreateDbWindow : Window
 	{
+		public bool dbCreated = false;
 		readonly public OpenFileDialog ofd = new();
 		public CreateDbWindow()
 		{ InitializeComponent(); }
@@ -37,12 +38,14 @@ namespace eKasa.Core
 		{
 			ofd.Title = "Yeni veritabanını kaydedecek konum seçin";
 			ofd.Filter = "Veritabanı dosyaları (*fdbx)|*.fdbx|JSON dosyaları (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
+			ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 			ofd.AddExtension = true;
 			ofd.CheckFileExists = false;
 			if (ofd.ShowDialog() == true) {
 				directoryPreview.Text = ofd.SafeFileName;
 				directoryPreview.ToolTip = ofd.FileName;
 			}
+			nameInput.Focus();
 		}
 
 		private void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -60,6 +63,7 @@ namespace eKasa.Core
 
 				Database.Save(dbm, ofd.FileName);
 
+				dbCreated = true;
 				MessageBox.Show("Dosya başarıyla oluşturuldu!", "Bildirim!", MessageBoxButton.OK, MessageBoxImage.Information);
 
 				Close();

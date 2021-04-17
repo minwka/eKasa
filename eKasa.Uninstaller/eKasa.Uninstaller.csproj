@@ -11,11 +11,11 @@
 		<Company>NAMI</Company>
 		<Authors>M. Ferit Uzun</Authors>
 		<Description>eKasa. Kaldırma sihirbazı.</Description>
-		<Version>4.3</Version>
+		<Version>4.4</Version>
 		<Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
-		<AssemblyVersion>4.3.0.0</AssemblyVersion>
-		<FileVersion>4.3.0.0</FileVersion>
+		<AssemblyVersion>4.4.0.0</AssemblyVersion>
+		<FileVersion>4.4.0.0</FileVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

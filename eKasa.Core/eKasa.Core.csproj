@@ -6,15 +6,15 @@
 		<UseWPF>true</UseWPF>
 		<AssemblyName>eKasa</AssemblyName>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
-		<StartupObject></StartupObject>
-		<Version>4.3</Version>
+		<StartupObject>eKasa.Core.App</StartupObject>
+		<Version>4.4</Version>
 		<Authors>M. Ferit Uzun</Authors>
 		<Company>NAMI</Company>
 		<Description>eKasa. Şifre yönetici uygulaması.</Description>
 		<Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
 		<PackageIcon></PackageIcon>
-		<AssemblyVersion>4.3.0.0</AssemblyVersion>
-		<FileVersion>4.3.0.0</FileVersion>
+		<AssemblyVersion>4.4.0.0</AssemblyVersion>
+		<FileVersion>4.4.0.0</FileVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

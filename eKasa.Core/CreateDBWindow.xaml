@@ -1,9 +1,8 @@
 ﻿<Window x:Name="mainWindow" x:Class="eKasa.Core.CreateDbWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:eKasa.Core"
         mc:Ignorable="d"
         Title="Create Database" Height="330" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF2D2D30" BorderBrush="#FF0078D7" WindowStyle="None" BorderThickness="1,1,10,1" MouseDown="MainWindow_MouseDown">
 	<Grid x:Name="mainGrid">
@@ -39,7 +38,7 @@
 		<TextBox x:Name="ownerInput" TextWrapping="NoWrap" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="18" VerticalAlignment="Center" CaretBrush="#FF0078D7" Grid.ColumnSpan="4" Grid.Row="5" Grid.Column="1" Height="30" Margin="45,0,10,0" TabIndex="24"/>
 		<CheckBox x:Name="pwdToggle" Content="Şifreyi Göster" FontSize="16" Foreground="#FF0078D7" Checked="PwdToggle_CheckedChanged" Unchecked="PwdToggle_CheckedChanged" Grid.Column="3" Grid.Row="6" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,0,10,0" TabIndex="27"/>
 		<Button x:Name="createButton" Content="Oluştur" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" Click="CreateButton_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="7" Grid.ColumnSpan="1" Grid.Column="4" Margin="0,0,10,10" TabIndex="25" IsDefault="True" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="terminateButton" Content="Çık" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" FontSize="13" Click="TerminateButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="7" Margin="10,0,0,10" TabIndex="26" IsCancel="True" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="terminateButton" Content="Çık" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" FontSize="13" Click="TerminateButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="7" Margin="10,0,0,10" TabIndex="26" IsCancel="True" Template="{StaticResource borderlessButton}"/>
 
 	</Grid>
 </Window>

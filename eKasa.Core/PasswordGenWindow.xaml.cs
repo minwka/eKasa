@@ -65,9 +65,9 @@ namespace eKasa.Core
 
 		private void SavePwdButton_Click(object sender, RoutedEventArgs e)
 		{
-			HomeWindow.createv.clearPasswordInput.Text = randomString;
+			HomeWindow.addv.clearPasswordInput.Text = randomString;
 			HomeWindow.editv.clearPasswordInput.Text = randomString;
-			HomeWindow.createv.passwordInput.Password = randomString;
+			HomeWindow.addv.passwordInput.Password = randomString;
 			HomeWindow.editv.passwordInput.Password = randomString;
 			Close();
 		}

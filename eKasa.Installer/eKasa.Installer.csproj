@@ -9,9 +9,9 @@
 		<Company>NAMI</Company>
 		<Authors>M. Ferit Uzun</Authors>
 		<Product>eKasa Installer</Product>
-		<AssemblyVersion>4.3.0.0</AssemblyVersion>
-		<FileVersion>4.3.0.0</FileVersion>
-		<Version>4.3</Version>
+		<AssemblyVersion>4.4.0.0</AssemblyVersion>
+		<FileVersion>4.4.0.0</FileVersion>
+		<Version>4.4</Version>
 		<AssemblyName>Installer</AssemblyName>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<Description>eKasa. Yükleme sihirbazı.</Description>

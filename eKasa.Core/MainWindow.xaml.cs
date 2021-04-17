@@ -31,7 +31,7 @@ namespace eKasa.Core
 		{
 			CreateDbWindow cdb = new();
 			cdb.ShowDialog();
-			if (!string.IsNullOrEmpty(cdb.ofd.FileName)) {
+			if (cdb.dbCreated) {
 				ofd.FileName = cdb.ofd.FileName;
 				locationInput.Text = ofd.SafeFileName;
 				rememberDb.IsChecked = true;
@@ -53,6 +53,7 @@ namespace eKasa.Core
 		{
 			ofd.Title = "Bir veritabanı dosyası seçin";
 			ofd.Filter = "Veritabanı dosyaları (*fdbx)|*.fdbx|JSON dosyaları (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
+			ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 			if (ofd.ShowDialog() == true)
 				locationInput.Text = ofd.SafeFileName;
 			passwordInput.Focus();
@@ -76,7 +77,7 @@ namespace eKasa.Core
 		private void ConfirmButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
-				if (pwdToggle.IsChecked == true) { passwordInput.Password = clearPwdInput.Text; }
+				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPwdInput.Text;
 
 				dbSettings.FilePath = ofd.FileName;
 				dbSettings.Password = passwordInput.Password;

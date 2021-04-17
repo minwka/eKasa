@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using static eKasa.Core.GlobalSettings;
+using static eKasa.Library.Encryption.String;
 
 namespace eKasa.Core.UserControls
 {
@@ -96,15 +101,72 @@ namespace eKasa.Core.UserControls
 
 		private void LockButton_Click(object sender, RoutedEventArgs e)
 		{
-			var canvas = (Canvas)Parent;
-			var grid = (Grid)(canvas.Parent);
-			var window = (Window)(grid.Parent);
+			Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+			Application.Current.Shutdown();
+		}
 
-			canvas.Children.Clear();
-			window.Close();
+		private void ExportButton_Click(object sender, RoutedEventArgs e)
+		{
+			DatabaseModel edb = new();
+			edb = dbSettings.InternalDb;
+			edb.PwdHash = "";
+			edb.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-			LoginWindow w = new();
-			w.Show();
+			try {
+				var ask = MessageBox.Show("Veritabanını ŞİFRESİZ olarak dışa aktarmak istediğinize emin misiniz?", "Veritabanını dışa aktar!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+				if (ask == MessageBoxResult.Yes) {
+				tryAgain:
+					OpenFileDialog ofd = new();
+					ofd.Title = "Dışa aktarma konumu seçin!";
+					ofd.Filter = "JSON dosyası (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
+					ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+					ofd.AddExtension = true;
+					ofd.CheckPathExists = true;
+					ofd.CheckFileExists = false;
+					ofd.ShowDialog();
+					if (ofd.FileName == "") {
+						var retry = MessageBox.Show("Dışa aktarmayı iptal ettiniz.\nTekrar denemek ister misiniz?", "Tekrar dene?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+						if (retry == MessageBoxResult.Yes) goto tryAgain;
+						else tooltipLabel.Content = "Dışa aktarma iptal edildi!";
+					} else {
+						Database.ToJson(ref dbSettings.InternalDb, ofd.FileName);
+						tooltipLabel.Content = "Dışa aktarma başarılı!";
+					}
+				}
+			} catch (Exception ex) { logger.Error(ex); }
+		}
+
+		private void ImportButton_Click(object sender, RoutedEventArgs e)
+		{
+			try {
+			tryAgain:
+				OpenFileDialog ofd = new();
+				ofd.Title = "İçe aktarılacak veritabanını seçin!";
+				ofd.Filter = "JSON dosyası (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
+				ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+				ofd.AddExtension = true;
+				ofd.CheckFileExists = true;
+				ofd.ShowDialog();
+				if (ofd.FileName == "") {
+					var retry = MessageBox.Show("İçe aktarmayı iptal ettiniz.\nTekrar denemek ister misiniz?", "Tekrar dene?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+					if (retry == MessageBoxResult.Yes) goto tryAgain;
+					else tooltipLabel.Content = "İçe aktarma iptal edildi!";
+				} else {
+					var db = Database.FromJson(ofd.FileName);
+					dbSettings.InternalDb = db;
+					dbSettings.Password = "password";
+					dbSettings.InternalDb.PwdHash = Sha256("password");
+					entriesDataGrid.ItemsSource = dbSettings.InternalDb.Entries;
+					entriesDataGrid.Items.Refresh();
+
+					var dbPath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName) + ".fdbx");
+					dbSettings.FilePath = dbPath;
+					Database.Save(db, dbPath);
+					MessageBox.Show($"İçeri aktarılan veritabanı '{dbPath}' konumuna kaydedildi!\nVarsayılan şifre: 'password'", "Veritabanı kaydedildi!", MessageBoxButton.OK, MessageBoxImage.Information);
+					tooltipLabel.Content = $"İçe aktarma başarılı!";
+				}
+
+			} catch (Exception ex) { logger.Error(ex); }
 		}
 	}
 }

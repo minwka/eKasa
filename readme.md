@@ -1,8 +1,7 @@
-# eKasa. WPF Şifre Yönetici Uygulaması
+# eKasa: Şifre Yönetici Uygulaması <a href="https://github.com/minwka/eKasa/releases/tag/v4.2"><img title="Version" src="https://img.shields.io/badge/Sürüm-4.4-blue.svg"></a>
 
 <p align="center" id="version">
 <a href="https://github.com/minwka/eKasa"><img title="eKasa" src="https://img.shields.io/badge/Uygulama-eKasa-blue.svg"></a>
-<a href="https://github.com/minwka/eKasa/releases/tag/v4.2"><img title="Version" src="https://img.shields.io/badge/Sürüm-4.3-blue.svg"></a>
 <a href="https://github.com/minwka/eKasa"><img title="Language" src="https://img.shields.io/badge/Dil-C%23-purple"></a>
 <a href="https://github.com/minwka/eKasa"><img title="Framework" src="https://img.shields.io/badge/Framework-.NET%20Core-purple"></a>
 </p>

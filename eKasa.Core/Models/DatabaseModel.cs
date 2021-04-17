@@ -14,14 +14,11 @@ namespace eKasa.Core
 		[JsonPropertyName("password_hash")]
 		public string PwdHash { get; set; }
 
-		[JsonPropertyName("last_modified_date")]
+		[JsonPropertyName("modified_date")]
 		public string ModifiedDate { get; set; }
 
-		[JsonPropertyName("database_version")]
+		[JsonPropertyName("app_version")]
 		public string Version { get; set; }
-
-		[JsonPropertyName("salt")]
-		public string Salt { get; set; }
 
 		[JsonPropertyName("entry_list")]
 		public List<EntryModel> Entries { get; set; }

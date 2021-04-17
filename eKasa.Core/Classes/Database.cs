@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
@@ -14,7 +13,14 @@ namespace eKasa.Core
 		{ return JsonSerializer.Deserialize<DatabaseModel>(File.ReadAllText(filePath)); }
 
 		static public string ToJson(ref DatabaseModel db)
-		{ return JsonSerializer.Serialize(db); }
+		{ return JsonSerializer.Serialize(db, new JsonSerializerOptions() { WriteIndented = true }); }
+
+		static public string ToJson(ref DatabaseModel db, string filePath)
+		{
+			var json = JsonSerializer.Serialize(db, new JsonSerializerOptions() { WriteIndented = true });
+			File.WriteAllText(filePath, json);
+			return json;
+		}
 
 		static public void Save(DatabaseModel db, string filePath)
 		{
@@ -85,7 +91,6 @@ namespace eKasa.Core
 				PwdHash = db.PwdHash,
 				ModifiedDate = Decrypt(db.ModifiedDate, dbSettings.Password),
 				Version = db.Version,
-				Salt = db.Salt,
 				Entries = DecryptEntries(ref db)
 			};
 			return dbm;

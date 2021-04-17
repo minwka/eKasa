@@ -9,7 +9,7 @@ namespace eKasa.Core
 	{
 		#region UserControls
 		readonly static public HomeView homev = new();
-		readonly static public AddEntryView createv= new();
+		readonly static public AddEntryView addv = new();
 		readonly static public EditEntryView editv = new();
 		readonly static public AboutView aboutv = new();
 		readonly static public AppSettingsView appSettingsv = new();
@@ -52,12 +52,14 @@ namespace eKasa.Core
 
 		private void CreateButton_Click(object sender, RoutedEventArgs e)
 		{
+			addv.nameInput.Focus();
 			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(createv);
+			contentCanvas.Children.Add(addv);
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
+			editv.nameInput.Focus();
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(editv);
 		}
@@ -76,6 +78,7 @@ namespace eKasa.Core
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
+			appSettingsv.nameInput.Focus();
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(appSettingsv);
 		}
