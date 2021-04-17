@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,10 +10,7 @@ namespace eKasa.Core.UserControls
 		{ InitializeComponent(); }
 
 		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
-		{
-			var gpw = new PasswordGenWindow();
-			gpw.Show();
-		}
+		{ var gpw = new PasswordGenWindow(); gpw.Show(); }
 
 		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
 		{
@@ -41,20 +36,22 @@ namespace eKasa.Core.UserControls
 					Id = Guid.NewGuid(),
 					Name = nameInput.Text,
 					Username = usernameInput.Text,
-					Tag = tagInput.Text,
-					Password = passwordInput.Password
+					Password = passwordInput.Password,
+					Tag = tagInput.Text
 				};
 
 				Settings.dbSettings.InternalDb.Entries.Add(newEntry);
-
-				ManageDbWindow.homeuc.entriesDataGrid.ItemsSource = new List<EntryModel>();
 				ManageDbWindow.homeuc.entriesDataGrid.ItemsSource = Settings.dbSettings.InternalDb.Entries;
+				ManageDbWindow.homeuc.entriesDataGrid.Items.Refresh();
 
-				nameInput.Text = "";
-				usernameInput.Text = "";
-				tagInput.Text = "";
-				clearPasswordInput.Text = "";
-				passwordInput.Password = "";
+				foreach (var child in mainGrid.Children) {
+					if (child.GetType() == typeof(TextBox)) {
+						((TextBox)child).Text = "";
+					}
+					if (child.GetType() == typeof(PasswordBox)) {
+						((PasswordBox)child).Password = "";
+					}
+				}
 
 				if (stayHereToggle.IsChecked == false) {
 					var parent = (Canvas)Parent;

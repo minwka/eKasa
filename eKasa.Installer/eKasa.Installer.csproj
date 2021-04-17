@@ -9,13 +9,22 @@
 		<Company>NAMI</Company>
 		<Authors>M. Ferit Uzun</Authors>
 		<Product>eKasa Installer</Product>
-		<AssemblyVersion>4.2.0.0</AssemblyVersion>
-		<FileVersion>4.2.0.0</FileVersion>
-		<Version>4.2</Version>
+		<AssemblyVersion>4.3.0.0</AssemblyVersion>
+		<FileVersion>4.3.0.0</FileVersion>
+		<Version>4.3</Version>
 		<AssemblyName>Installer</AssemblyName>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<Description>eKasa. Yükleme sihirbazı.</Description>
 		<Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>none</DebugType>
+	  <DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <WarningLevel>0</WarningLevel>
 	</PropertyGroup>
 
 	<ItemGroup>

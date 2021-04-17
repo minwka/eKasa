@@ -18,7 +18,6 @@ namespace eKasa.Core
 		{
 			InitializeComponent();
 			contentCanvas.Children.Add(homeuc);
-			homeuc.ForceRefresh();
 		}
 
 		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -26,6 +25,7 @@ namespace eKasa.Core
 			if (e.ChangedButton == MouseButton.Left) {
 				DragMove();
 				homeuc.tooltipLabel.Content = "";
+				settingsuc.tooltipLabel.Content = "";
 				homeuc.entriesDataGrid.SelectedIndex = -1;
 			}
 		}

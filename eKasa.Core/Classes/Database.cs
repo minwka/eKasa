@@ -16,32 +16,16 @@ namespace eKasa.Core
 		static public string ToJson(ref DatabaseModel db)
 		{ return JsonSerializer.Serialize(db); }
 
-		static public DatabaseModel EncryptDatabase(ref DatabaseModel db, string key)
+		static public void Save(DatabaseModel db, string filePath)
 		{
-			var dbm = new DatabaseModel() {
-				Name = Encrypt(db.Name, dbSettings.Password),
-				Owner = Encrypt(db.Owner, dbSettings.Password),
-				PwdHash = db.PwdHash,
-				ModifiedDate = Encrypt(db.ModifiedDate, dbSettings.Password),
-				Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-				Salt = Convert.ToBase64String(sessionSalt),
-				Entries = EncryptEntries(ref db, key)
-			};
-			return dbm;
+			db = EncryptDatabase(ref db, dbSettings.Password);
+			File.WriteAllText(filePath, ToJson(ref db));
 		}
 
-		static public DatabaseModel DecryptDatabase(ref DatabaseModel db)
+		static public void Restore(ref DatabaseModel db, string filePath)
 		{
-			var dbm = new DatabaseModel() {
-				Name = Decrypt(db.Name, dbSettings.Password, dbSettings.InternalDb.Salt),
-				Owner = Decrypt(db.Owner, dbSettings.Password, dbSettings.InternalDb.Salt),
-				PwdHash = db.PwdHash,
-				ModifiedDate = Decrypt(db.ModifiedDate, dbSettings.Password, dbSettings.InternalDb.Salt),
-				Version = db.Salt,
-				Salt = db.Salt,
-				Entries = DecryptEntries(ref db)
-			};
-			return dbm;
+			db = FromJson(filePath);
+			db = DecryptDatabase(ref db);
 		}
 
 		static public List<EntryModel> EncryptEntries(ref DatabaseModel db, string key)
@@ -78,6 +62,34 @@ namespace eKasa.Core
 				}
 			}
 			return entryList;
+		}
+
+		static public DatabaseModel EncryptDatabase(ref DatabaseModel db, string key)
+		{
+			var dbm = new DatabaseModel() {
+				Name = Encrypt(db.Name, dbSettings.Password),
+				Owner = Encrypt(db.Owner, dbSettings.Password),
+				PwdHash = db.PwdHash,
+				ModifiedDate = Encrypt(db.ModifiedDate, dbSettings.Password),
+				Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
+				Salt = Convert.ToBase64String(sessionSalt),
+				Entries = EncryptEntries(ref db, key)
+			};
+			return dbm;
+		}
+
+		static public DatabaseModel DecryptDatabase(ref DatabaseModel db)
+		{
+			var dbm = new DatabaseModel() {
+				Name = Decrypt(db.Name, dbSettings.Password, dbSettings.InternalDb.Salt),
+				Owner = Decrypt(db.Owner, dbSettings.Password, dbSettings.InternalDb.Salt),
+				PwdHash = db.PwdHash,
+				ModifiedDate = Decrypt(db.ModifiedDate, dbSettings.Password, dbSettings.InternalDb.Salt),
+				Version = db.Version,
+				Salt = db.Salt,
+				Entries = DecryptEntries(ref db)
+			};
+			return dbm;
 		}
 	}
 }

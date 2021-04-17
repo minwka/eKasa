@@ -1,12 +1,11 @@
-﻿using eKasa.Library.Config;
-
-namespace eKasa.Core
+﻿namespace eKasa.Core
 {
 	static public class Settings
 	{
-		readonly static public DbSettingsModel dbSettings = new();
-		readonly static public AppSettingsModel appSettings = new();
-		readonly static public SettingsManager<AppSettingsModel> appSettingsManager = new(ref appSettings, @"Settings\app_settings.xml");
+		static public AppSettingsModel appSettings = new();
+		readonly static public string appSettingsPath = @"Settings\app_settings.json";
 		readonly static public Logger logger = new("error.log");
+
+		readonly static public DbSettingsModel dbSettings = new();
 	}
 }

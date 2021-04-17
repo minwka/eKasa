@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using eKasa.Library.Config;
 using Microsoft.Win32;
 using static eKasa.Core.Settings;
 using static eKasa.Library.Encryption.String;
@@ -14,9 +15,8 @@ namespace eKasa.Core
 		public MainWindow()
 		{
 			InitializeComponent();
-
-			appSettingsManager.Restore();
-			if (!string.IsNullOrEmpty(appSettings.LastDbLocation)) {
+			SettingsManager<AppSettingsModel>.Restore(ref appSettings, appSettingsPath);
+			if (appSettings.RememberLastDb) {
 				ofd.FileName = appSettings.LastDbLocation;
 				locationInput.Text = Path.GetFileName(appSettings.LastDbLocation);
 				rememberDb.IsChecked = true;
@@ -78,18 +78,22 @@ namespace eKasa.Core
 			try {
 				if (pwdToggle.IsChecked == true) { passwordInput.Password = clearPwdInput.Text; }
 
+				dbSettings.FilePath = ofd.FileName;
+				dbSettings.Password = passwordInput.Password;
+
 				ref var idb = ref dbSettings.InternalDb;
 				idb = Database.FromJson(ofd.FileName);
 
 				if (idb.PwdHash == Hash(passwordInput.Password)) {
-					dbSettings.Path = ofd.FileName;
-					dbSettings.Password = passwordInput.Password;
-
 					idb = Database.DecryptDatabase(ref idb);
 
-					if (rememberDb.IsChecked == true) appSettings.LastDbLocation = ofd.FileName;
-					else appSettings.LastDbLocation = "";
-					appSettingsManager.Save();
+					if (rememberDb.IsChecked == true) {
+						appSettings.RememberLastDb = true;
+						appSettings.LastDbLocation = ofd.FileName;
+					} else {
+						appSettings.RememberLastDb = false;
+					}
+					SettingsManager<AppSettingsModel>.Save(appSettings, appSettingsPath);
 
 					ManageDbWindow mdbw = new();
 					mdbw.Show();
@@ -98,6 +102,13 @@ namespace eKasa.Core
 					MessageBox.Show("Yanlış ya da boş şifre veya geçersiz veritabanı dosyası belirttiniz!", "Hata!", MessageBoxButton.OK, MessageBoxImage.Warning);
 				}
 			} catch (Exception ex) { logger.Error(ex); }
+		}
+
+		private void mainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (rememberDb.IsChecked == true) appSettings.RememberLastDb = true;
+			else appSettings.RememberLastDb = false;
+			SettingsManager<AppSettingsModel>.Save(appSettings, appSettingsPath);
 		}
 	}
 }

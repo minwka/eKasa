@@ -1,11 +1,13 @@
-﻿using System.Xml.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace eKasa.Core
 {
-	[XmlRoot(ElementName = "application_settings")]
-	public class AppSettingsModel
+	public record AppSettingsModel
 	{
-		[XmlElement(DataType = "string", ElementName = "last_db_location")]
+		[JsonPropertyName("remember_db")]
+		public bool RememberLastDb { get; set; }
+
+		[JsonPropertyName("last_db")]
 		public string LastDbLocation { get; set; }
 	}
 }

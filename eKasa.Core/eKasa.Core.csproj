@@ -7,14 +7,26 @@
 		<AssemblyName>eKasa</AssemblyName>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
 		<StartupObject></StartupObject>
-		<Version>4.2</Version>
+		<Version>4.3</Version>
 		<Authors>M. Ferit Uzun</Authors>
 		<Company>NAMI</Company>
 		<Description>eKasa. Şifre yönetici uygulaması.</Description>
 		<Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
 		<PackageIcon></PackageIcon>
-		<AssemblyVersion>4.2.0.0</AssemblyVersion>
-		<FileVersion>4.2.0.0</FileVersion>
+		<AssemblyVersion>4.3.0.0</AssemblyVersion>
+		<FileVersion>4.3.0.0</FileVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile></DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DocumentationFile></DocumentationFile>
+	  <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+	  <DebugType>none</DebugType>
+	  <DebugSymbols>false</DebugSymbols>
+	  <DefineConstants></DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>

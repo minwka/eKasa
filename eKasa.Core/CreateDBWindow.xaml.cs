@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
@@ -51,6 +49,7 @@ namespace eKasa.Core
 		{
 			try {
 				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPwdInput.Text;
+				Settings.dbSettings.Password = passwordInput.Password;
 
 				DatabaseModel dbm = new() {
 					Name = string.IsNullOrEmpty(nameInput.Text) ? "FDBX" : nameInput.Text,
@@ -59,9 +58,7 @@ namespace eKasa.Core
 					ModifiedDate = DateTime.UtcNow.ToString(),
 				};
 
-				Settings.dbSettings.Password = passwordInput.Password;
-				dbm = Database.EncryptDatabase(ref dbm, passwordInput.Password);
-				File.WriteAllText(ofd.FileName, Database.ToJson(ref dbm));
+				Database.Save(dbm, ofd.FileName);
 
 				MessageBox.Show("Dosya başarıyla oluşturuldu!", "Bildirim!", MessageBoxButton.OK, MessageBoxImage.Information);
 
