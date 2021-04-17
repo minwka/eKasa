@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net5.0-windows</TargetFramework>
 		<PackageId>Core.Library</PackageId>
 		<Authors>M. Ferit Uzun</Authors>
 		<Company>NAMI</Company>
@@ -12,8 +13,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DebugType>none</DebugType>
-	  <DebugSymbols>false</DebugSymbols>
+		<DebugType>none</DebugType>
+		<DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
 
 </Project>

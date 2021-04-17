@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using eKasa.Core.UserControls;
 
 namespace eKasa.Core
 {
@@ -11,7 +10,7 @@ namespace eKasa.Core
 		readonly static public HomeView homev = new();
 		readonly static public AddEntryView addv = new();
 		readonly static public EditEntryView editv = new();
-		readonly static public AboutView aboutv = new();
+		readonly static public AboutAppView aboutv = new();
 		readonly static public AppSettingsView appSettingsv = new();
 		#endregion
 

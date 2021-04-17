@@ -6,11 +6,11 @@ using static eKasa.Library.Encryption.String;
 
 namespace eKasa.Core
 {
-	public partial class CreateDbWindow : Window
+	public partial class NewDbWindow : Window
 	{
 		public bool dbCreated = false;
 		readonly public OpenFileDialog ofd = new();
-		public CreateDbWindow()
+		public NewDbWindow()
 		{ InitializeComponent(); }
 
 		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)

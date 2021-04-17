@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace eKasa.Core.UserControls
+namespace eKasa.Core
 {
 	public partial class ActionsView : UserControl
 	{

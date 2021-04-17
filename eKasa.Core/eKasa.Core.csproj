@@ -6,7 +6,7 @@
 		<UseWPF>true</UseWPF>
 		<AssemblyName>eKasa</AssemblyName>
 		<ApplicationIcon>logo.ico</ApplicationIcon>
-		<StartupObject>eKasa.Core.App</StartupObject>
+		<StartupObject></StartupObject>
 		<Version>4.4</Version>
 		<Authors>M. Ferit Uzun</Authors>
 		<Company>NAMI</Company>

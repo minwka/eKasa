@@ -9,7 +9,7 @@ using Microsoft.Win32;
 using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
-namespace eKasa.Core.UserControls
+namespace eKasa.Core
 {
 	public partial class HomeView : UserControl
 	{

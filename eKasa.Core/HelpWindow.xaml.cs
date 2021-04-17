@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using eKasa.Core.UserControls.HelpControls;
 
 namespace eKasa.Core
 {
@@ -11,7 +10,7 @@ namespace eKasa.Core
 		readonly CreateHelp createHelp = new();
 		readonly EditHelp editHelp = new();
 		readonly SettingsHelp settingsHelp = new();
-		readonly LoginHelp loginHelp = new();
+		readonly UnlockHelp loginHelp = new();
 		readonly NewDbHelp newDbHelp = new();
 		readonly PwdGenHelp pwdGenHelp = new();
 		readonly AutofillHelp autofillHelp = new();

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace eKasa.Core.UserControls.HelpControls
+namespace eKasa.Core
 {
 	public partial class PwdGenHelp : UserControl
 	{

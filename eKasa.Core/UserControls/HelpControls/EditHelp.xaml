@@ -1,9 +1,8 @@
-﻿<UserControl x:Name="editControl" x:Class="eKasa.Core.UserControls.HelpControls.EditHelp"
+﻿<UserControl x:Name="editControl" x:Class="eKasa.Core.EditHelp"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:eKasa.Core.UserControls.HelpControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
 	<Grid x:Name="mainGrid" Width="629" Height="498">
 		<Grid.ColumnDefinitions>

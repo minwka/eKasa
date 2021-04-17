@@ -1,9 +1,8 @@
-﻿<UserControl x:Name="homeControl" x:Class="eKasa.Core.UserControls.HomeView"
+﻿<UserControl x:Name="homeControl" x:Class="eKasa.Core.HomeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:eKasa.Core.UserControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
 	<Grid x:Name="mainGrid" Height="498" Width="733" Grid.Column="4">
 		<Grid.ColumnDefinitions>
@@ -54,7 +53,7 @@
 		</DataGrid>
 		<Button x:Name="reloadButton" Content='Yenile' Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ReloadButton_Click" FontFamily="Segoe UI" Grid.Row="10" Grid.Column="5" Margin="0,0,10,10" TabIndex="51" Template="{StaticResource defaultButton}"/>
 		<Button x:Name="editButton" Content="Kaydı Düzenle" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="EditButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="52" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="optionsButton" Content="Seçenekler" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="OptionsButton_Click" Grid.Row="10" Grid.Column="4" Margin="0,0,10,10" TabIndex="50" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="actionsButton" Content="Eylemler" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="OptionsButton_Click" Grid.Row="10" Grid.Column="4" Margin="0,0,10,10" TabIndex="50" Template="{StaticResource defaultButton}"/>
 		<Button x:Name="deleteButton" Content="Kaydı Sil" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="DeleteButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,10" TabIndex="53" Template="{StaticResource defaultButton}"/>
 		<Button x:Name="saveButton" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" FontSize="24" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="SaveButton_Click" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="54" Template="{StaticResource borderlessButton}" Width="40" Grid.Column="3"/>
 		<Button x:Name="lockButton" FontFamily="Segoe MDL2 Assets" Content="&#xE72E;" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" FontSize="24" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="LockButton_Click" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="55" Width="40" Template="{StaticResource borderlessButton}" IsCancel="True" Grid.Column="3" Grid.RowSpan="1"/>

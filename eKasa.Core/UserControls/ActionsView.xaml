@@ -1,9 +1,8 @@
-﻿<UserControl x:Name="optionsUserControl" x:Class="eKasa.Core.UserControls.ActionsView"
+﻿<UserControl x:Name="optionsUserControl" x:Class="eKasa.Core.ActionsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:eKasa.Core.UserControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" Loaded="OptionsUserControl_Loaded">
 	<Grid x:Name="canvasGrid" Width="733" Height="498" Background="#66000000" MouseDown="CanvasGrid_MouseDown">
 		<Grid.ColumnDefinitions>

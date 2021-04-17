@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
-namespace eKasa.Core.UserControls
+namespace eKasa.Core
 {
 	public partial class AppSettingsView : UserControl
 	{

@@ -9,10 +9,10 @@ using static eKasa.Library.Encryption.String;
 
 namespace eKasa.Core
 {
-	public partial class LoginWindow : Window
+	public partial class UnlockWindow : Window
 	{
 		readonly static public OpenFileDialog ofd = new();
-		public LoginWindow()
+		public UnlockWindow()
 		{
 			InitializeComponent();
 			SettingsManager<AppSettingsModel>.Restore(ref appSettings, appSettingsPath);
@@ -29,7 +29,7 @@ namespace eKasa.Core
 
 		private void CreateButton_Click(object sender, RoutedEventArgs e)
 		{
-			CreateDbWindow cdb = new();
+			NewDbWindow cdb = new();
 			cdb.ShowDialog();
 			if (cdb.dbCreated) {
 				ofd.FileName = cdb.ofd.FileName;

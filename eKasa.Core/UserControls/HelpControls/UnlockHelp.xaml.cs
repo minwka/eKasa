@@ -2,9 +2,9 @@
 
 namespace eKasa.Core
 {
-	public partial class CreateHelp : UserControl
+	public partial class UnlockHelp : UserControl
 	{
-		public CreateHelp()
+		public UnlockHelp()
 		{
 			InitializeComponent();
 		}

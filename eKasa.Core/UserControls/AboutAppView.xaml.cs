@@ -2,11 +2,11 @@
 using System.Reflection;
 using System.Windows.Controls;
 
-namespace eKasa.Core.UserControls
+namespace eKasa.Core
 {
-	public partial class AboutView : UserControl
+	public partial class AboutAppView : UserControl
 	{
-		public AboutView()
+		public AboutAppView()
 		{
 			InitializeComponent();
 			appname.Text = Assembly.GetExecutingAssembly().GetName().Name.ToString();

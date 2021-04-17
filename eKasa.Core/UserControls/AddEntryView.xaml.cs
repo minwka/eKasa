@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace eKasa.Core.UserControls
+namespace eKasa.Core
 {
 	public partial class AddEntryView : UserControl
 	{
