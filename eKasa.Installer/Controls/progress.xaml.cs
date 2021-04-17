@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Microsoft.Win32;
 using eKasa.Installer.Classes;
 using eKasa.Library;
+using Microsoft.Win32;
 using File = System.IO.File;
 
 namespace eKasa.Installer.Controls
@@ -37,7 +37,7 @@ namespace eKasa.Installer.Controls
 				p.StartInfo = psi;
 				p.Start();
 
-				File.Copy("Uninstall.exe",$"{InstallParameters.InstallPath}\\Uninstall.exe");
+				File.Copy("Uninstall.exe", $"{InstallParameters.InstallPath}\\Uninstall.exe");
 			} catch (Exception ex) {
 				canvas.Children.Clear();
 				canvas.Children.Add(MainWindow.ucerror);
@@ -53,9 +53,6 @@ namespace eKasa.Installer.Controls
 			#region Replace w/ settings file
 			RegistryKey iSettings = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\eKasa");
 			iSettings.SetValue("install_path", InstallParameters.InstallPath);
-			//iSettings.SetValue("license_type", "Developer");
-			//iSettings.SetValue("licensed_by", "NAMI");
-			//iSettings.SetValue("license_key", @"owGbwMvMwCH2Lv3x/GtxmgGMa8ST2HMyk1PzilMT8pLiXVzDLCJ0XfxDuTpKWRjEOBhkxRRZzv1z6E6RvRAkxBpbBNPIygRSzsDFKQAT0ZNhZPggst5mvfaB6fyxuUnHz77cc22bl+3Pc11ve/f3pfZuzFjLyLCkRqL/suG74s5K1a2yvE13UqevvlQvJXUtYF9pib3sFl4A");
 			iSettings.Close();
 			#endregion
 

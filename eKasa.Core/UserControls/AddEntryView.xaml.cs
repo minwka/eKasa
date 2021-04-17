@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace eKasa.Core.UserControls
 {
-	public partial class NewDbUserControl : UserControl
+	public partial class AddEntryView : UserControl
 	{
-		public NewDbUserControl()
+		public AddEntryView()
 		{ InitializeComponent(); }
 
 		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
@@ -40,9 +40,9 @@ namespace eKasa.Core.UserControls
 					Tag = tagInput.Text
 				};
 
-				Settings.dbSettings.InternalDb.Entries.Add(newEntry);
-				ManageDbWindow.homeuc.entriesDataGrid.ItemsSource = Settings.dbSettings.InternalDb.Entries;
-				ManageDbWindow.homeuc.entriesDataGrid.Items.Refresh();
+				GlobalSettings.dbSettings.InternalDb.Entries.Add(newEntry);
+				HomeWindow.homev.entriesDataGrid.ItemsSource = GlobalSettings.dbSettings.InternalDb.Entries;
+				HomeWindow.homev.entriesDataGrid.Items.Refresh();
 
 				foreach (var child in mainGrid.Children) {
 					if (child.GetType() == typeof(TextBox)) {
@@ -56,11 +56,12 @@ namespace eKasa.Core.UserControls
 				if (stayHereToggle.IsChecked == false) {
 					var parent = (Canvas)Parent;
 					parent.Children.Clear();
-					parent.Children.Add(ManageDbWindow.homeuc);
+					parent.Children.Add(HomeWindow.homev);
 				}
 
-				ManageDbWindow.homeuc.tooltipLabel.Content = "Kayıt eklendi!";
-			} catch (Exception ex) { Settings.logger.Error(ex); }
+				nameInput.Focus();
+				HomeWindow.homev.tooltipLabel.Content = "Kayıt eklendi!";
+			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
 		}
 	}
 }

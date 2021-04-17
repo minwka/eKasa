@@ -1,57 +1,71 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using eKasa.Core.UserControls;
 
 namespace eKasa.Core
 {
-	public partial class ManageDbWindow : Window
+	public partial class HomeWindow : Window
 	{
 		#region UserControls
-		readonly static public HomeUserControl homeuc = new();
-		readonly static public NewDbUserControl createuc = new();
-		readonly static public EditUserControl edituc = new();
-		readonly static public AboutUserControl aboutuc = new();
-		readonly static public SettingsUserControl settingsuc = new();
+		readonly static public HomeView homev = new();
+		readonly static public AddEntryView createv= new();
+		readonly static public EditEntryView editv = new();
+		readonly static public AboutView aboutv = new();
+		readonly static public AppSettingsView appSettingsv = new();
 		#endregion
 
-		public ManageDbWindow()
+		public HomeWindow()
 		{
 			InitializeComponent();
-			contentCanvas.Children.Add(homeuc);
+			contentCanvas.Children.Add(homev);
+		}
+
+		static public void UpdateAllViews()
+		{
+			try {
+				Database.Restore(ref GlobalSettings.dbSettings.InternalDb, GlobalSettings.dbSettings.FilePath);
+				homev.entriesDataGrid.ItemsSource = GlobalSettings.dbSettings.InternalDb.Entries;
+				homev.entriesDataGrid.Items.Refresh();
+
+				homev.UpdateDbHint();
+				homev.entriesDataGrid.SelectedIndex = -1;
+				homev.tooltipLabel.Content = "Veritabanı yenilendi!";
+			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
 		}
 
 		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left) {
 				DragMove();
-				homeuc.tooltipLabel.Content = "";
-				settingsuc.tooltipLabel.Content = "";
-				homeuc.entriesDataGrid.SelectedIndex = -1;
+				homev.tooltipLabel.Content = "";
+				appSettingsv.tooltipLabel.Content = "";
+				homev.entriesDataGrid.SelectedIndex = -1;
 			}
 		}
 
 		private void HomeButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(homeuc);
+			contentCanvas.Children.Add(homev);
 		}
 
 		private void CreateButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(createuc);
+			contentCanvas.Children.Add(createv);
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(edituc);
+			contentCanvas.Children.Add(editv);
 		}
 
 		private void AboutButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(aboutuc);
+			contentCanvas.Children.Add(aboutv);
 		}
 
 		private void HelpButton_Click(object sender, RoutedEventArgs e)
@@ -63,7 +77,7 @@ namespace eKasa.Core
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(settingsuc);
+			contentCanvas.Children.Add(appSettingsv);
 		}
 
 		private void TerminateButton_Click(object sender, RoutedEventArgs e)

@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace eKasa.Core.UserControls
 {
-	public partial class AboutUserControl : UserControl
+	public partial class AboutView : UserControl
 	{
-		public AboutUserControl()
+		public AboutView()
 		{
 			InitializeComponent();
 			appname.Text = Assembly.GetExecutingAssembly().GetName().Name.ToString();

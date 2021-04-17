@@ -1,4 +1,4 @@
-﻿<UserControl x:Name="settingsControl" x:Class="eKasa.Core.UserControls.SettingsUserControl"
+﻿<UserControl x:Name="settingsControl" x:Class="eKasa.Core.UserControls.AppSettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -43,8 +43,8 @@
 		<PasswordBox x:Name="pwdInput" Height="30" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" FontSize="18" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3" TabIndex="42" Margin="0,0,10,0"/>
 		<TextBox x:Name="clearPwdInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" Visibility="Collapsed" Grid.ColumnSpan="3" Grid.Column="2" Grid.Row="7" TabIndex="42" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
 		<Label x:Name="tooltipLabel" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF0078D7" Background="{x:Null}" FontSize="13" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,10,10"/>
-		<Button x:Name="saveButton" Content="Ayarları Kaydet" Height="30" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Top" HorizontalAlignment="Stretch" d:LayoutOverrides="Height" Click="SaveButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,0" TabIndex="43" IsDefault="True" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="reloadButton" Content="Bilgileri Yenile" Height="30" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Top" HorizontalAlignment="Stretch" d:LayoutOverrides="Height" Click="ReloadButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,0" TabIndex="44" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="saveButton" Content="Ayarları Kaydet" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="SaveButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="43" IsDefault="True" Template="{StaticResource defaultButton}"/>
+		<Button x:Name="reloadButton" Content="Bilgileri Yenile" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ReloadButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,10" TabIndex="44" Template="{StaticResource defaultButton}"/>
 		<CheckBox x:Name="pwdToggle" Content="Şifreyi Göster" FontSize="16" Foreground="#FF0078D7" Checked="PwdToggle_CheckedChanged" Unchecked="PwdToggle_CheckedChanged" Grid.Column="5" Grid.Row="7" VerticalAlignment="Center" TabIndex="45" HorizontalAlignment="Right" Margin="0,0,10,0"/>
 	</Grid>
 </UserControl>

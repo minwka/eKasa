@@ -11,8 +11,8 @@ namespace eKasa.Core
 		public Logger(string filepath)
 		{ Filepath = filepath; }
 
-		private static void ShowMessage(string msg, string title, MessageBoxImage img)
-		{ MessageBox.Show(msg, title, MessageBoxButton.OK, img); }
+		private static void ShowMessage(string message, string title, MessageBoxImage icon)
+		{ MessageBox.Show(message, title, MessageBoxButton.OK, icon); }
 
 		public void Log(Exception ex)
 		{
@@ -22,43 +22,43 @@ namespace eKasa.Core
 				$"Error inner exception: {ex.InnerException}\n\n\n");
 		}
 
-		public void Error(Exception ex, string msg, string title)
+		public void Error(Exception ex, string message, string title)
 		{
-			ShowMessage(msg, title, MessageBoxImage.Error);
+			ShowMessage(message, title, MessageBoxImage.Error);
 			Log(ex);
 		}
 
 		public void Error(Exception ex)
 		{
-			string msg = "Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.";
+			string message = "Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.";
 			string title = "Hata!";
-			Error(ex, msg, title);
+			Error(ex, message, title);
 		}
 
-		public void Info(Exception ex, string msg, string title)
+		public void Info(Exception ex, string message, string title)
 		{
-			ShowMessage(msg, title, MessageBoxImage.Information);
+			ShowMessage(message, title, MessageBoxImage.Information);
 			Log(ex);
 		}
 
 		public void Info(Exception ex)
 		{
-			string msg = "Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.";
+			string message = "Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.";
 			string title = "Hata!";
-			Info(ex, msg, title);
+			Info(ex, message, title);
 		}
 
-		public void Warning(Exception ex, string msg, string title)
+		public void Warning(Exception ex, string message, string title)
 		{
-			ShowMessage(msg, title, MessageBoxImage.Warning);
+			ShowMessage(message, title, MessageBoxImage.Warning);
 			Log(ex);
 		}
 
 		public void Warning(Exception ex)
 		{
-			string msg = "Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.";
+			string message = "Beklenmedik bir hata oluştu!\nLütfen kayıtlara göz atın.";
 			string title = "Hata!";
-			Warning(ex, msg, title);
+			Warning(ex, message, title);
 		}
 	}
 }

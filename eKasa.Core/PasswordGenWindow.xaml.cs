@@ -29,7 +29,12 @@ namespace eKasa.Core
 		}
 
 		private void PwdLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-		{ if (pwdLength != null) pwdLength.Content = $"{(int)pwdLengthSlider.Value}"; }
+		{
+			if (pwdLength != null) {
+				pwdLength.Content = $"{(int)pwdLengthSlider.Value}";
+			}
+			GenPwdButton_Click(new object(), new RoutedPropertyChangedEventArgs<double>(0, 0));
+		}
 
 		string randomString = "";
 		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
@@ -49,24 +54,25 @@ namespace eKasa.Core
 				var random = new Random();
 				randomString = new string(Enumerable.Repeat(charset, (int)pwdLengthSlider.Value).Select(s => s[random.Next(s.Length)]).ToArray());
 
-				if (pwdToggle.IsChecked == true) {
+				if (IsInitialized) {
 					clearPasswordInput.Text = randomString;
-				} else {
 					passwordInput.Password = randomString;
 				}
-			} catch (Exception) {
-				MessageBox.Show("Lütfen en az bir karakter seti seçin!", "Hatalı Karakter Seti!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+			} catch (Exception ex) {
+				MessageBox.Show($"Lütfen en az bir karakter seti seçin!\n{ex.Message}", "Hatalı Karakter Seti!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 			}
 		}
 
 		private void SavePwdButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (ManageDbWindow.createuc.pwdToggle.IsChecked == true) {
-				ManageDbWindow.createuc.clearPasswordInput.Text = randomString;
-			} else {
-				ManageDbWindow.createuc.passwordInput.Password = randomString;
-			}
+			HomeWindow.createv.clearPasswordInput.Text = randomString;
+			HomeWindow.editv.clearPasswordInput.Text = randomString;
+			HomeWindow.createv.passwordInput.Password = randomString;
+			HomeWindow.editv.passwordInput.Password = randomString;
 			Close();
 		}
+
+		private void CloseButton_Click(object sender, RoutedEventArgs e)
+		{ Close(); }
 	}
 }

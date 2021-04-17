@@ -4,15 +4,15 @@ using System.Windows;
 using System.Windows.Input;
 using eKasa.Library.Config;
 using Microsoft.Win32;
-using static eKasa.Core.Settings;
+using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
 namespace eKasa.Core
 {
-	public partial class MainWindow : Window
+	public partial class LoginWindow : Window
 	{
 		readonly static public OpenFileDialog ofd = new();
-		public MainWindow()
+		public LoginWindow()
 		{
 			InitializeComponent();
 			SettingsManager<AppSettingsModel>.Restore(ref appSettings, appSettingsPath);
@@ -84,7 +84,7 @@ namespace eKasa.Core
 				ref var idb = ref dbSettings.InternalDb;
 				idb = Database.FromJson(ofd.FileName);
 
-				if (idb.PwdHash == Hash(passwordInput.Password)) {
+				if (idb.PwdHash == Sha256(passwordInput.Password)) {
 					idb = Database.DecryptDatabase(ref idb);
 
 					if (rememberDb.IsChecked == true) {
@@ -95,16 +95,18 @@ namespace eKasa.Core
 					}
 					SettingsManager<AppSettingsModel>.Save(appSettings, appSettingsPath);
 
-					ManageDbWindow mdbw = new();
+					HomeWindow mdbw = new();
 					mdbw.Show();
-					Hide();
+					Close();
 				} else {
 					MessageBox.Show("Yanlış ya da boş şifre veya geçersiz veritabanı dosyası belirttiniz!", "Hata!", MessageBoxButton.OK, MessageBoxImage.Warning);
+					passwordInput.Password = "";
+					clearPwdInput.Text = "";
 				}
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
-		private void mainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if (rememberDb.IsChecked == true) appSettings.RememberLastDb = true;
 			else appSettings.RememberLastDb = false;

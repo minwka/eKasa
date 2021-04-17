@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using static eKasa.Core.Settings;
+using static eKasa.Core.GlobalSettings;
 
 namespace eKasa.Core.UserControls
 {
-	public partial class HomeUserControl : UserControl
+	public partial class HomeView : UserControl
 	{
-		public HomeUserControl()
+		public HomeView()
 		{
 			InitializeComponent();
 
@@ -17,7 +17,7 @@ namespace eKasa.Core.UserControls
 			UpdateDbHint();
 		}
 
-		private void UpdateDbHint()
+		public void UpdateDbHint()
 		{
 			var idb = dbSettings.InternalDb;
 
@@ -34,7 +34,7 @@ namespace eKasa.Core.UserControls
 			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
 
 			var canvas = (Canvas)Parent;
-			var ouc = new OptionsUserControl();
+			var ouc = new ActionsView();
 			canvas.Children.Add(ouc);
 		}
 
@@ -43,18 +43,18 @@ namespace eKasa.Core.UserControls
 			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
 			var oldEntry = (EntryModel)entriesDataGrid.SelectedItem;
 			if (oldEntry != null) {
-				ManageDbWindow.edituc.idPreview.Text = oldEntry.Id.ToString();
-				ManageDbWindow.edituc.namePreview.Text = oldEntry.Name;
-				ManageDbWindow.edituc.usernamePreview.Text = oldEntry.Username;
-				ManageDbWindow.edituc.pwdPreview.Password = oldEntry.Password;
-				ManageDbWindow.edituc.tagPreview.Text = oldEntry.Tag;
-				ManageDbWindow.edituc.nameInput.Text = oldEntry.Name;
-				ManageDbWindow.edituc.usernameInput.Text = oldEntry.Username;
-				ManageDbWindow.edituc.tagInput.Text = oldEntry.Tag;
+				HomeWindow.editv.idPreview.Text = oldEntry.Id.ToString();
+				HomeWindow.editv.namePreview.Text = oldEntry.Name;
+				HomeWindow.editv.usernamePreview.Text = oldEntry.Username;
+				HomeWindow.editv.pwdPreview.Password = oldEntry.Password;
+				HomeWindow.editv.tagPreview.Text = oldEntry.Tag;
+				HomeWindow.editv.nameInput.Text = oldEntry.Name;
+				HomeWindow.editv.usernameInput.Text = oldEntry.Username;
+				HomeWindow.editv.tagInput.Text = oldEntry.Tag;
 
 				var parent = (Canvas)Parent;
 				parent.Children.Clear();
-				parent.Children.Add(ManageDbWindow.edituc);
+				parent.Children.Add(HomeWindow.editv);
 			}
 		}
 
@@ -88,6 +88,8 @@ namespace eKasa.Core.UserControls
 				dbSettings.InternalDb.Entries = (List<EntryModel>)entriesDataGrid.ItemsSource;
 				dbSettings.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
 				Database.Save(dbSettings.InternalDb, dbSettings.FilePath);
+
+				HomeWindow.UpdateAllViews();
 				tooltipLabel.Content = "Veritabanı kaydedildi!";
 			} catch (Exception ex) { logger.Error(ex); }
 		}
@@ -101,7 +103,7 @@ namespace eKasa.Core.UserControls
 			canvas.Children.Clear();
 			window.Close();
 
-			MainWindow w = new();
+			LoginWindow w = new();
 			w.Show();
 		}
 	}

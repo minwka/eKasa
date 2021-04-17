@@ -5,9 +5,9 @@ using System.Windows.Input;
 
 namespace eKasa.Core.UserControls
 {
-	public partial class OptionsUserControl : UserControl
+	public partial class ActionsView : UserControl
 	{
-		public OptionsUserControl()
+		public ActionsView()
 		{ InitializeComponent(); }
 
 		Canvas canvas;
@@ -19,14 +19,14 @@ namespace eKasa.Core.UserControls
 			canvas = (Canvas)Parent;
 			grid = (Grid)(canvas.Parent);
 			window = (Window)(grid.Parent);
-			entry = (EntryModel)ManageDbWindow.homeuc.entriesDataGrid.SelectedItem;
+			entry = (EntryModel)HomeWindow.homev.entriesDataGrid.SelectedItem;
 		}
 
 		private void CopyUserButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entry != null) {
 				Clipboard.SetText(entry.Username);
-				ManageDbWindow.homeuc.tooltipLabel.Content = "Kullanıcı adı panoya kopyalandı!";
+				HomeWindow.homev.tooltipLabel.Content = "Kullanıcı adı panoya kopyalandı!";
 				canvas.Children.Remove(this);
 			}
 		}
@@ -35,7 +35,7 @@ namespace eKasa.Core.UserControls
 		{
 			if (entry != null) {
 				Clipboard.SetText(entry.Password);
-				ManageDbWindow.homeuc.tooltipLabel.Content = "Şifre panoya kopyalandı!";
+				HomeWindow.homev.tooltipLabel.Content = "Şifre panoya kopyalandı!";
 				canvas.Children.Remove(this);
 			}
 		}

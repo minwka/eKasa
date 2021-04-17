@@ -1,6 +1,6 @@
 ﻿namespace eKasa.Core
 {
-	static public class Settings
+	static public class GlobalSettings
 	{
 		static public AppSettingsModel appSettings = new();
 		readonly static public string appSettingsPath = @"Settings\app_settings.json";

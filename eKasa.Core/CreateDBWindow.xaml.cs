@@ -49,12 +49,12 @@ namespace eKasa.Core
 		{
 			try {
 				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPwdInput.Text;
-				Settings.dbSettings.Password = passwordInput.Password;
+				GlobalSettings.dbSettings.Password = passwordInput.Password;
 
 				DatabaseModel dbm = new() {
 					Name = string.IsNullOrEmpty(nameInput.Text) ? "FDBX" : nameInput.Text,
 					Owner = string.IsNullOrEmpty(ownerInput.Text) ? "Kullanıcı" : ownerInput.Text,
-					PwdHash = Hash(passwordInput.Password),
+					PwdHash = Sha256(passwordInput.Password),
 					ModifiedDate = DateTime.UtcNow.ToString(),
 				};
 
@@ -64,7 +64,7 @@ namespace eKasa.Core
 
 				Close();
 			} catch (Exception ex) {
-				Settings.logger.Error(ex, "Dosya oluşturulurken bir hata meydana geldi.\nLütfen tekrar deneyin.", "Hata!");
+				GlobalSettings.logger.Error(ex, "Dosya oluşturulurken bir hata meydana geldi.\nLütfen tekrar deneyin.", "Hata!");
 			}
 		}
 	}

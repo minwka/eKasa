@@ -44,7 +44,7 @@ namespace eKasa.Uninstaller.Controls
 						}
 					}
 
-					Directory.Delete(Path.Combine(installPath,"App"), true);
+					Directory.Delete(Path.Combine(installPath, "App"), true);
 					iSettings.Close();
 				}
 

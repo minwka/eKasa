@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
-using static eKasa.Core.Settings;
+using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
 namespace eKasa.Core
@@ -53,10 +53,10 @@ namespace eKasa.Core
 				foreach (var entry in db.Entries) {
 					var newEntry = new EntryModel {
 						Id = entry.Id,
-						Name = Decrypt(entry.Name, dbSettings.Password, dbSettings.InternalDb.Salt),
-						Username = Decrypt(entry.Username, dbSettings.Password, dbSettings.InternalDb.Salt),
-						Password = Decrypt(entry.Password, dbSettings.Password, dbSettings.InternalDb.Salt),
-						Tag = Decrypt(entry.Tag, dbSettings.Password, dbSettings.InternalDb.Salt)
+						Name = Decrypt(entry.Name, dbSettings.Password),
+						Username = Decrypt(entry.Username, dbSettings.Password),
+						Password = Decrypt(entry.Password, dbSettings.Password),
+						Tag = Decrypt(entry.Tag, dbSettings.Password)
 					};
 					entryList.Add(newEntry);
 				}
@@ -72,7 +72,6 @@ namespace eKasa.Core
 				PwdHash = db.PwdHash,
 				ModifiedDate = Encrypt(db.ModifiedDate, dbSettings.Password),
 				Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-				Salt = Convert.ToBase64String(sessionSalt),
 				Entries = EncryptEntries(ref db, key)
 			};
 			return dbm;
@@ -81,10 +80,10 @@ namespace eKasa.Core
 		static public DatabaseModel DecryptDatabase(ref DatabaseModel db)
 		{
 			var dbm = new DatabaseModel() {
-				Name = Decrypt(db.Name, dbSettings.Password, dbSettings.InternalDb.Salt),
-				Owner = Decrypt(db.Owner, dbSettings.Password, dbSettings.InternalDb.Salt),
+				Name = Decrypt(db.Name, dbSettings.Password),
+				Owner = Decrypt(db.Owner, dbSettings.Password),
 				PwdHash = db.PwdHash,
-				ModifiedDate = Decrypt(db.ModifiedDate, dbSettings.Password, dbSettings.InternalDb.Salt),
+				ModifiedDate = Decrypt(db.ModifiedDate, dbSettings.Password),
 				Version = db.Version,
 				Salt = db.Salt,
 				Entries = DecryptEntries(ref db)

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using static eKasa.Core.Settings;
+using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
 namespace eKasa.Core.UserControls
 {
-	public partial class SettingsUserControl : UserControl
+	public partial class AppSettingsView : UserControl
 	{
-		public SettingsUserControl()
+		public AppSettingsView()
 		{
 			InitializeComponent();
 
@@ -53,14 +53,17 @@ namespace eKasa.Core.UserControls
 		{
 			try {
 				if (pwdToggle.IsChecked == true) pwdInput.Password = clearPwdInput.Text;
+
 				ref var idb = ref dbSettings.InternalDb;
 				idb.Name = nameInput.Text;
 				idb.Owner = ownerInput.Text;
-				idb.PwdHash = pwdInput.Password != "" ? Hash(pwdInput.Password) : idb.PwdHash;
+				idb.PwdHash = pwdInput.Password != "" ? Sha256(pwdInput.Password) : idb.PwdHash;
 				dbSettings.Password = pwdInput.Password != "" ? pwdInput.Password : dbSettings.Password;
+				Database.Save(idb, dbSettings.FilePath);
+
 				pwdInput.Password = "";
 				clearPwdInput.Text = "";
-				Database.Save(idb, dbSettings.FilePath);
+				HomeWindow.UpdateAllViews();
 				tooltipLabel.Content = "Ayarlar kaydedildi!";
 			} catch (Exception ex) { logger.Error(ex); }
 		}

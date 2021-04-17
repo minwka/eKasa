@@ -8,7 +8,7 @@ namespace eKasa.Core.UserControls.HelpControls
 		{
 			InitializeComponent();
 
-			var owner = string.IsNullOrEmpty(Settings.dbSettings.InternalDb.Owner) ? "Kullanıcı" : Settings.dbSettings.InternalDb.Owner;
+			var owner = string.IsNullOrEmpty(GlobalSettings.dbSettings.InternalDb.Owner) ? "Kullanıcı" : GlobalSettings.dbSettings.InternalDb.Owner;
 			titleLabel.Text = $"Hoşgeldin, {owner}!";
 		}
 	}

@@ -4,27 +4,30 @@ using System.Windows.Controls;
 
 namespace eKasa.Core.UserControls
 {
-	public partial class EditUserControl : UserControl
+	public partial class EditEntryView : UserControl
 	{
-		public EditUserControl()
+		public EditEntryView()
 		{ InitializeComponent(); }
+
+		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
+		{ var gpw = new PasswordGenWindow(); gpw.Show(); }
 
 		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
 		{
 			if (pwdToggle.IsChecked == true) {
-				clearPwdInput.Text = pwdInput.Password;
+				clearPasswordInput.Text = passwordInput.Password;
 				clearPwdPreview.Text = pwdPreview.Password;
 
-				pwdInput.Visibility = Visibility.Collapsed;
-				clearPwdInput.Visibility = Visibility.Visible;
+				passwordInput.Visibility = Visibility.Collapsed;
+				clearPasswordInput.Visibility = Visibility.Visible;
 				pwdPreview.Visibility = Visibility.Collapsed;
 				clearPwdPreview.Visibility = Visibility.Visible;
 			} else {
-				pwdInput.Password = clearPwdInput.Text;
+				passwordInput.Password = clearPasswordInput.Text;
 				pwdPreview.Password = clearPwdPreview.Text;
 
-				clearPwdInput.Visibility = Visibility.Collapsed;
-				pwdInput.Visibility = Visibility.Visible;
+				clearPasswordInput.Visibility = Visibility.Collapsed;
+				passwordInput.Visibility = Visibility.Visible;
 				clearPwdPreview.Visibility = Visibility.Collapsed;
 				pwdPreview.Visibility = Visibility.Visible;
 			}
@@ -33,15 +36,15 @@ namespace eKasa.Core.UserControls
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			try {
-				if (pwdToggle.IsChecked == true) pwdInput.Password = clearPwdInput.Text;
+				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPasswordInput.Text;
 
-				ref var dg = ref ManageDbWindow.homeuc.entriesDataGrid;
+				ref var dg = ref HomeWindow.homev.entriesDataGrid;
 				var entry = (EntryModel)dg.SelectedItem;
 				entry.Id = entry.Id;
 				entry.Name = nameInput.Text;
 				entry.Username = usernameInput.Text;
 				entry.Tag = tagInput.Text;
-				entry.Password = pwdInput.Password == "" ? entry.Password : pwdInput.Password;
+				entry.Password = passwordInput.Password == "" ? entry.Password : passwordInput.Password;
 				dg.Items.Refresh();
 
 				foreach (var child in mainGrid.Children) {
@@ -55,10 +58,10 @@ namespace eKasa.Core.UserControls
 
 				var parent = (Canvas)Parent;
 				parent.Children.Clear();
-				parent.Children.Add(ManageDbWindow.homeuc);
+				parent.Children.Add(HomeWindow.homev);
 
-				ManageDbWindow.homeuc.tooltipLabel.Content = "Kayıt düzenlendi!";
-			} catch (Exception ex) { Settings.logger.Error(ex); }
+				HomeWindow.homev.tooltipLabel.Content = "Kayıt düzenlendi!";
+			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
 		}
 	}
 }
