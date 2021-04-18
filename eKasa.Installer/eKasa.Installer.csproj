@@ -32,12 +32,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Resource Include="Controls\ekasa_logo.png" />
+	  <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="WindowsAPICodePack-Core" Version="1.1.2" />
-		<PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+		<Resource Include="Controls\ekasa_logo.png" />
 	</ItemGroup>
 
 	<ItemGroup>

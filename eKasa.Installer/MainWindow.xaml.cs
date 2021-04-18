@@ -49,7 +49,6 @@ namespace eKasa.Installer
 					break;
 				case 2:
 					content.Children.Add(ucprogress);
-					Progress.CopyPreferences();
 					next.Content = "YÜKLENİYOR";
 					next.IsEnabled = false;
 					back.IsEnabled = false;

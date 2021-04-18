@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using eKasa.Installer.Classes;
 using eKasa.Library;
 using Microsoft.Win32;
 using File = System.IO.File;
@@ -15,9 +14,7 @@ namespace eKasa.Installer.Controls
 		public Progress()
 		{ InitializeComponent(); }
 
-		public static void CopyPreferences()
-		{ InstallParameters.InstallPath = MainWindow.ucoptions.path.Text; }
-
+		readonly public string InstallPath = MainWindow.ucoptions.path.Text;
 		public void BeginInstall()
 		{
 			var canvas = (Canvas)Parent;
@@ -27,7 +24,7 @@ namespace eKasa.Installer.Controls
 			try {
 				ProcessStartInfo psi = new();
 				psi.FileName = "cmd.exe";
-				psi.Arguments = $"/c Binaries\\7z\\7za.exe x -o\"{InstallParameters.InstallPath}\\App\" Binaries\\Install\\package.7z -y";
+				psi.Arguments = $"/c \"Binaries\\7z\\7za.exe x -o\"{InstallPath}\\App\" Binaries\\Install\\package.7z -y && copy Uninstall.exe \"{InstallPath}\\Uninstall.exe\"\"";
 				psi.CreateNoWindow = true;
 				psi.WindowStyle = ProcessWindowStyle.Hidden;
 
@@ -36,8 +33,6 @@ namespace eKasa.Installer.Controls
 				p.Exited += new EventHandler(FinalizeAndLaunch);
 				p.StartInfo = psi;
 				p.Start();
-
-				File.Copy("Uninstall.exe", $"{InstallParameters.InstallPath}\\Uninstall.exe");
 			} catch (Exception ex) {
 				canvas.Children.Clear();
 				canvas.Children.Add(MainWindow.ucerror);
@@ -52,7 +47,7 @@ namespace eKasa.Installer.Controls
 		{
 			#region Replace w/ settings file
 			RegistryKey iSettings = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\eKasa");
-			iSettings.SetValue("install_path", InstallParameters.InstallPath);
+			iSettings.SetValue("install_path", InstallPath);
 			iSettings.Close();
 			#endregion
 
@@ -60,17 +55,17 @@ namespace eKasa.Installer.Controls
 				#region Shortcuts
 				if ((bool)MainWindow.ucoptions.scDesktop.IsChecked) {
 					var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-					WinShortcut.Create($"{desktopPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\App\\eKasa.exe", "", InstallParameters.InstallPath, "eKasa. Şifre yöneticiniz", "", "");
+					WinShortcut.Create($"{desktopPath}\\eKasa.lnk", $"{InstallPath}\\App\\eKasa.exe", "", InstallPath, "eKasa. Şifre yöneticiniz", "", "");
 				}
 
 				if ((bool)MainWindow.ucoptions.scStart.IsChecked) {
 					var startmenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
-					WinShortcut.Create($"{startmenuPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\App\\eKasa.exe", "", startmenuPath, "eKasa. Şifre yöneticiniz", "", "");
+					WinShortcut.Create($"{startmenuPath}\\eKasa.lnk", $"{InstallPath}\\App\\eKasa.exe", "", startmenuPath, "eKasa. Şifre yöneticiniz", "", "");
 				}
 
 				if ((bool)MainWindow.ucoptions.launchAtStartup.IsChecked) {
 					var startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-					WinShortcut.Create($"{startupPath}\\eKasa.lnk", $"{InstallParameters.InstallPath}\\App\\eKasa.exe", "", startupPath, "eKasa. Şifre yöneticiniz", "", "");
+					WinShortcut.Create($"{startupPath}\\eKasa.lnk", $"{InstallPath}\\App\\eKasa.exe", "", startupPath, "eKasa. Şifre yöneticiniz", "", "");
 				}
 				#endregion
 
@@ -100,7 +95,7 @@ namespace eKasa.Installer.Controls
 		void Terminate(object sender, RoutedEventArgs e)
 		{
 			if (MainWindow.uclaunch.scLaunch.IsChecked == true)
-				Process.Start($"{InstallParameters.InstallPath}\\App\\eKasa.exe");
+				Process.Start($"{InstallPath}\\App\\eKasa.exe");
 			Application.Current.Shutdown();
 		}
 	}

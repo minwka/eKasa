@@ -11,8 +11,12 @@ namespace eKasa.Core
 		public AppSettingsView()
 		{
 			InitializeComponent();
+			UpdateSettingsInfo();
+		}
 
-			ref var idb = ref dbSettings.InternalDb;
+		public void UpdateSettingsInfo()
+		{
+			var idb = dbSettings.InternalDb;
 			titleLabel.Text = $"Ayarlar - {idb.Name}";
 			nameInput.Text = idb.Name;
 			ownerInput.Text = idb.Owner;
@@ -39,10 +43,7 @@ namespace eKasa.Core
 				ref var idb = ref dbSettings.InternalDb;
 				Database.Restore(ref idb, dbSettings.FilePath);
 
-				titleLabel.Text = $"Ayarlar - {idb.Name}";
-				nameInput.Text = idb.Name;
-				ownerInput.Text = idb.Owner;
-
+				UpdateSettingsInfo();
 				pwdInput.Password = "";
 				clearPwdInput.Text = "";
 				tooltipLabel.Content = "Bilgiler yenilendi!";
@@ -61,11 +62,15 @@ namespace eKasa.Core
 				dbSettings.Password = pwdInput.Password != "" ? pwdInput.Password : dbSettings.Password;
 				Database.Save(idb, dbSettings.FilePath);
 
+				UpdateSettingsInfo();
 				pwdInput.Password = "";
 				clearPwdInput.Text = "";
-				HomeWindow.UpdateAllViews();
+				HomeWindow.UpdateHomeView();
 				tooltipLabel.Content = "Ayarlar kaydedildi!";
 			} catch (Exception ex) { logger.Error(ex); }
 		}
+
+		private void SettingsControl_Loaded(object sender, RoutedEventArgs e)
+		{ nameInput.Focus(); }
 	}
 }

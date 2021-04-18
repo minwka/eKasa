@@ -25,7 +25,7 @@ namespace eKasa.Core
 		static public void Save(DatabaseModel db, string filePath)
 		{
 			db = EncryptDatabase(ref db, dbSettings.Password);
-			File.WriteAllText(filePath, ToJson(ref db));
+			ToJson(ref db, filePath);
 		}
 
 		static public void Restore(ref DatabaseModel db, string filePath)

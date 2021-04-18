@@ -25,13 +25,12 @@ namespace eKasa.Core
 		public void UpdateDbHint()
 		{
 			var idb = dbSettings.InternalDb;
-
-			titleLabel.Text = $"Hoşgeldin, {idb.Owner}!";
 			var modifiedDate = Convert.ToDateTime(idb.ModifiedDate).ToLocalTime().ToShortDateString();
 			var modifiedTime = Convert.ToDateTime(idb.ModifiedDate).ToLocalTime().ToShortTimeString();
-			dbDataLabel.Content = $"DB: {idb.Name}, Son değişiklik: {modifiedDate} - {modifiedTime}";
 
 			entriesDataGrid.SelectedIndex = -1;
+			titleLabel.Text = $"Hoşgeldin, {idb.Owner}!";
+			dbDataLabel.Content = $"DB: {idb.Name}, Son değişiklik: {modifiedDate} - {modifiedTime}";
 		}
 
 		private void OptionsButton_Click(object sender, RoutedEventArgs e)
@@ -68,22 +67,20 @@ namespace eKasa.Core
 			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
 
 			dbSettings.InternalDb.Entries.Remove((EntryModel)entriesDataGrid.SelectedItem);
-			entriesDataGrid.ItemsSource = dbSettings.InternalDb.Entries;
-			entriesDataGrid.Items.Refresh();
-
+			dbSettings.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
+			HomeWindow.UpdateHomeView();
 			tooltipLabel.Content = "Kayıt silindi!";
 		}
 
 		private void ReloadButton_Click(object sender, RoutedEventArgs e)
 		{
+			var r = MessageBox.Show("Veritabanını yenilemek istediğinize emin misiniz?\nKaydedilmemiş değişiklikleriniz KAYBOLACAKtır!", "Veritabanını yenile?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 			try {
-				Database.Restore(ref dbSettings.InternalDb, dbSettings.FilePath);
-				entriesDataGrid.ItemsSource = dbSettings.InternalDb.Entries;
-				entriesDataGrid.Items.Refresh();
-
-				UpdateDbHint();
-				entriesDataGrid.SelectedIndex = -1;
-				tooltipLabel.Content = "Veritabanı yenilendi!";
+				if (r == MessageBoxResult.Yes) {
+					Database.Restore(ref dbSettings.InternalDb, dbSettings.FilePath);
+					HomeWindow.UpdateHomeView();
+					tooltipLabel.Content = "Veritabanı yenilendi!";
+				}
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
@@ -94,26 +91,35 @@ namespace eKasa.Core
 				dbSettings.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
 				Database.Save(dbSettings.InternalDb, dbSettings.FilePath);
 
-				HomeWindow.UpdateAllViews();
+				HomeWindow.UpdateHomeView();
 				tooltipLabel.Content = "Veritabanı kaydedildi!";
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
 		private void LockButton_Click(object sender, RoutedEventArgs e)
 		{
-			Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-			Application.Current.Shutdown();
+			var r = MessageBox.Show("Veritabanını kilitlemek istediğinize emin misiniz?\nKaydedilmemiş değişiklikleriniz KAYDEDİLECEKtır!", "Veritabanını kilitle?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+			if (r == MessageBoxResult.Yes) {
+				Database.Save(dbSettings.InternalDb, dbSettings.FilePath);
+				Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+				Application.Current.Shutdown();
+			}
 		}
 
 		private void ExportButton_Click(object sender, RoutedEventArgs e)
 		{
-			DatabaseModel edb = new();
-			edb = dbSettings.InternalDb;
-			edb.PwdHash = "";
-			edb.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			ref var idb = ref dbSettings.InternalDb;
+			var edb = new DatabaseModel {
+				Name = idb.Name,
+				Owner = idb.Owner,
+				PwdHash = null,
+				Entries = idb.Entries,
+				ModifiedDate = idb.ModifiedDate,
+				Version = Assembly.GetExecutingAssembly().GetName().Version.ToString()
+			};
 
+			var ask = MessageBox.Show("Veritabanını ŞİFRESİZ olarak dışa aktarmak istediğinize emin misiniz?", "Veritabanını dışa aktar!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			try {
-				var ask = MessageBox.Show("Veritabanını ŞİFRESİZ olarak dışa aktarmak istediğinize emin misiniz?", "Veritabanını dışa aktar!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 				if (ask == MessageBoxResult.Yes) {
 				tryAgain:
 					OpenFileDialog ofd = new();
@@ -125,11 +131,11 @@ namespace eKasa.Core
 					ofd.CheckFileExists = false;
 					ofd.ShowDialog();
 					if (ofd.FileName == "") {
-						var retry = MessageBox.Show("Dışa aktarmayı iptal ettiniz.\nTekrar denemek ister misiniz?", "Tekrar dene?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+						var retry = MessageBox.Show("Dışa aktarma konumu seçmediniz.\nTekrar denemek ister misiniz?", "Tekrar dene?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 						if (retry == MessageBoxResult.Yes) goto tryAgain;
 						else tooltipLabel.Content = "Dışa aktarma iptal edildi!";
 					} else {
-						Database.ToJson(ref dbSettings.InternalDb, ofd.FileName);
+						Database.ToJson(ref edb, ofd.FileName);
 						tooltipLabel.Content = "Dışa aktarma başarılı!";
 					}
 				}
@@ -138,32 +144,35 @@ namespace eKasa.Core
 
 		private void ImportButton_Click(object sender, RoutedEventArgs e)
 		{
+			var ask = MessageBox.Show("Veritabanı içe aktarmak istediğinize emin misiniz?\nKaydedilmemiş değişiklikleriniz kaybolacaktır!", "Veritabanı içe aktar!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			try {
-			tryAgain:
-				OpenFileDialog ofd = new();
-				ofd.Title = "İçe aktarılacak veritabanını seçin!";
-				ofd.Filter = "JSON dosyası (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
-				ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-				ofd.AddExtension = true;
-				ofd.CheckFileExists = true;
-				ofd.ShowDialog();
-				if (ofd.FileName == "") {
-					var retry = MessageBox.Show("İçe aktarmayı iptal ettiniz.\nTekrar denemek ister misiniz?", "Tekrar dene?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-					if (retry == MessageBoxResult.Yes) goto tryAgain;
-					else tooltipLabel.Content = "İçe aktarma iptal edildi!";
-				} else {
-					var db = Database.FromJson(ofd.FileName);
-					dbSettings.InternalDb = db;
-					dbSettings.Password = "password";
-					dbSettings.InternalDb.PwdHash = Sha256("password");
-					entriesDataGrid.ItemsSource = dbSettings.InternalDb.Entries;
-					entriesDataGrid.Items.Refresh();
+				if (ask == MessageBoxResult.Yes) {
+				tryAgain:
+					OpenFileDialog ofd = new();
+					ofd.Title = "İçe aktarılacak veritabanını seçin!";
+					ofd.Filter = "JSON dosyası (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
+					ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+					ofd.AddExtension = true;
+					ofd.CheckFileExists = true;
+					ofd.ShowDialog();
+					if (ofd.FileName == "") {
+						var retry = MessageBox.Show("İçe aktarılacak veritabanı seçmediniz.\nTekrar denemek ister misiniz?", "Tekrar dene?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+						if (retry == MessageBoxResult.Yes) goto tryAgain;
+						else tooltipLabel.Content = "İçe aktarma iptal edildi!";
+					} else {
+						var db = Database.FromJson(ofd.FileName);
+						dbSettings.InternalDb = db;
+						dbSettings.Password = "password";
+						dbSettings.InternalDb.PwdHash = Sha256("password");
+						entriesDataGrid.ItemsSource = dbSettings.InternalDb.Entries;
+						entriesDataGrid.Items.Refresh();
 
-					var dbPath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName) + ".fdbx");
-					dbSettings.FilePath = dbPath;
-					Database.Save(db, dbPath);
-					MessageBox.Show($"İçeri aktarılan veritabanı '{dbPath}' konumuna kaydedildi!\nVarsayılan şifre: 'password'", "Veritabanı kaydedildi!", MessageBoxButton.OK, MessageBoxImage.Information);
-					tooltipLabel.Content = $"İçe aktarma başarılı!";
+						var dbPath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName) + ".fdbx");
+						dbSettings.FilePath = dbPath;
+						Database.Save(db, dbPath);
+						MessageBox.Show($"İçeri aktarılan veritabanı '{dbPath}' konumuna kaydedildi!\nVarsayılan şifre: 'password'", "Veritabanı kaydedildi!", MessageBoxButton.OK, MessageBoxImage.Information);
+						tooltipLabel.Content = $"İçe aktarma başarılı!";
+					}
 				}
 
 			} catch (Exception ex) { logger.Error(ex); }

@@ -38,14 +38,13 @@ namespace eKasa.Core
 			try {
 				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPasswordInput.Text;
 
-				ref var dg = ref HomeWindow.homev.entriesDataGrid;
-				var entry = (EntryModel)dg.SelectedItem;
-				entry.Id = entry.Id;
+				var entry = (EntryModel)HomeWindow.homev.entriesDataGrid.SelectedItem;
 				entry.Name = nameInput.Text;
 				entry.Username = usernameInput.Text;
 				entry.Tag = tagInput.Text;
 				entry.Password = passwordInput.Password == "" ? entry.Password : passwordInput.Password;
-				dg.Items.Refresh();
+				GlobalSettings.dbSettings.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
+				HomeWindow.UpdateHomeView();
 
 				foreach (var child in mainGrid.Children) {
 					if (child.GetType() == typeof(TextBox)) {
@@ -63,5 +62,8 @@ namespace eKasa.Core
 				HomeWindow.homev.tooltipLabel.Content = "Kayıt düzenlendi!";
 			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
 		}
+
+		private void EditControl_Loaded(object sender, RoutedEventArgs e)
+		{ nameInput.Focus(); }
 	}
 }

@@ -20,10 +20,9 @@ namespace eKasa.Core
 			contentCanvas.Children.Add(homev);
 		}
 
-		static public void UpdateAllViews()
+		static public void UpdateHomeView()
 		{
 			try {
-				Database.Restore(ref GlobalSettings.dbSettings.InternalDb, GlobalSettings.dbSettings.FilePath);
 				homev.entriesDataGrid.ItemsSource = GlobalSettings.dbSettings.InternalDb.Entries;
 				homev.entriesDataGrid.Items.Refresh();
 
@@ -51,14 +50,12 @@ namespace eKasa.Core
 
 		private void CreateButton_Click(object sender, RoutedEventArgs e)
 		{
-			addv.nameInput.Focus();
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(addv);
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
-			editv.nameInput.Focus();
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(editv);
 		}
@@ -77,7 +74,6 @@ namespace eKasa.Core
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
-			appSettingsv.nameInput.Focus();
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(appSettingsv);
 		}

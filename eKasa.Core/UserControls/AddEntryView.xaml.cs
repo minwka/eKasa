@@ -41,8 +41,8 @@ namespace eKasa.Core
 				};
 
 				GlobalSettings.dbSettings.InternalDb.Entries.Add(newEntry);
-				HomeWindow.homev.entriesDataGrid.ItemsSource = GlobalSettings.dbSettings.InternalDb.Entries;
-				HomeWindow.homev.entriesDataGrid.Items.Refresh();
+				GlobalSettings.dbSettings.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
+				HomeWindow.UpdateHomeView();
 
 				foreach (var child in mainGrid.Children) {
 					if (child.GetType() == typeof(TextBox)) {
@@ -63,5 +63,8 @@ namespace eKasa.Core
 				HomeWindow.homev.tooltipLabel.Content = "Kayıt eklendi!";
 			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
 		}
+
+		private void CreateControl_Loaded(object sender, RoutedEventArgs e)
+		{ nameInput.Focus(); }
 	}
 }

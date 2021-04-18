@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.WindowsAPICodePack.Dialogs;
+using Ookii.Dialogs.Wpf;
 
 namespace eKasa.Installer.Controls
 {
@@ -11,15 +11,16 @@ namespace eKasa.Installer.Controls
 		public Options()
 		{ InitializeComponent(); }
 
-		readonly CommonOpenFileDialog cofd = new();
+		readonly VistaFolderBrowserDialog fbd = new();
 		private void Browse_Click(object sender, RoutedEventArgs e)
 		{
 			try {
-				cofd.IsFolderPicker = true;
-				cofd.InitialDirectory = @"C:\Program Files\";
-				CommonFileDialogResult res = cofd.ShowDialog();
+				fbd.RootFolder = Environment.SpecialFolder.ProgramFiles;
+				fbd.Description = "Programın kaydedileceği konumu seçin!";
+				fbd.UseDescriptionForTitle = true;
+				fbd.ShowDialog();
 
-				path.Text = res != CommonFileDialogResult.Cancel ? cofd.FileName + @"\eKasa" : path.Text;
+				path.Text = Path.Combine(fbd.SelectedPath,"eKasa");
 			} catch (Exception ex) {
 				var canvas = (Canvas)Parent;
 				var grid = (Grid)canvas.Parent;

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace eKasa.Core
 {
-	public class EntryModel
+	public record EntryModel
 	{
 		[JsonPropertyName("entry_id")]
 		public Guid Id { get; set; }

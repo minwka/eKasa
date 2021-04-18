@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace eKasa.Core
 {
-	public class DatabaseModel
+	public record DatabaseModel
 	{
 		[JsonPropertyName("database_name")]
 		public string Name { get; set; }
