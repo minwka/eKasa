@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:eKasa.Uninstaller"
         mc:Ignorable="d"
-        Title="Uninstaller" Width="400" Height="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF1A1A1D" BorderBrush="#FFFF4343" Foreground="#FFFF4343" WindowStyle="None" MouseDown="MainWindow_MouseDown" BorderThickness="1,0,1,1">
+        Title="Uninstaller" Width="400" Height="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF1A1A1D" BorderBrush="#FFFF4343" Foreground="#FFFF4343" WindowStyle="None" MouseDown="MainWindow_MouseDown" BorderThickness="1,0,1,1" KeyDown="MainWindow_KeyDown">
 	<Grid x:Name="mainGrid">
 		<Rectangle x:Name="topBar" Stroke="#FFFF4343" Height="15" VerticalAlignment="Top" Fill="#FFFF4343"/>
 

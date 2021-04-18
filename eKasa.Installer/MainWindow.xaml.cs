@@ -7,12 +7,12 @@ namespace eKasa.Installer
 	public partial class MainWindow : Window
 	{
 		#region UserControls
-		readonly static public Welcome ucwelcome = new();
-		readonly static public License uclicense = new();
-		readonly static public Options ucoptions = new();
-		readonly static public Progress ucprogress = new();
-		readonly static public Launch uclaunch = new();
-		readonly static public Error ucerror = new();
+		readonly static public WelcomePage ucwelcome = new();
+		readonly static public LicensePage uclicense = new();
+		readonly static public OptionsPage ucoptions = new();
+		readonly static public ProgressPage ucprogress = new();
+		readonly static public LaunchPage uclaunch = new();
+		readonly static public ErrorPage ucerror = new();
 		#endregion
 
 		public MainWindow()
@@ -24,6 +24,9 @@ namespace eKasa.Installer
 
 		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{ if (e.ChangedButton == MouseButton.Left) DragMove(); }
+
+		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+		{ if (e.Key == Key.System && e.SystemKey == Key.F4) e.Handled = true; }
 
 		private void Terminate_Click(object sender, RoutedEventArgs e)
 		{

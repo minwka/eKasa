@@ -6,9 +6,9 @@ using Ookii.Dialogs.Wpf;
 
 namespace eKasa.Installer.Controls
 {
-	public partial class Options : UserControl
+	public partial class OptionsPage : UserControl
 	{
-		public Options()
+		public OptionsPage()
 		{ InitializeComponent(); }
 
 		readonly VistaFolderBrowserDialog fbd = new();

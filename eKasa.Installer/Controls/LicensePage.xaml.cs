@@ -2,9 +2,9 @@
 
 namespace eKasa.Installer.Controls
 {
-	public partial class Welcome : UserControl
+	public partial class LicensePage : UserControl
 	{
-		public Welcome()
+		public LicensePage()
 		{ InitializeComponent(); }
 	}
 }

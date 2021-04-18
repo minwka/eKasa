@@ -42,6 +42,14 @@ namespace eKasa.Core
 			}
 		}
 
+		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.System && e.SystemKey == Key.F4) {
+				e.Handled = true;
+				TerminateButton_Click(sender, e);
+			}
+		}
+
 		private void HomeButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();

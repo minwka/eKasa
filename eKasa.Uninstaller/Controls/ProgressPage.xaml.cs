@@ -9,9 +9,9 @@ using static System.Environment;
 
 namespace eKasa.Uninstaller.Controls
 {
-	public partial class Progress : UserControl
+	public partial class ProgressPage : UserControl
 	{
-		public Progress()
+		public ProgressPage()
 		{ InitializeComponent(); }
 
 		public void BeginUninstall()

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:eKasa.Installer"
         mc:Ignorable="d"
-        Title="Installer" Width="400" Height="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF1A1A1D" BorderBrush="#FFFF003C" Foreground="#FFFF003C" WindowStyle="None" MouseDown="MainWindow_MouseDown" BorderThickness="1,0,1,1">
+        Title="Installer" Width="400" Height="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF1A1A1D" BorderBrush="#FFFF003C" Foreground="#FFFF003C" WindowStyle="None" MouseDown="MainWindow_MouseDown" BorderThickness="1,0,1,1" KeyDown="MainWindow_KeyDown">
 	<Grid x:Name="mainGrid">
 		<Rectangle x:Name="topBar" Stroke="#FFFF003C" Height="15" VerticalAlignment="Top" Fill="#FFFF003C"/>
 

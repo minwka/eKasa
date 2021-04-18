@@ -2,9 +2,9 @@
 
 namespace eKasa.Uninstaller.Controls
 {
-	public partial class Done : UserControl
+	public partial class DonePage : UserControl
 	{
-		public Done()
+		public DonePage()
 		{ InitializeComponent(); }
 	}
 }

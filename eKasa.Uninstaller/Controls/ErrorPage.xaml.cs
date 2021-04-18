@@ -2,9 +2,9 @@
 
 namespace eKasa.Uninstaller.Controls
 {
-	public partial class Error : UserControl
+	public partial class ErrorPage : UserControl
 	{
-		public Error()
+		public ErrorPage()
 		{ InitializeComponent(); }
 	}
 }

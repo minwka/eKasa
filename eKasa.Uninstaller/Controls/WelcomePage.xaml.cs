@@ -2,9 +2,9 @@
 
 namespace eKasa.Uninstaller.Controls
 {
-	public partial class Welcome : UserControl
+	public partial class WelcomePage : UserControl
 	{
-		public Welcome()
+		public WelcomePage()
 		{ InitializeComponent(); }
 	}
 }

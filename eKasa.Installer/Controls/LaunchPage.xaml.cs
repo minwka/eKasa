@@ -2,9 +2,9 @@
 
 namespace eKasa.Installer.Controls
 {
-	public partial class Launch : UserControl
+	public partial class LaunchPage : UserControl
 	{
-		public Launch()
+		public LaunchPage()
 		{ InitializeComponent(); }
 	}
 }

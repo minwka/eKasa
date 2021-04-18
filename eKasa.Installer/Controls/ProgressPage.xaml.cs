@@ -9,9 +9,9 @@ using File = System.IO.File;
 
 namespace eKasa.Installer.Controls
 {
-	public partial class Progress : UserControl
+	public partial class ProgressPage : UserControl
 	{
-		public Progress()
+		public ProgressPage()
 		{ InitializeComponent(); }
 
 		readonly public string InstallPath = MainWindow.ucoptions.path.Text;
