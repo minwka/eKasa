@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace eKasa.AutofillHelper
-{
-	public partial class MainForm : Form
-	{
+namespace eKasa.AutofillHelper {
+	public partial class MainForm : Form {
 		readonly string[] args = Environment.GetCommandLineArgs();
-		public MainForm()
-		{
+		public MainForm() {
 			InitializeComponent();
 			Type();
 		}
 
 		// TO DO --> Merge this with *.Core
-		public void Type()
-		{
+		public void Type() {
 			try {
 				WindowState = FormWindowState.Minimized;
 				switch (args[1]) {

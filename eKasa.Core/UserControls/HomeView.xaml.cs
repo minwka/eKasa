@@ -1,20 +1,17 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
 using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
-namespace eKasa.Core
-{
-	public partial class HomeView : UserControl
-	{
-		public HomeView()
-		{
+namespace eKasa.Core {
+	public partial class HomeView : UserControl {
+		public HomeView() {
 			InitializeComponent();
 
 			titleLabel.Text = $"Hoşgeldin, {dbSettings.InternalDb.Owner}!";
@@ -22,8 +19,7 @@ namespace eKasa.Core
 			UpdateDbHint();
 		}
 
-		public void UpdateDbHint()
-		{
+		public void UpdateDbHint() {
 			var idb = dbSettings.InternalDb;
 			var modifiedDate = Convert.ToDateTime(idb.ModifiedDate).ToLocalTime().ToShortDateString();
 			var modifiedTime = Convert.ToDateTime(idb.ModifiedDate).ToLocalTime().ToShortTimeString();
@@ -33,8 +29,7 @@ namespace eKasa.Core
 			dbDataLabel.Content = $"DB: {idb.Name}, Son değişiklik: {modifiedDate} - {modifiedTime}";
 		}
 
-		private void OptionsButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void OptionsButton_Click(object sender, RoutedEventArgs e) {
 			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
 
 			var canvas = (Canvas)Parent;
@@ -42,28 +37,17 @@ namespace eKasa.Core
 			canvas.Children.Add(ouc);
 		}
 
-		private void EditButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void EditButton_Click(object sender, RoutedEventArgs e) {
 			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
-			var oldEntry = (EntryModel)entriesDataGrid.SelectedItem;
-			if (oldEntry != null) {
-				HomeWindow.editv.idPreview.Text = oldEntry.Id.ToString();
-				HomeWindow.editv.namePreview.Text = oldEntry.Name;
-				HomeWindow.editv.usernamePreview.Text = oldEntry.Username;
-				HomeWindow.editv.pwdPreview.Password = oldEntry.Password;
-				HomeWindow.editv.tagPreview.Text = oldEntry.Tag;
-				HomeWindow.editv.nameInput.Text = oldEntry.Name;
-				HomeWindow.editv.usernameInput.Text = oldEntry.Username;
-				HomeWindow.editv.tagInput.Text = oldEntry.Tag;
 
+			if ((EntryModel)entriesDataGrid.SelectedItem != null) {
 				var parent = (Canvas)Parent;
 				parent.Children.Clear();
 				parent.Children.Add(HomeWindow.editv);
 			}
 		}
 
-		private void DeleteButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void DeleteButton_Click(object sender, RoutedEventArgs e) {
 			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
 
 			dbSettings.InternalDb.Entries.Remove((EntryModel)entriesDataGrid.SelectedItem);
@@ -72,8 +56,7 @@ namespace eKasa.Core
 			tooltipLabel.Content = "Kayıt silindi!";
 		}
 
-		private void ReloadButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void ReloadButton_Click(object sender, RoutedEventArgs e) {
 			var r = MessageBox.Show("Veritabanını yenilemek istediğinize emin misiniz?\nKaydedilmemiş değişiklikleriniz KAYBOLACAKtır!", "Veritabanını yenile?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 			try {
 				if (r == MessageBoxResult.Yes) {
@@ -84,8 +67,7 @@ namespace eKasa.Core
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
-		private void SaveButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void SaveButton_Click(object sender, RoutedEventArgs e) {
 			try {
 				dbSettings.InternalDb.Entries = (List<EntryModel>)entriesDataGrid.ItemsSource;
 				dbSettings.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
@@ -96,8 +78,7 @@ namespace eKasa.Core
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
-		private void LockButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void LockButton_Click(object sender, RoutedEventArgs e) {
 			var r = MessageBox.Show("Veritabanını kilitlemek istediğinize emin misiniz?\nKaydedilmemiş değişiklikleriniz KAYDEDİLECEKtır!", "Veritabanını kilitle?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 			if (r == MessageBoxResult.Yes) {
 				Database.Save(dbSettings.InternalDb, dbSettings.FilePath);
@@ -106,8 +87,7 @@ namespace eKasa.Core
 			}
 		}
 
-		private void ExportButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void ExportButton_Click(object sender, RoutedEventArgs e) {
 			ref var idb = ref dbSettings.InternalDb;
 			var edb = new DatabaseModel {
 				Name = idb.Name,
@@ -142,8 +122,7 @@ namespace eKasa.Core
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
-		private void ImportButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void ImportButton_Click(object sender, RoutedEventArgs e) {
 			var ask = MessageBox.Show("Veritabanı içe aktarmak istediğinize emin misiniz?\nKaydedilmemiş değişiklikleriniz kaybolacaktır!", "Veritabanı içe aktar!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			try {
 				if (ask == MessageBoxResult.Yes) {

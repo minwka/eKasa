@@ -1,11 +1,9 @@
-﻿using System.Windows;
+﻿using eKasa.Uninstaller.Controls;
+using System.Windows;
 using System.Windows.Input;
-using eKasa.Uninstaller.Controls;
 
-namespace eKasa.Uninstaller
-{
-	public partial class MainWindow : Window
-	{
+namespace eKasa.Uninstaller {
+	public partial class MainWindow : Window {
 		#region UserControls
 		readonly static public WelcomePage ucwelcome = new();
 		readonly static public OptionsPage ucoptions = new();
@@ -14,20 +12,16 @@ namespace eKasa.Uninstaller
 		readonly static public ErrorPage ucerror = new();
 		#endregion
 
-		public MainWindow()
-		{
+		public MainWindow() {
 			InitializeComponent();
 			content.Children.Add(ucwelcome);
 		}
 
-		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
-		{ if (e.ChangedButton == MouseButton.Left) DragMove(); }
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) DragMove(); }
 
-		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
-		{ if (e.Key == Key.System && e.SystemKey == Key.F4) e.Handled = true; }
+		private void MainWindow_KeyDown(object sender, KeyEventArgs e) { if (e.Key == Key.System && e.SystemKey == Key.F4) e.Handled = true; }
 
-		private void Terminate_Click(object sender, RoutedEventArgs e)
-		{
+		private void Terminate_Click(object sender, RoutedEventArgs e) {
 			var result = MessageBox.Show("Kaldırma işlemini iptal etmek istediğinize emin misiniz?", "Çıkışı Onayla!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (result == MessageBoxResult.Yes) {
 				Application.Current.Shutdown();
@@ -35,8 +29,7 @@ namespace eKasa.Uninstaller
 		}
 
 		int page = 0;
-		private void Next_Click(object sender, RoutedEventArgs e)
-		{
+		private void Next_Click(object sender, RoutedEventArgs e) {
 			content.Children.Clear();
 			switch (page) {
 				case 0:

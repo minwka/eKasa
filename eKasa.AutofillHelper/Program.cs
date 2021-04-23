@@ -1,13 +1,10 @@
 using System;
 using System.Windows.Forms;
 
-namespace eKasa.AutofillHelper
-{
-	static class Program
-	{
+namespace eKasa.AutofillHelper {
+	static class Program {
 		[STAThread]
-		static void Main()
-		{
+		static void Main() {
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);

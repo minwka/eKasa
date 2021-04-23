@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace eKasa.Core
-{
-	public record DatabaseModel
-	{
+namespace eKasa.Core {
+	public record DatabaseModel {
 		[JsonPropertyName("database_name")]
 		public string Name { get; set; }
 

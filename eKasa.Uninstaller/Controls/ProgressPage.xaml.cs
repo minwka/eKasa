@@ -1,21 +1,17 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Microsoft.Win32;
 using static System.Environment;
 
-namespace eKasa.Uninstaller.Controls
-{
-	public partial class ProgressPage : UserControl
-	{
-		public ProgressPage()
-		{ InitializeComponent(); }
+namespace eKasa.Uninstaller.Controls {
+	public partial class ProgressPage : UserControl {
+		public ProgressPage() { InitializeComponent(); }
 
-		public void BeginUninstall()
-		{
+		public void BeginUninstall() {
 			var canvas = (Canvas)Parent;
 			var grid = (Grid)canvas.Parent;
 			var window = (Window)grid.Parent;
@@ -69,8 +65,7 @@ namespace eKasa.Uninstaller.Controls
 			}
 		}
 
-		public void Terminate(object sender, RoutedEventArgs e)
-		{
+		public void Terminate(object sender, RoutedEventArgs e) {
 			try {
 				if (MainWindow.ucdone.scVisit.IsChecked == true) {
 					ProcessStartInfo psi = new();

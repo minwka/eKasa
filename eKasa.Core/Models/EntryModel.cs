@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace eKasa.Core
-{
-	public record EntryModel
-	{
+namespace eKasa.Core {
+	public record EntryModel {
 		[JsonPropertyName("entry_id")]
 		public Guid Id { get; set; }
 

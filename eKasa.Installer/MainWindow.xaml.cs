@@ -1,11 +1,9 @@
-﻿using System.Windows;
+﻿using eKasa.Installer.Controls;
+using System.Windows;
 using System.Windows.Input;
-using eKasa.Installer.Controls;
 
-namespace eKasa.Installer
-{
-	public partial class MainWindow : Window
-	{
+namespace eKasa.Installer {
+	public partial class MainWindow : Window {
 		#region UserControls
 		readonly static public WelcomePage ucwelcome = new();
 		readonly static public LicensePage uclicense = new();
@@ -15,21 +13,17 @@ namespace eKasa.Installer
 		readonly static public ErrorPage ucerror = new();
 		#endregion
 
-		public MainWindow()
-		{
+		public MainWindow() {
 			InitializeComponent();
 			content.Children.Add(ucwelcome);
 			back.Visibility = Visibility.Hidden;
 		}
 
-		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
-		{ if (e.ChangedButton == MouseButton.Left) DragMove(); }
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) DragMove(); }
 
-		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
-		{ if (e.Key == Key.System && e.SystemKey == Key.F4) e.Handled = true; }
+		private void MainWindow_KeyDown(object sender, KeyEventArgs e) { if (e.Key == Key.System && e.SystemKey == Key.F4) e.Handled = true; }
 
-		private void Terminate_Click(object sender, RoutedEventArgs e)
-		{
+		private void Terminate_Click(object sender, RoutedEventArgs e) {
 			var result = MessageBox.Show("Kaldırma işlemini iptal etmek istediğinize emin misiniz?", "Çıkışı Onayla!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (result == MessageBoxResult.Yes) {
 				Application.Current.Shutdown();
@@ -37,8 +31,7 @@ namespace eKasa.Installer
 		}
 
 		int page = 0;
-		private void Next_Click(object sender, RoutedEventArgs e)
-		{
+		private void Next_Click(object sender, RoutedEventArgs e) {
 			content.Children.Clear();
 			switch (page) {
 				case 0:
@@ -62,8 +55,7 @@ namespace eKasa.Installer
 			page++;
 		}
 
-		private void Back_Click(object sender, RoutedEventArgs e)
-		{
+		private void Back_Click(object sender, RoutedEventArgs e) {
 			content.Children.Clear();
 			switch (page) {
 				case 2:

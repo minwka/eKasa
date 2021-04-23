@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace eKasa.Library
-{
-	public class WinShortcut
-	{
+namespace eKasa.Library {
+	public class WinShortcut {
 		private static readonly Type m_type = Type.GetTypeFromProgID("WScript.Shell");
 		private static readonly object m_shell = Activator.CreateInstance(m_type);
 
 		[ComImport, TypeLibType((short)0x1040), Guid("F935DC23-1CF0-11D0-ADB9-00C04FD58A0B")]
-		private interface IWshShortcut
-		{
+		private interface IWshShortcut {
 			[DispId(0)]
 			string FullName { [return: MarshalAs(UnmanagedType.BStr)] [DispId(0)] get; }
 			[DispId(0x3e8)]
@@ -35,8 +32,7 @@ namespace eKasa.Library
 			void Save();
 		}
 
-		public static void Create(string fileName, string targetPath, string arguments, string workingDirectory, string description, string hotkey, string iconPath)
-		{
+		public static void Create(string fileName, string targetPath, string arguments, string workingDirectory, string description, string hotkey, string iconPath) {
 			IWshShortcut shortcut = (IWshShortcut)m_type.InvokeMember("CreateShortcut", System.Reflection.BindingFlags.InvokeMethod, null, m_shell, new object[] { fileName });
 			shortcut.Description = description;
 			shortcut.Hotkey = hotkey;

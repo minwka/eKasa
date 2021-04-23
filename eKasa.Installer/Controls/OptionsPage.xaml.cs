@@ -1,26 +1,22 @@
-﻿using System;
+﻿using Ookii.Dialogs.Wpf;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using Ookii.Dialogs.Wpf;
 
-namespace eKasa.Installer.Controls
-{
-	public partial class OptionsPage : UserControl
-	{
-		public OptionsPage()
-		{ InitializeComponent(); }
+namespace eKasa.Installer.Controls {
+	public partial class OptionsPage : UserControl {
+		public OptionsPage() { InitializeComponent(); }
 
 		readonly VistaFolderBrowserDialog fbd = new();
-		private void Browse_Click(object sender, RoutedEventArgs e)
-		{
+		private void Browse_Click(object sender, RoutedEventArgs e) {
 			try {
 				fbd.RootFolder = Environment.SpecialFolder.ProgramFiles;
 				fbd.Description = "Programın kaydedileceği konumu seçin!";
 				fbd.UseDescriptionForTitle = true;
 				fbd.ShowDialog();
 
-				path.Text = Path.Combine(fbd.SelectedPath,"eKasa");
+				path.Text = Path.Combine(fbd.SelectedPath, "eKasa");
 			} catch (Exception ex) {
 				var canvas = (Canvas)Parent;
 				var grid = (Grid)canvas.Parent;

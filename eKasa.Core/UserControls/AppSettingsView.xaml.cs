@@ -4,26 +4,21 @@ using System.Windows.Controls;
 using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
-namespace eKasa.Core
-{
-	public partial class AppSettingsView : UserControl
-	{
-		public AppSettingsView()
-		{
+namespace eKasa.Core {
+	public partial class AppSettingsView : UserControl {
+		public AppSettingsView() {
 			InitializeComponent();
 			UpdateSettingsInfo();
 		}
 
-		public void UpdateSettingsInfo()
-		{
+		public void UpdateSettingsInfo() {
 			var idb = dbSettings.InternalDb;
 			titleLabel.Text = $"Ayarlar - {idb.Name}";
 			nameInput.Text = idb.Name;
 			ownerInput.Text = idb.Owner;
 		}
 
-		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
-		{
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e) {
 			if (pwdToggle.IsChecked == true) {
 				clearPwdInput.Text = pwdInput.Password;
 
@@ -37,8 +32,7 @@ namespace eKasa.Core
 			}
 		}
 
-		private void ReloadButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void ReloadButton_Click(object sender, RoutedEventArgs e) {
 			try {
 				ref var idb = ref dbSettings.InternalDb;
 				Database.Restore(ref idb, dbSettings.FilePath);
@@ -50,8 +44,7 @@ namespace eKasa.Core
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
-		private void SaveButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void SaveButton_Click(object sender, RoutedEventArgs e) {
 			try {
 				if (pwdToggle.IsChecked == true) pwdInput.Password = clearPwdInput.Text;
 
@@ -70,7 +63,6 @@ namespace eKasa.Core
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
-		private void SettingsControl_Loaded(object sender, RoutedEventArgs e)
-		{ nameInput.Focus(); }
+		private void SettingsControl_Loaded(object sender, RoutedEventArgs e) { nameInput.Focus(); }
 	}
 }

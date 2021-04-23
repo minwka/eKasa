@@ -1,22 +1,18 @@
-﻿using System;
+﻿using eKasa.Library;
+using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using eKasa.Library;
-using Microsoft.Win32;
 using File = System.IO.File;
 
-namespace eKasa.Installer.Controls
-{
-	public partial class ProgressPage : UserControl
-	{
-		public ProgressPage()
-		{ InitializeComponent(); }
+namespace eKasa.Installer.Controls {
+	public partial class ProgressPage : UserControl {
+		public ProgressPage() { InitializeComponent(); }
 
 		readonly public string InstallPath = MainWindow.ucoptions.path.Text;
-		public void BeginInstall()
-		{
+		public void BeginInstall() {
 			var canvas = (Canvas)Parent;
 			var grid = (Grid)canvas.Parent;
 			var window = (Window)grid.Parent;
@@ -43,8 +39,7 @@ namespace eKasa.Installer.Controls
 			}
 		}
 
-		void FinalizeAndLaunch(object sender, EventArgs e)
-		{
+		void FinalizeAndLaunch(object sender, EventArgs e) {
 			#region Replace w/ settings file
 			RegistryKey iSettings = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\eKasa");
 			iSettings.SetValue("install_path", InstallPath);
@@ -92,8 +87,7 @@ namespace eKasa.Installer.Controls
 			});
 		}
 
-		void Terminate(object sender, RoutedEventArgs e)
-		{
+		void Terminate(object sender, RoutedEventArgs e) {
 			if (MainWindow.uclaunch.scLaunch.IsChecked == true)
 				Process.Start($"{InstallPath}\\App\\eKasa.exe");
 			Application.Current.Shutdown();

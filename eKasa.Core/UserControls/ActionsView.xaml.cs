@@ -3,27 +3,22 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace eKasa.Core
-{
-	public partial class ActionsView : UserControl
-	{
-		public ActionsView()
-		{ InitializeComponent(); }
+namespace eKasa.Core {
+	public partial class ActionsView : UserControl {
+		public ActionsView() { InitializeComponent(); }
 
 		Canvas canvas;
 		Grid grid;
 		Window window;
 		EntryModel entry;
-		private void OptionsUserControl_Loaded(object sender, RoutedEventArgs e)
-		{
+		private void OptionsUserControl_Loaded(object sender, RoutedEventArgs e) {
 			canvas = (Canvas)Parent;
 			grid = (Grid)(canvas.Parent);
 			window = (Window)(grid.Parent);
 			entry = (EntryModel)HomeWindow.homev.entriesDataGrid.SelectedItem;
 		}
 
-		private void CopyUserButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void CopyUserButton_Click(object sender, RoutedEventArgs e) {
 			if (entry != null) {
 				Clipboard.SetText(entry.Username);
 				HomeWindow.homev.tooltipLabel.Content = "Kullanıcı adı panoya kopyalandı!";
@@ -31,8 +26,7 @@ namespace eKasa.Core
 			}
 		}
 
-		private void CopyPwdButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void CopyPwdButton_Click(object sender, RoutedEventArgs e) {
 			if (entry != null) {
 				Clipboard.SetText(entry.Password);
 				HomeWindow.homev.tooltipLabel.Content = "Şifre panoya kopyalandı!";
@@ -40,8 +34,7 @@ namespace eKasa.Core
 			}
 		}
 
-		private void TypeUserButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void TypeUserButton_Click(object sender, RoutedEventArgs e) {
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
 				Process.Start("AutofillHelper.exe", $"s {entry.Username}");
@@ -49,8 +42,7 @@ namespace eKasa.Core
 			}
 		}
 
-		private void TypePwdButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void TypePwdButton_Click(object sender, RoutedEventArgs e) {
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
 				Process.Start("AutofillHelper.exe", $"s {entry.Password}");
@@ -58,8 +50,7 @@ namespace eKasa.Core
 			}
 		}
 
-		private void TypeCredsButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void TypeCredsButton_Click(object sender, RoutedEventArgs e) {
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
 				Process.Start("AutofillHelper.exe", $"m {entry.Username} {entry.Password}");
@@ -67,13 +58,11 @@ namespace eKasa.Core
 			}
 		}
 
-		private void ReturnButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void ReturnButton_Click(object sender, RoutedEventArgs e) {
 			var huc = (Canvas)Parent;
 			huc.Children.Remove(this);
 		}
 
-		private void CanvasGrid_MouseDown(object sender, MouseButtonEventArgs e)
-		{ ReturnButton_Click(sender, e); }
+		private void CanvasGrid_MouseDown(object sender, MouseButtonEventArgs e) { ReturnButton_Click(sender, e); }
 	}
 }

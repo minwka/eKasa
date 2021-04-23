@@ -1,26 +1,20 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Win32;
 using static eKasa.Library.Encryption.String;
 
-namespace eKasa.Core
-{
-	public partial class NewDbWindow : Window
-	{
+namespace eKasa.Core {
+	public partial class NewDbWindow : Window {
 		public bool dbCreated = false;
 		readonly public OpenFileDialog ofd = new();
-		public NewDbWindow()
-		{ InitializeComponent(); }
+		public NewDbWindow() { InitializeComponent(); }
 
-		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
-		{ if (e.ChangedButton == MouseButton.Left) DragMove(); }
+		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) DragMove(); }
 
-		private void TerminateButton_Click(object sender, RoutedEventArgs e)
-		{ Close(); }
+		private void TerminateButton_Click(object sender, RoutedEventArgs e) { Close(); }
 
-		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
-		{
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e) {
 			if (pwdToggle.IsChecked == true) {
 				clearPwdInput.Text = passwordInput.Password;
 
@@ -34,8 +28,7 @@ namespace eKasa.Core
 			}
 		}
 
-		private void PickerButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void PickerButton_Click(object sender, RoutedEventArgs e) {
 			ofd.Title = "Yeni veritabanını kaydedecek konum seçin";
 			ofd.Filter = "Veritabanı dosyaları (*fdbx)|*.fdbx|JSON dosyaları (*.json)|*.json|Tüm dosyalar (*.*)|*.*";
 			ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -48,8 +41,7 @@ namespace eKasa.Core
 			nameInput.Focus();
 		}
 
-		private void CreateButton_Click(object sender, RoutedEventArgs e)
-		{
+		private void CreateButton_Click(object sender, RoutedEventArgs e) {
 			try {
 				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPwdInput.Text;
 				GlobalSettings.dbSettings.Password = passwordInput.Password;
