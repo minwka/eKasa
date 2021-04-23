@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" Loaded="SettingsControl_Loaded">
+             mc:Ignorable="d" Loaded="SettingsControl_Loaded" Foreground="#FF7289DA">
 	<Grid x:Name="mainGrid" Height="498" Width="733">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -28,22 +28,22 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 		<StackPanel x:Name="seperatorStack" Grid.Row="2" Grid.Column="1" Grid.RowSpan="9" Orientation="Horizontal" HorizontalAlignment="Left">
-			<Separator x:Name="verticalSeperator" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF0078D7" Foreground="{x:Null}" />
+			<Separator x:Name="verticalSeperator" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF7289DA" />
 		</StackPanel>
 
-		<TextBlock x:Name="titleLabel" Text="Ayarlar - {0}" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Top" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" Margin="10,10,10,0" Grid.RowSpan="2"/>
-		<Separator x:Name="titleSeperator" VerticalAlignment="Top" Foreground="{x:Null}" Background="#FF0078D7" Grid.Row="1" Margin="10,10,10,0" Grid.ColumnSpan="6"/>
-		<Label x:Name="newDataLabel" Content="Veritabanı Ayarları:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" d:LayoutOverrides="HorizontalAlignment" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10,0,0,0"/>
-		<Label x:Name="nameLabel" Content="Veritabanı Adı:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Row="5" Grid.Column="1" Padding="0,0,0,0" Margin="10,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-		<Label x:Name="usernameLabel" Content="Kullanıcı Adı:" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Row="6" Grid.Column="1" Padding="0,0,0,0" Margin="10,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-		<Label x:Name="pwdLabel" Content="Şifre:" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Row="7" Grid.Column="1" Padding="0,0,0,0" Margin="10,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-		<TextBox x:Name="nameInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" d:LayoutOverrides="HorizontalAlignment" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" TabIndex="40" Margin="0,0,10,0"/>
-		<TextBox x:Name="ownerInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" d:LayoutOverrides="HorizontalAlignment" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="3" TabIndex="41" Margin="0,0,10,0"/>
-		<PasswordBox x:Name="pwdInput" Height="30" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" FontSize="18" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3" TabIndex="42" Margin="0,0,10,0"/>
-		<TextBox x:Name="clearPwdInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" Visibility="Collapsed" Grid.ColumnSpan="3" Grid.Column="2" Grid.Row="7" TabIndex="42" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
+		<TextBlock x:Name="titleLabel" Text="Ayarlar - {0}" TextWrapping="Wrap" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Top" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" Margin="10,10,10,0" Grid.RowSpan="2"/>
+		<Separator x:Name="titleSeperator" VerticalAlignment="Top" Grid.Row="1" Margin="10,10,10,0" Grid.ColumnSpan="6"/>
+		<Label x:Name="newDataLabel" Content="Veritabanı Ayarları:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" FontSize="16" d:LayoutOverrides="HorizontalAlignment" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Padding="0,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10,0,0,0"/>
+		<Label x:Name="nameLabel" Content="Veritabanı Adı:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" FontSize="16" Grid.Row="5" Grid.Column="1" Padding="0,0,0,0" Margin="10,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+		<Label x:Name="usernameLabel" Content="Kullanıcı Adı:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Grid.Row="6" Grid.Column="1" Padding="0,0,0,0" Margin="10,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+		<Label x:Name="pwdLabel" Content="Şifre:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Grid.Row="7" Grid.Column="1" Padding="0,0,0,0" Margin="10,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+		<TextBox x:Name="nameInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" d:LayoutOverrides="HorizontalAlignment" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" TabIndex="40" Margin="0,0,10,0"/>
+		<TextBox x:Name="ownerInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" d:LayoutOverrides="HorizontalAlignment" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="3" TabIndex="41" Margin="0,0,10,0"/>
+		<PasswordBox x:Name="pwdInput" Height="30" Background="{x:Null}" FontSize="18" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3" TabIndex="42" Margin="0,0,10,0"/>
+		<TextBox x:Name="clearPwdInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Visibility="Collapsed" Grid.ColumnSpan="3" Grid.Column="2" Grid.Row="7" TabIndex="42" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
 		<Label x:Name="tooltipLabel" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF0078D7" Background="{x:Null}" FontSize="13" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,10,5" Padding="5,0,5,5"/>
-		<Button x:Name="saveButton" Content="Ayarları Kaydet" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="SaveButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="43" IsDefault="True" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="reloadButton" Content="Bilgileri Yenile" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ReloadButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,10" TabIndex="44" Template="{StaticResource defaultButton}"/>
-		<CheckBox x:Name="pwdToggle" Content="Şifreyi Göster" FontSize="16" Foreground="#FF0078D7" Checked="PwdToggle_CheckedChanged" Unchecked="PwdToggle_CheckedChanged" Grid.Column="5" Grid.Row="7" VerticalAlignment="Center" TabIndex="45" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+		<Button x:Name="saveButton" Content="Ayarları Kaydet" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="SaveButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="43" IsDefault="True" Style="{DynamicResource PrimaryButton}"/>
+		<Button x:Name="reloadButton" Content="Bilgileri Yenile" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ReloadButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,10" TabIndex="44" Style="{DynamicResource SecondaryButton}"/>
+		<CheckBox x:Name="pwdToggle" Content="Şifreyi Göster" FontSize="15" Checked="PwdToggle_CheckedChanged" Unchecked="PwdToggle_CheckedChanged" Grid.Column="5" Grid.Row="7" VerticalAlignment="Center" TabIndex="45" HorizontalAlignment="Right" Margin="0,0,10,0"/>
 	</Grid>
 </UserControl>

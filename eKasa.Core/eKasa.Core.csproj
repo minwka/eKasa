@@ -1,37 +1,30 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0-windows</TargetFramework>
-		<UseWPF>true</UseWPF>
-		<AssemblyName>eKasa</AssemblyName>
-		<ApplicationIcon>logo.ico</ApplicationIcon>
-		<StartupObject></StartupObject>
-		<Version>4.4</Version>
-		<Authors>M. Ferit Uzun</Authors>
-		<Company>NAMI</Company>
-		<Description>eKasa. Şifre yönetici uygulaması.</Description>
-		<Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
-		<PackageIcon></PackageIcon>
-		<AssemblyVersion>4.4.0.0</AssemblyVersion>
-		<FileVersion>4.4.0.0</FileVersion>
-		<ApplicationManifest>app.manifest</ApplicationManifest>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DocumentationFile></DocumentationFile>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DocumentationFile></DocumentationFile>
-	  <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-	  <DebugType>none</DebugType>
-	  <DebugSymbols>false</DebugSymbols>
-	  <DefineConstants></DefineConstants>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\eKasa.Library\eKasa.Library.csproj" />
-	</ItemGroup>
-
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>eKasa</AssemblyName>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <StartupObject></StartupObject>
+    <Version>4.4.0.0</Version>
+    <Authors>M. Ferit Uzun</Authors>
+    <Company>NAMI</Company>
+    <Description>eKasa. Şifre yönetici uygulaması.</Description>
+    <Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
+    <PackageIcon></PackageIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DefineConstants></DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eKasa.Library\eKasa.Library.csproj" />
+  </ItemGroup>
 </Project>

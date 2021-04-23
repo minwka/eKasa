@@ -83,5 +83,11 @@ namespace eKasa.Core
 
 		private void TerminateButton_Click(object sender, RoutedEventArgs e)
 		{ Close(); }
+
+		private void ChromeClose_Click(object sender, RoutedEventArgs e)
+		{ Close(); }
+
+		private void ChromeMinimize_Click(object sender, RoutedEventArgs e)
+		{ WindowState = WindowState.Minimized; }
 	}
 }

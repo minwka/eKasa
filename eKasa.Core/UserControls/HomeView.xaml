@@ -3,7 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d">
+             mc:Ignorable="d" Foreground="White">
+
 	<Grid x:Name="mainGrid" Height="498" Width="733" Grid.Column="4">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -28,12 +29,11 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 
-		<TextBlock x:Name="titleLabel" Margin="10,10,10,0" Text="Hoşgeldin, {0}!" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Grid.RowSpan="2" Grid.ColumnSpan="6"/>
-		<Separator x:Name="titleSeperator" VerticalAlignment="Top" Foreground="{x:Null}" Background="#FF0078D7" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" Grid.Row="1" Margin="10,10,10,0" Grid.RowSpan="2"/>
-		<DataGrid x:Name="entriesDataGrid" Background="{x:Null}" BorderBrush="#FF0078D7" FontSize="14" BorderThickness="0,0,0,0" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" AlternationCount="1" GridLinesVisibility="All" HorizontalGridLinesBrush="#FF0078D7" RowBackground="#FF2D2D30" AlternatingRowBackground="#FF1A1A1D" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="10,20,10,10" TabIndex="49" VerticalAlignment="Stretch" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="All" AutoGenerateColumns="False" MinColumnWidth="100">
-			<DataGrid.Foreground>
-				<SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-			</DataGrid.Foreground>
+		<TextBlock x:Name="titleLabel" Margin="10,10,10,0" Text="Hoşgeldin, {0}!" TextWrapping="Wrap" Foreground="#FF7289DA" FontSize="30" FontFamily="Montserrat Medium" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Grid.RowSpan="2" Grid.ColumnSpan="6"/>
+
+		<Separator x:Name="titleSeperator" VerticalAlignment="Top" Foreground="{x:Null}" Background="#FF7289DA" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" Grid.Row="1" Margin="10,10,10,0" Grid.RowSpan="2"/>
+
+		<DataGrid x:Name="entriesDataGrid" BorderBrush="#FF7289DA" FontSize="14" BorderThickness="0,0,0,0" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" AlternationCount="1" GridLinesVisibility="All" HorizontalGridLinesBrush="#FF7289DA" RowBackground="#FF2D2D30" AlternatingRowBackground="#FF363A3F" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="10,20,10,10" TabIndex="49" VerticalAlignment="Stretch" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="All" AutoGenerateColumns="False" MinColumnWidth="100" FontFamily="Exo 2 Light" VerticalGridLinesBrush="#7F7289DA" Background="{x:Null}">
 			<DataGrid.Resources>
 				<Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
 					<Setter Property="Background" Value="#00000000" />
@@ -42,24 +42,34 @@
 					<Setter Property="Background" Value="#00000000" />
 				</Style>
 			</DataGrid.Resources>
-			<DataGrid.VerticalGridLinesBrush>
-				<SolidColorBrush Color="#FF0078D7" Opacity="0.5"/>
-			</DataGrid.VerticalGridLinesBrush>
+			<DataGrid.Foreground>
+				<SolidColorBrush Color="#FFD9D9D9"/>
+			</DataGrid.Foreground>
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Etiket" Binding="{Binding Tag}"/>
 				<DataGridTextColumn Header="Kayıt Adı" Binding="{Binding Name}"/>
 				<DataGridTextColumn Header="Kullanıcı Adı" Binding="{Binding Username}"/>
+				<DataGridTextColumn Header="Etiket" Binding="{Binding Tag}"/>
 			</DataGrid.Columns>
 		</DataGrid>
-		<Button x:Name="reloadButton" Content='Yenile' Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ReloadButton_Click" FontFamily="Segoe UI" Grid.Row="10" Grid.Column="5" Margin="0,0,10,10" TabIndex="51" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="editButton" Content="Kaydı Düzenle" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="EditButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="52" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="actionsButton" Content="Eylemler" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="OptionsButton_Click" Grid.Row="10" Grid.Column="4" Margin="0,0,10,10" TabIndex="50" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="deleteButton" Content="Kaydı Sil" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="DeleteButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,10" TabIndex="53" Template="{StaticResource defaultButton}"/>
-		<Button x:Name="saveButton" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" FontSize="24" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="SaveButton_Click" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="54" Template="{StaticResource borderlessButton}" Width="40" Grid.Column="3"/>
-		<Button x:Name="lockButton" FontFamily="Segoe MDL2 Assets" Content="&#xE72E;" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" FontSize="24" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="LockButton_Click" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="55" Width="40" Template="{StaticResource borderlessButton}" IsCancel="True" Grid.Column="3" Grid.RowSpan="1"/>
-		<Button x:Name="exportButton" FontFamily="Segoe MDL2 Assets" Content="&#xE8E5;" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFB900" FontSize="24" HorizontalAlignment="Right" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,60,10" TabIndex="54" Template="{StaticResource borderlessButton}" Width="40" Grid.Column="3" Click="ExportButton_Click"/>
-		<Button x:Name="importButton" FontFamily="Segoe MDL2 Assets" Content="&#xE896;" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFB900" FontSize="24" HorizontalAlignment="Right" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,60,10" TabIndex="55" Width="40" Template="{StaticResource borderlessButton}" IsCancel="True" Grid.Column="3" Grid.RowSpan="1" Click="ImportButton_Click"/>
-		<Label x:Name="tooltipLabel" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF0078D7" FontSize="13" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,110,-20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Padding="5,0,5,10" Background="{x:Null}"/>
-		<Label x:Name="dbDataLabel" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF0078D7" Background="{x:Null}" FontSize="13" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,110,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Padding="5,0,5,5" Grid.RowSpan="2"/>
+
+		<Button x:Name="reloadButton" Content='Yenile' VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ReloadButton_Click" Grid.Row="10" Grid.Column="5" Margin="0,0,10,10" TabIndex="51" Style="{DynamicResource SuccessButton}" FontSize="13"/>
+
+		<Button x:Name="editButton" Content="Kaydı Düzenle" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="EditButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="52" Style="{DynamicResource WarningButton}" FontSize="13"/>
+
+		<Button x:Name="actionsButton" Content="Eylemler" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="OptionsButton_Click" Grid.Row="10" Grid.Column="4" Margin="0,0,10,10" TabIndex="50" Style="{DynamicResource SecondaryButton}" FontSize="13"/>
+
+		<Button x:Name="deleteButton" Content="Kaydı Sil" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="DeleteButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,10" TabIndex="53" Style="{DynamicResource DangerButton}" FontSize="13"/>
+
+		<Button x:Name="saveButton" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" FontSize="24" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="SaveButton_Click" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="54" Style="{DynamicResource OutlineSuccessButton}" Width="40" Grid.Column="3" IsDefault="True"/>
+
+		<Button x:Name="lockButton" FontFamily="Segoe MDL2 Assets" Content="&#xE72E;" FontSize="24" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="LockButton_Click" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="55" Width="40" Style="{DynamicResource OutlineDangerButton}" IsCancel="True" Grid.Column="3" Grid.RowSpan="1"/>
+
+		<Button x:Name="exportButton" FontFamily="Segoe MDL2 Assets" Content="&#xE8E5;" FontSize="24" HorizontalAlignment="Right" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,60,10" TabIndex="56" Style="{DynamicResource OutlineWarningButton}" Width="40" Grid.Column="3" Click="ExportButton_Click"/>
+
+		<Button x:Name="importButton" FontFamily="Segoe MDL2 Assets" Content="&#xE896;" FontSize="24" HorizontalAlignment="Right" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,60,10" TabIndex="57" Width="40" Style="{DynamicResource OutlineWarningButton}" Grid.Column="3" Grid.RowSpan="1" Click="ImportButton_Click"/>
+
+		<Label x:Name="tooltipLabel" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF7289DA" FontSize="13" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,110,-20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Padding="5,0,5,10" Background="{x:Null}" FontFamily="Exo 2"/>
+
+		<Label x:Name="dbDataLabel" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF7289DA" Background="{x:Null}" FontSize="13" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,110,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Padding="5,0,5,5" Grid.RowSpan="2" FontFamily="Exo 2"/>
 	</Grid>
 </UserControl>

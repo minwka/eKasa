@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d">
+             mc:Ignorable="d" Foreground="#FF7289DA" FontFamily="Exo 2 Light">
 	<Grid x:Name="mainGrid" Width="629" Height="498">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -27,10 +27,10 @@
 			<RowDefinition/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
-		<TextBlock x:Name="titleLabel" Margin="10,10,10,0" Text="Ayarlar" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" Height="40" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="6"/>
-		<Separator x:Name="titleSeperator" Margin="10,10,10,0" VerticalAlignment="Top" Foreground="{x:Null}" Background="#FF0078D7" Grid.ColumnSpan="6" Grid.Row="1"/>
+		<TextBlock x:Name="titleLabel" Margin="10,10,10,0" Text="Ayarlar" TextWrapping="Wrap" FontSize="30" FontFamily="Montserrat Medium" Height="40" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="6"/>
+		<Separator x:Name="titleSeperator" Margin="10,10,10,0" VerticalAlignment="Top" Grid.ColumnSpan="6" Grid.Row="1"/>
 		<ScrollViewer x:Name="helpScroller" Grid.Row="1" Grid.RowSpan="11" Grid.ColumnSpan="6" Margin="10,20,10,10" FontWeight="Bold" VerticalScrollBarVisibility="Auto">
-			<TextBlock x:Name="helpContent" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="14" FontWeight="Normal" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" FontStyle="Italic"><Run Text="Ayarlar sayfası, veritabanınız hakkındaki temel bilgilerin bulunduğu sayfadır."/><LineBreak/><Run/><LineBreak/><Run Text="• &quot;Veritabanı Adı&quot;, dosya ismine ihtiyaç duymadan, birden fazla veritabanını birbirinden ayırt edebilmenizi sağlar. Örn: &quot;E-Posta Hesaplarım&quot;, &quot;Sunucu Bilgilerim&quot;"/><LineBreak/><Run Text="• &quot;Kullanıcı Adı&quot;, veritabanı sahibinin/kullanıcısının adını saklar. Veritabanınızı açarken gerekli değildir. Yalnızca kolaylık ve görsellik için kullanılmaktadır."/><LineBreak/><Run Text="• Veritabanı şifreniz, veritabanınızdaki kayıtları şifrelemek için kullanılan anaşifrenizdir. Tüm verileri şifrelemek ve çözmek için kullanacağınız bu şifreyi unutursanız veritabanına tüm erişiminizi kaybedersiniz. Şifrenizi değiştirmek istemediğiniz zaman alanı boş bırakabilirsiniz."/><LineBreak/><Run/><LineBreak/><Run Text="• Değişikliklerinizi tamamladığınız zaman &quot;Ayarları Kaydet&quot; butonunu kullanabilirsiniz."/><LineBreak/><Run Text="• Veritabanı bilgilerini veritabanı dosyasından tekrar yüklemek isterseniz &quot;Bilgileri Yenile&quot; butonunu kullanabilirsiniz."/></TextBlock>
+			<TextBlock x:Name="helpContent" TextWrapping="Wrap" FontSize="14" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" UseLayoutRounding="False"><Run Text="Ayarlar sayfası, veritabanınız hakkındaki temel bilgilerin bulunduğu sayfadır."/><LineBreak/><Run/><LineBreak/><Run Text="• &quot;Veritabanı Adı&quot;, dosya ismine ihtiyaç duymadan, birden fazla veritabanını birbirinden ayırt edebilmenizi sağlar. Örn: &quot;E-Posta Hesaplarım&quot;, &quot;Sunucu Bilgilerim&quot;"/><LineBreak/><Run Text="• &quot;Kullanıcı Adı&quot;, veritabanı sahibinin/kullanıcısının adını saklar. Veritabanınızı açarken gerekli değildir. Yalnızca kolaylık ve görsellik için kullanılmaktadır."/><LineBreak/><Run Text="• Veritabanı şifreniz, veritabanınızdaki kayıtları şifrelemek için kullanılan anaşifrenizdir. Tüm verileri şifrelemek ve çözmek için kullanacağınız bu şifreyi unutursanız veritabanına tüm erişiminizi kaybedersiniz. Şifrenizi değiştirmek istemediğiniz zaman alanı boş bırakabilirsiniz."/><LineBreak/><Run/><LineBreak/><Run Text="• Değişikliklerinizi tamamladığınız zaman &quot;Ayarları Kaydet&quot; butonunu kullanabilirsiniz."/><LineBreak/><Run Text="• Veritabanı bilgilerini veritabanı dosyasından tekrar yüklemek isterseniz &quot;Bilgileri Yenile&quot; butonunu kullanabilirsiniz."/></TextBlock>
 		</ScrollViewer>
 	</Grid>
 </UserControl>

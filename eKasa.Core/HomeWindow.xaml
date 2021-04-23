@@ -1,164 +1,44 @@
 ﻿<Window x:Name="mainWindow" x:Class="eKasa.Core.HomeWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:eKasa.Core"
-        mc:Ignorable="d"
-        Title="Manage Database" Height="500" Width="800" Background="#FF2D2D30" BorderBrush="#FF0078D7" WindowStyle="None" BorderThickness="1,1,1,1" MouseDown="MainWindow_MouseDown" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyDown="MainWindow_KeyDown">
+		  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		  mc:Ignorable="d"
+        Title="Manage Database" Height="520" Width="800" Background="#FF2C2F33" WindowStyle="None" MouseDown="MainWindow_MouseDown" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" KeyDown="MainWindow_KeyDown" Foreground="#FFD9D9D9">
 
-	<Window.Resources>
-
-		<!--// Toggle Button Style Template //-->
-
-		<ImageBrush x:Key="tb_mouse_over"/>
-
-		<!--// Text font style //-->
-
-		<Style x:Key="font_style" TargetType="TextBlock">
-
-			<Setter Property="FontFamily"
-                    Value="Fonts/Roboto-Light.ttf #Roboto"/>
-
-			<Setter Property="VerticalAlignment"
-                    Value="Center"/>
-
-			<Setter Property="HorizontalAlignment"
-                    Value="Left"/>
-
-			<Setter Property="Foreground"
-                    Value="White"/>
-
-			<Setter Property="FontSize"
-                    Value="20"/>
-
-		</Style>
-
-		<!--// Tooltip Style Template //-->
-
-		<Style TargetType="ToolTip" x:Key="tt_style">
-
-			<Setter Property="Placement" Value="Right"/>
-			<Setter Property="Height" Value="40"/>
-			<Setter Property="Width" Value="100"/>
-			<Setter Property="Margin" Value="20,0,0,0"/>
-			<Setter Property="Background" Value="#4A5668"/>
-			<Setter Property="BorderBrush" Value="Transparent"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto"/>
-			<Setter Property="FontSize" Value="16"/>
-			<Setter Property="PlacementRectangle" Value="60,0,0,0"/>
-			<Setter Property="HorizontalOffset" Value="15"/>
-			<Setter Property="VerticalOffset" Value="6"/>
-			<Setter Property="HasDropShadow" Value="True"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-
-		</Style>
-
-		<!--// App Close Button Style Template //-->
-
-		<ImageBrush x:Key="CloseBtn_MouseOver" />
-
-		<Style x:Key="Close_btn" TargetType="{x:Type Button}">
-
-			<Setter Property="Template">
-
-				<Setter.Value>
-
-					<ControlTemplate TargetType="{x:Type Button}">
-
-						<Border x:Name="button"
-                                BorderThickness="0"
-                                Background="{TemplateBinding Background}"
-                                SnapsToDevicePixels="True">
-
-						</Border>
-
-						<ControlTemplate.Triggers>
-
-							<Trigger Property="IsMouseOver"
-                                     Value="True">
-
-								<Setter Property="Background"
-                                        TargetName="button"
-                                        Value="{StaticResource CloseBtn_MouseOver}"/>
-
-							</Trigger>
-
-						</ControlTemplate.Triggers>
-
-					</ControlTemplate>
-
-				</Setter.Value>
-
-			</Setter>
-
-		</Style>
-
-
-		<Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
-
-			<Setter Property="Template">
-
-				<Setter.Value>
-
-					<ControlTemplate TargetType="{x:Type ToggleButton}">
-
-						<Border  x:Name="border"
-                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                 Background="{TemplateBinding Background}"
-                                 SnapsToDevicePixels="True">
-
-						</Border>
-
-						<ControlTemplate.Triggers>
-
-							<Trigger Property="IsMouseOver" Value="true">
-
-								<Setter Property="Background"
-                                        TargetName="border"
-                                        Value="{StaticResource tb_mouse_over}"/>
-
-								<Setter Property="BorderBrush"
-                                        TargetName="border"
-                                        Value="{StaticResource tb_mouse_over}"/>
-
-							</Trigger>
-
-							<Trigger Property="IsChecked" Value="true">
-
-								<Setter Property="Background"
-                                        TargetName="border"
-                                        Value="{StaticResource tb_mouse_over}"/>
-
-								<Setter Property="BorderBrush"
-                                        TargetName="border"
-                                        Value="{StaticResource tb_mouse_over}"/>
-
-							</Trigger>
-
-						</ControlTemplate.Triggers>
-
-					</ControlTemplate>
-
-				</Setter.Value>
-
-			</Setter>
-
-		</Style>
-
-	</Window.Resources>
+	<WindowChrome.WindowChrome>
+		<WindowChrome ResizeBorderThickness="0" CaptionHeight="0"/>
+	</WindowChrome.WindowChrome>
 
 	<Grid x:Name="mainGrid">
-		<Grid x:Name="navigationGrid" Width="65" d:LayoutOverrides="VerticalAlignment, Width" HorizontalAlignment="Left" Background="#FF3C3C41">
-			<Button x:Name="homeButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xEA8A;' VerticalAlignment="Top" Margin="0,10,0,0" Click="HomeButton_Click" TabIndex="10" Template="{StaticResource navigationButton}" Height="40"/>
-			<Button x:Name="createButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xF8AA;' VerticalAlignment="Top" RenderTransformOrigin="0.585,1.374" Click="CreateButton_Click" TabIndex="11" Template="{StaticResource navigationButton}" Margin="0,55,0,0" Height="40"/>
-			<Button x:Name="editButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE70F;' VerticalAlignment="Top" Margin="0,100,0,0" Click="EditButton_Click" TabIndex="12" Template="{StaticResource navigationButton}" Height="40"/>
-			<Button x:Name="helpButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xF167;' VerticalAlignment="Top" Click="HelpButton_Click" TabIndex="13" Template="{StaticResource navigationButton}" Height="40" Margin="0,313,0,0"/>
-			<Button x:Name="aboutButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE943;' VerticalAlignment="Top" Click="AboutButton_Click" TabIndex="13" Template="{StaticResource navigationButton}" Height="40" Margin="0,358,0,0"/>
-			<Button x:Name="settingsButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" Content='&#xE713;' VerticalAlignment="Top" Click="SettingsButton_Click" TabIndex="14" Template="{StaticResource navigationButton}" Height="40" Margin="0,403,0,0"/>
-			<Button x:Name="terminateButton" Click="TerminateButton_Click" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" Content='&#xE7E8;' VerticalAlignment="Bottom" TabIndex="15" Template="{StaticResource navigationButton}" Height="40" Margin="0,0,0,10"/>
+		<Rectangle x:Name="titlebar" Height="20" Stroke="#FF202225" Fill="#FF202225" Margin="0,0,0,498"/>
+		<Button x:Name="chromeClose" FontFamily="Segoe MDL2 Assets" Content="&#xE8BB;" Template="{StaticResource chromeCloseButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#FFBFBEBF" BorderBrush="{x:Null}" Background="{x:Null}" Width="30" Height="20" Padding="0,0,0,0" Click="ChromeClose_Click"/>
+
+		<Button x:Name="chromeMinimize" FontFamily="Segoe MDL2 Assets" Content="&#xE921;" Template="{StaticResource chromeMinimizeButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#FFBFBEBF" Width="30" Height="20" Padding="0,0,0,0" Margin="0,0,35,0" Click="ChromeMinimize_Click"/>
+
+		<Button x:Name="chromeDbTitle" Content="{}{0}" Style="{DynamicResource DbTitleButton}" VerticalAlignment="Top" Foreground="Black" Height="20" Margin="0,0,154,0" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" MaxWidth="250" MinWidth="125" IsTabStop="False"/>
+
+		<Grid x:Name="navigationGrid" Width="65" HorizontalAlignment="Left" Background="#FF202225" Margin="0,20,0,0">
+			<Button x:Name="homeButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Content='&#xEA8A;' VerticalAlignment="Top" Margin="0,10,0,0" Click="HomeButton_Click" TabIndex="10" Template="{StaticResource navigationButton}" Height="40" Foreground="#FF7289DA"/>
+
+			<Button x:Name="createButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Content='&#xF8AA;' VerticalAlignment="Top" RenderTransformOrigin="0.585,1.374" Click="CreateButton_Click" TabIndex="11" Template="{StaticResource navigationButton}" Margin="0,55,0,0" Height="40" Foreground="#FF7289DA"/>
+
+			<Button x:Name="editButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Content='&#xE70F;' VerticalAlignment="Top" Margin="0,100,0,0" Click="EditButton_Click" TabIndex="12" Template="{StaticResource navigationButton}" Height="40" Foreground="#FF7289DA"/>
+
+			<Button x:Name="helpButton" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Bottom" Click="HelpButton_Click" TabIndex="13" Template="{StaticResource navigationButton}" Height="40" Margin="0,0,0,145" Foreground="#FF7289DA">
+				<Grid>
+					<Label x:Name="circle" Content='&#xEA3B;' Foreground="#FF7289DA"/>
+					<Label x:Name="qmark" Content='&#xE897;' Foreground="#FF202225" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontStyle="Normal"/>
+				</Grid>
+			</Button>
+
+			<Button x:Name="aboutButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Content='&#xE943;' VerticalAlignment="Bottom" Click="AboutButton_Click" TabIndex="14" Template="{StaticResource navigationButton}" Height="40" Margin="0,0,0,100" FontWeight="Normal" Foreground="#FF7289DA"/>
+
+			<Button x:Name="settingsButton" FontFamily="Segoe MDL2 Assets" FontSize="24" Content='&#xE713;' VerticalAlignment="Bottom" Click="SettingsButton_Click" TabIndex="15" Template="{StaticResource navigationButton}" Height="40" Margin="0,0,0,55" FontStyle="Normal" FontWeight="Normal" Foreground="#FF7289DA"/>
+
+			<Button x:Name="terminateButton" Click="TerminateButton_Click" FontFamily="Segoe MDL2 Assets" FontSize="24" Content='&#xE7E8;' VerticalAlignment="Bottom" TabIndex="16" Template="{StaticResource navigationButton}" Height="40" Margin="0,0,0,10" Foreground="#FFF24848"/>
 		</Grid>
-		<Canvas x:Name="contentCanvas" Margin="65,0,0,0" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+
+		<Canvas x:Name="contentCanvas" Margin="65,20,0,0"/>
 	</Grid>
 </Window>

@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d">
+             mc:Ignorable="d" FontFamily="Exo 2 Light" Foreground="#FF7289DA">
 	<Grid x:Name="mainGrid" Width="629" Height="498">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -27,10 +27,10 @@
 			<RowDefinition/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
-		<TextBlock x:Name="titleLabel" Margin="10,10,10,0" Text="Veritabanının Kilidini Aç" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" Height="40" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="6"/>
-		<Separator x:Name="titleSeperator" Margin="10,10,10,0" VerticalAlignment="Top" Foreground="{x:Null}" Background="#FF0078D7" Grid.ColumnSpan="6" Grid.Row="1"/>
+		<TextBlock x:Name="titleLabel" Margin="10,10,10,0" Text="Veritabanının Kilidini Aç" TextWrapping="Wrap" FontSize="30" FontFamily="Montserrat Medium" Height="40" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="6"/>
+		<Separator x:Name="titleSeperator" Margin="10,10,10,0" VerticalAlignment="Top" Grid.ColumnSpan="6" Grid.Row="1"/>
 		<ScrollViewer x:Name="helpScroller" Grid.Row="1" Grid.RowSpan="11" Grid.ColumnSpan="6" Margin="10,20,10,10" FontWeight="Bold" VerticalScrollBarVisibility="Auto">
-			<TextBlock x:Name="helpContent" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="14" FontWeight="Normal" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" FontStyle="Italic"><Run Text="Giriş penceresi, uygulamayı ilk açtığınızda karşılaştığınız penceredir."/><LineBreak/><Run/><LineBreak/><Run Text="• &quot;Veritabanı Dosyası&quot;, veritabanınızın bulunduğu konumu seçtiğiniz alandır. Veritabanızı seçmek için &quot;Göz At&quot; butonunu kullanabilirsiniz."/><LineBreak/><Run Text="• &quot;Veritabanı Şifresi&quot;, veritabanınızdaki şifreli kayıtların çözülebilmesi için kullanılan şifredir. Şifrenizi unutursanız veritabanınıza olan tüm erişiminizi kaybedersiniz."/><LineBreak/><Run/><LineBreak/><Run Text="• Eğer uygulamayı ilk defa kullanıyorsanız &quot;Yeni Veritabanı&quot; butonunu kullanarak yeni bir veritabanı oluşturabilirsiniz."/><LineBreak/><Run Text="• &quot;Yardım&quot; butonunu bu pencere erişmek için kullanabilirsiniz."/><LineBreak/><Run Text="• Uygulamayı kapatmak istediğinizde &quot;Çık&quot; butonunu kullanabilirsiniz."/></TextBlock>
+			<TextBlock x:Name="helpContent" TextWrapping="Wrap" Foreground="#FF7289DA" FontSize="14" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" UseLayoutRounding="False"><Run Text="Giriş penceresi, uygulamayı ilk açtığınızda karşılaştığınız penceredir."/><LineBreak/><Run/><LineBreak/><Run Text="• &quot;Veritabanı Dosyası&quot;, veritabanınızın bulunduğu konumu seçtiğiniz alandır. Veritabanızı seçmek için &quot;Göz At&quot; butonunu kullanabilirsiniz."/><LineBreak/><Run Text="• &quot;Veritabanı Şifresi&quot;, veritabanınızdaki şifreli kayıtların çözülebilmesi için kullanılan şifredir. Şifrenizi unutursanız veritabanınıza olan tüm erişiminizi kaybedersiniz."/><LineBreak/><Run/><LineBreak/><Run Text="• Eğer uygulamayı ilk defa kullanıyorsanız &quot;Yeni Veritabanı&quot; butonunu kullanarak yeni bir veritabanı oluşturabilirsiniz."/><LineBreak/><Run Text="• &quot;Yardım&quot; butonunu bu pencere erişmek için kullanabilirsiniz."/><LineBreak/><Run Text="• Uygulamayı kapatmak istediğinizde &quot;Çık&quot; butonunu kullanabilirsiniz."/></TextBlock>
 		</ScrollViewer>
 	</Grid>
 </UserControl>

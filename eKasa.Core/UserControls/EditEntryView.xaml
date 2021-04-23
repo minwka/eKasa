@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" Loaded="EditControl_Loaded">
+             mc:Ignorable="d" Loaded="EditControl_Loaded" Foreground="#FF7289DA">
 	<Grid x:Name="mainGrid" Height="498" Width="733">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -28,35 +28,35 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 		<StackPanel x:Name="seperatorStack" Grid.Row="2" Grid.Column="3" Grid.RowSpan="9" Orientation="Horizontal" HorizontalAlignment="Left">
-			<Separator x:Name="verticalSeperator" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF0078D7" Foreground="{x:Null}" />
+			<Separator x:Name="verticalSeperator" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF7289DA" />
 		</StackPanel>
 
-		<TextBlock x:Name="titleLabel" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2" Margin="10,10,10,0" Text="Düzenle" TextWrapping="Wrap" Foreground="#FF0078D7" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
-		<Separator x:Name="titleSeperator" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1" Margin="10,10,10,0" VerticalAlignment="Top" Foreground="{x:Null}" Background="#FF0078D7"/>
-		<Label x:Name="updateTitle" Content="Güncellenecek Kayıt" VerticalAlignment="Stretch" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" HorizontalAlignment="Stretch" Grid.Row="2" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
-		<Label x:Name="idTitle" Content="Kimlik:" Margin="10,0,0,0" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Row="4" d:LayoutOverrides="Width"/>
-		<Label x:Name="nameTitle" Content="Kayıt Adı:" Margin="10,0,0,0" VerticalAlignment="Stretch" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" HorizontalAlignment="Stretch" Grid.Row="5" d:LayoutOverrides="Width"/>
-		<Label x:Name="usernameTitle" Content="Kullanıcı Adı:" Margin="10,0,0,0" VerticalAlignment="Stretch" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" HorizontalAlignment="Stretch" Grid.Row="6" d:LayoutOverrides="Width"/>
-		<Label x:Name="pwdTitle" Content="Şifre:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Row="7" Margin="10,0,0,0"/>
-		<Label x:Name="tagTitle" Content="Etiket:" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Row="8" Margin="10,0,0,0"/>
-		<TextBox x:Name="idPreview" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="4" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" Height="30"/>
-		<TextBox x:Name="namePreview" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="5" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
-		<TextBox x:Name="usernamePreview" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="6" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
-		<PasswordBox x:Name="pwdPreview" Height="30" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="7" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
-		<TextBox x:Name="clearPwdPreview" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" IsReadOnly="True" Visibility="Collapsed" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="7" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
-		<TextBox x:Name="tagPreview" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="8" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
-		<Label x:Name="newTitle" Content="Yeni Bilgiler:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="2" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
-		<Label x:Name="newNameTitle" Content="Kayıt Adı:" HorizontalAlignment="Stretch" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="4" VerticalAlignment="Stretch" Margin="10,0,0,0"/>
-		<Label x:Name="newUsernameTitle" Content="Kullanıcı Adı:" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="5" Margin="10,0,0,0"/>
-		<Label x:Name="newPwdTitle" Content="Şifre:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="6" Margin="10,0,0,0"/>
-		<Label x:Name="newTagTitle" Content="Etiket:" Foreground="#FF0078D7" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="7" Margin="10,0,0,0"/>
-		<TextBox x:Name="nameInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="4" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="40"/>
-		<TextBox x:Name="usernameInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="5" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="41"/>
-		<PasswordBox x:Name="passwordInput" Height="30" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="42"/>
-		<TextBox x:Name="clearPasswordInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" Visibility="Collapsed" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="42"/>
-		<TextBox x:Name="tagInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Foreground="#FF0078D7" CaretBrush="#FF0078D7" BorderBrush="#FF0078D7" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="7" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="43"/>
-		<CheckBox x:Name="pwdToggle" Content="Şifreyi Göster" FontSize="16" Foreground="#FF0078D7" Checked="PwdToggle_CheckedChanged" Unchecked="PwdToggle_CheckedChanged" Grid.Column="5" Grid.Row="8" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Center" TabIndex="45"/>
-		<Button x:Name="saveButton" Content="Değişikilkleri Kaydet" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" Click="EditButton_Click" Grid.Column="4" HorizontalAlignment="Right" Grid.Row="11" VerticalAlignment="Stretch" Margin="0,0,10,10" IsDefault="True" TabIndex="44" Template="{StaticResource defaultButton}" Grid.ColumnSpan="2" Width="150"/>
-		<Button x:Name="genPwdButton" Content="Şifre Oluştur" Background="{x:Null}" BorderBrush="#FF0078D7" Foreground="#FF0078D7" FontSize="13" Grid.Row="11" Grid.Column="3" Margin="0,0,45,10" TabIndex="35" Template="{StaticResource defaultButton}" Click="GenPwdButton_Click" HorizontalAlignment="Right" Grid.ColumnSpan="2" Width="120"/>
+		<TextBlock x:Name="titleLabel" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2" Margin="10,10,10,0" Text="Düzenle" TextWrapping="Wrap" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+		<Separator x:Name="titleSeperator" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1" Margin="10,10,10,0" VerticalAlignment="Top"/>
+		<Label x:Name="updateTitle" Content="Güncellenecek Kayıt" VerticalAlignment="Stretch" Background="{x:Null}" FontSize="16" HorizontalAlignment="Stretch" Grid.Row="2" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
+		<Label x:Name="idTitle" Content="Kimlik:" Margin="10,0,0,0" Background="{x:Null}" FontSize="16" Grid.Row="4" d:LayoutOverrides="Width"/>
+		<Label x:Name="nameTitle" Content="Kayıt Adı:" Margin="10,0,0,0" VerticalAlignment="Stretch" Background="{x:Null}" FontSize="16" HorizontalAlignment="Stretch" Grid.Row="5" d:LayoutOverrides="Width"/>
+		<Label x:Name="usernameTitle" Content="Kullanıcı Adı:" Margin="10,0,0,0" VerticalAlignment="Stretch" Background="{x:Null}" FontSize="16" HorizontalAlignment="Stretch" Grid.Row="6" d:LayoutOverrides="Width"/>
+		<Label x:Name="pwdTitle" Content="Şifre:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}" FontSize="16" Grid.Row="7" Margin="10,0,0,0"/>
+		<Label x:Name="tagTitle" Content="Etiket:" Background="{x:Null}" FontSize="16" Grid.Row="8" Margin="10,0,0,0"/>
+		<TextBox x:Name="idPreview" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="4" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" Height="30"/>
+		<TextBox x:Name="namePreview" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="5" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
+		<TextBox x:Name="usernamePreview" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="6" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
+		<PasswordBox x:Name="pwdPreview" Height="30" FontSize="18" Background="{x:Null}" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="7" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
+		<TextBox x:Name="clearPwdPreview" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" IsReadOnly="True" Visibility="Collapsed" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="7" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
+		<TextBox x:Name="tagPreview" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="8" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0"/>
+		<Label x:Name="newTitle" Content="Yeni Bilgiler:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="2" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
+		<Label x:Name="newNameTitle" Content="Kayıt Adı:" HorizontalAlignment="Stretch" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="4" VerticalAlignment="Stretch" Margin="10,0,0,0"/>
+		<Label x:Name="newUsernameTitle" Content="Kullanıcı Adı:" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="5" Margin="10,0,0,0"/>
+		<Label x:Name="newPwdTitle" Content="Şifre:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="6" Margin="10,0,0,0"/>
+		<Label x:Name="newTagTitle" Content="Etiket:" Background="{x:Null}" FontSize="16" Grid.Column="3" Grid.Row="7" Margin="10,0,0,0"/>
+		<TextBox x:Name="nameInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="4" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="40"/>
+		<TextBox x:Name="usernameInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="5" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="41"/>
+		<PasswordBox x:Name="passwordInput" Height="30" FontSize="18" Background="{x:Null}" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="42"/>
+		<TextBox x:Name="clearPasswordInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Visibility="Collapsed" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="6" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="42"/>
+		<TextBox x:Name="tagInput" Height="30" TextWrapping="NoWrap" FontSize="18" Background="{x:Null}" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="7" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Margin="0,0,10,0" TabIndex="43"/>
+		<CheckBox x:Name="pwdToggle" Content="Şifreyi Göster" FontSize="15" Checked="PwdToggle_CheckedChanged" Unchecked="PwdToggle_CheckedChanged" Grid.Column="5" Grid.Row="8" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Center" TabIndex="46"/>
+		<Button x:Name="saveButton" Content="Değişikilkleri Kaydet" FontSize="13" Click="EditButton_Click" Grid.Column="4" HorizontalAlignment="Right" Grid.Row="11" VerticalAlignment="Stretch" Margin="0,0,10,10" IsDefault="True" TabIndex="44" Style="{DynamicResource PrimaryButton}" Grid.ColumnSpan="2" Width="150"/>
+		<Button x:Name="genPwdButton" Content="Şifre Oluştur" FontSize="13" Grid.Row="11" Grid.Column="3" Margin="0,0,45,10" TabIndex="45" Style="{DynamicResource SecondaryButton}" Click="GenPwdButton_Click" HorizontalAlignment="Right" Grid.ColumnSpan="2" Width="120"/>
 	</Grid>
 </UserControl>

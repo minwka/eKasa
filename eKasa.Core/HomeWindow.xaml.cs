@@ -18,6 +18,7 @@ namespace eKasa.Core
 		{
 			InitializeComponent();
 			contentCanvas.Children.Add(homev);
+			chromeDbTitle.Content = $"{GlobalSettings.dbSettings.InternalDb.Owner} • {GlobalSettings.dbSettings.InternalDb.Name}";
 		}
 
 		static public void UpdateHomeView()
@@ -85,6 +86,12 @@ namespace eKasa.Core
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(appSettingsv);
 		}
+
+		private void ChromeClose_Click(object sender, RoutedEventArgs e)
+		{ TerminateButton_Click(sender, e); }
+
+		private void ChromeMinimize_Click(object sender, RoutedEventArgs e)
+		{ WindowState = WindowState.Minimized; }
 
 		private void TerminateButton_Click(object sender, RoutedEventArgs e)
 		{

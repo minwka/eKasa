@@ -1,46 +1,36 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0-windows</TargetFramework>
-		<UseWPF>true</UseWPF>
-		<ApplicationIcon>logo.ico</ApplicationIcon>
-		<PackageId>eKasa Installer</PackageId>
-		<Company>NAMI</Company>
-		<Authors>M. Ferit Uzun</Authors>
-		<Product>eKasa Installer</Product>
-		<AssemblyVersion>4.4.0.0</AssemblyVersion>
-		<FileVersion>4.4.0.0</FileVersion>
-		<Version>4.4</Version>
-		<AssemblyName>Installer</AssemblyName>
-		<ApplicationManifest>app.manifest</ApplicationManifest>
-		<Description>eKasa. Yükleme sihirbazı.</Description>
-		<Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DebugType>none</DebugType>
-	  <DebugSymbols>false</DebugSymbols>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <WarningLevel>0</WarningLevel>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<None Remove="Controls\ekasa_logo.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Resource Include="Controls\ekasa_logo.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\eKasa.Library\eKasa.Library.csproj" />
-	</ItemGroup>
-
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <PackageId>eKasa Installer</PackageId>
+    <Company>NAMI</Company>
+    <Authors>M. Ferit Uzun</Authors>
+    <Product>eKasa Installer</Product>
+    <Version>4.4.0.0</Version>
+    <AssemblyName>Installer</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Description>eKasa. Yükleme sihirbazı.</Description>
+    <Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Controls\ekasa_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\ekasa_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eKasa.Library\eKasa.Library.csproj" />
+  </ItemGroup>
 </Project>

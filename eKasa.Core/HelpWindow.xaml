@@ -5,70 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:eKasa.Core"
         mc:Ignorable="d"
-        Title="Knowledge Database" Height="500" Width="800" Background="#FF2D2D30" BorderBrush="#FF0078D7" WindowStyle="None" BorderThickness="1,10,1,1" MouseDown="MainWindow_MouseDown" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="#FF0078D7">
+        Title="Knowledge Database" Height="520" Width="800" Background="#FF2C2F33" BorderBrush="#FF7289DA" WindowStyle="None" MouseDown="MainWindow_MouseDown" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" Foreground="#FF7289DA" FontFamily="Exo 2">
+
+	<WindowChrome.WindowChrome>
+		<WindowChrome ResizeBorderThickness="0" CaptionHeight="0"/>
+	</WindowChrome.WindowChrome>
+
 	<Grid x:Name="mainGrid">
-		<StackPanel x:Name="menuPanel" VerticalAlignment="Stretch" Width="170" HorizontalAlignment="Left" Background="#FF3C3C41">
+		<Rectangle x:Name="titlebar" Stroke="#FF202225" Fill="#FF202225" Margin="0,1,-2,497"/>
+		<Button x:Name="chromeClose" FontFamily="Segoe MDL2 Assets" Content="&#xE8BB;" Template="{StaticResource chromeCloseButton}" Foreground="#FFBFBEBF" BorderBrush="{x:Null}" Background="{x:Null}" Padding="0,0,0,0" Click="ChromeClose_Click" Margin="770,0,-2,498"/>
+		<Button x:Name="chromeMinimize" FontFamily="Segoe MDL2 Assets" Content="&#xE921;" Template="{StaticResource chromeMinimizeButton}" Foreground="#FFBFBEBF" Padding="0,0,0,0" Click="ChromeMinimize_Click" Margin="735,0,33,498"/>
+		<StackPanel x:Name="menuPanel" Width="170" HorizontalAlignment="Left" Background="#FF202225" Margin="0,21,0,0">
 			<Button x:Name="homeButton" FontSize="24" Foreground="#FF0078D7" VerticalAlignment="Bottom" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,15,0,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Click="HomeButton_Click" Background="{x:Null}" BorderBrush="{x:Null}">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xE80F;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="hbc" Text="Anasayfa" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" />
+					<TextBlock Text="&#xE80F;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="hbc" Text="Anasayfa" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Foreground="#FF7289DA" />
 				</StackPanel>
 			</Button>
-			<Button x:Name="addButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="AddButton_Click">
+			<Button x:Name="addButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="11" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="AddButton_Click">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xF8AA;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="adbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Kayıt Ekleme" />
+					<TextBlock Text="&#xF8AA;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="adbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Kayıt Ekleme" Foreground="#FF7289DA" />
 				</StackPanel>
 			</Button>
-			<Button x:Name="editButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="EditButton_Click">
+			<Button x:Name="editButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="12" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="EditButton_Click">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="ebc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Kayıt Düzenleme" />
+					<TextBlock Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="ebc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Kayıt Düzenleme" Foreground="#FF7289DA" />
 				</StackPanel>
 			</Button>
-			<Button x:Name="settingsButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,0,0,5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Click="SettingsButton_Click">
+			<Button x:Name="settingsButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="13" Template="{StaticResource navigationButton}" Margin="0,0,0,5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Click="SettingsButton_Click">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="sbc" Text="Ayarlar" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" />
+					<TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="sbc" Text="Ayarlar" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Foreground="#FF7289DA" />
 				</StackPanel>
 			</Button>
-			<Button x:Name="loginButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="LoginButton_Click">
+			<Button x:Name="loginButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="14" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="LoginButton_Click">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="lbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Giriş Ekranı" />
+					<TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="lbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Giriş Ekranı" Foreground="#FF7289DA" />
 				</StackPanel>
 			</Button>
-			<Button x:Name="newDbButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="NewDbButton_Click">
+			<Button x:Name="newDbButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="15" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="NewDbButton_Click">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xF61D;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="ndbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" ><Run Text="Yeni Veritabanı"/><LineBreak/><Run Text="Oluşturma"/></TextBlock>
+					<TextBlock Text="&#xF61D;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="ndbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Foreground="#FF7289DA" ><Run Text="Yeni Veritabanı"/><LineBreak/><Run Text="Oluşturma"/></TextBlock>
 				</StackPanel>
 			</Button>
-			<Button x:Name="pwdGenButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="PwdGenButton_Click">
+			<Button x:Name="pwdGenButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="16" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="PwdGenButton_Click">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xF439;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="pbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Şifre Oluşturucu" />
+					<TextBlock Text="&#xF439;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="pbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Şifre Oluşturucu" Foreground="#FF7289DA" />
 				</StackPanel>
 			</Button>
-			<Button x:Name="autofillButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="AutofillButton_Click">
+			<Button x:Name="autofillButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="17" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="AutofillButton_Click">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xF714;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="afbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Oto-Doldurma" />
+					<TextBlock Text="&#xF714;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="afbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Oto-Doldurma" Foreground="#FF7289DA" />
 				</StackPanel>
 			</Button>
-			<Button x:Name="encryptionButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="10" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="EncryptionButton_Click">
+			<Button x:Name="encryptionButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0078D7" TabIndex="18" Template="{StaticResource navigationButton}" Margin="0,0,0,5" Click="EncryptionButton_Click">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xED5D;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="edbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" ><Run Text="Veritabanı ve"/><LineBreak/><Run Text="Şifreleme"/></TextBlock>
+					<TextBlock Text="&#xED5D;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FF7289DA" />
+					<TextBlock x:Name="edbc" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Foreground="#FF7289DA" ><Run Text="Veritabanı ve"/><LineBreak/><Run Text="Şifreleme"/></TextBlock>
 				</StackPanel>
 			</Button>
-			<Button x:Name="terminateButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" TabIndex="10" Template="{StaticResource navigationButton}" Click="TerminateButton_Click">
+			<Button x:Name="terminateButton" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF003C" TabIndex="19" Template="{StaticResource navigationButton}" Click="TerminateButton_Click" IsCancel="True">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="150" Margin="10,0,10,0">
-					<TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" />
-					<TextBlock x:Name="edbc1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Kapat" />
+					<TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8,0,8" Foreground="#FFF24848" />
+					<TextBlock x:Name="edbc1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" Text="Kapat" Foreground="#FFF24848" />
 				</StackPanel>
 			</Button>
 		</StackPanel>
-		<Canvas x:Name="contentCanvas" Margin="170,0,0,0"/>
+		<Canvas x:Name="contentCanvas" Margin="170,21,0,0"/>
 	</Grid>
 </Window>

@@ -1,34 +1,27 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0-windows</TargetFramework>
-		<UseWPF>true</UseWPF>
-		<AssemblyName>Uninstall</AssemblyName>
-		<ApplicationIcon>logo.ico</ApplicationIcon>
-		<PackageId>eKasa Uninstaller</PackageId>
-		<Product>eKasa Uninstaller</Product>
-		<Company>NAMI</Company>
-		<Authors>M. Ferit Uzun</Authors>
-		<Description>eKasa. Kaldırma sihirbazı.</Description>
-		<Version>4.4</Version>
-		<Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
-		<ApplicationManifest>app.manifest</ApplicationManifest>
-		<AssemblyVersion>4.4.0.0</AssemblyVersion>
-		<FileVersion>4.4.0.0</FileVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DebugType>none</DebugType>
-	  <DebugSymbols>false</DebugSymbols>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<None Remove="Controls\ekasa_logo.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Resource Include="Controls\ekasa_logo.png" />
-	</ItemGroup>
-
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>Uninstall</AssemblyName>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <PackageId>eKasa Uninstaller</PackageId>
+    <Product>eKasa Uninstaller</Product>
+    <Company>NAMI</Company>
+    <Authors>M. Ferit Uzun</Authors>
+    <Description>eKasa. Kaldırma sihirbazı.</Description>
+    <Version>4.4.0.0</Version>
+    <Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Controls\ekasa_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\ekasa_logo.png" />
+  </ItemGroup>
 </Project>
