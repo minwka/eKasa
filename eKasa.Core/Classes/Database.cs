@@ -1,20 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text.Json;
 using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
 namespace eKasa.Core {
 	static public class Database {
-		static public DatabaseModel FromJson(string filePath) { return JsonSerializer.Deserialize<DatabaseModel>(File.ReadAllText(filePath)); }
+		static public DatabaseModel FromJson(string filePath) { return JsonConvert.DeserializeObject<DatabaseModel>(File.ReadAllText(filePath)); }
 
-		static public string ToJson(ref DatabaseModel db) { return JsonSerializer.Serialize(db, new JsonSerializerOptions() { WriteIndented = true }); }
+		static public string ToJson(ref DatabaseModel db) { return JsonConvert.SerializeObject(db, Formatting.Indented); }
 
-		static public string ToJson(ref DatabaseModel db, string filePath) {
-			var json = JsonSerializer.Serialize(db, new JsonSerializerOptions() { WriteIndented = true });
+		static public void ToJson(ref DatabaseModel db, string filePath) {
+			var json = JsonConvert.SerializeObject(db, Formatting.Indented);
 			File.WriteAllText(filePath, json);
-			return json;
 		}
 
 		static public void Save(DatabaseModel db, string filePath) {

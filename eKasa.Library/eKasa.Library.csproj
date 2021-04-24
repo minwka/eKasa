@@ -8,7 +8,7 @@
     <Product>Core.Library</Product>
     <Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
     <Description>eKasa. Core library.</Description>
-    <Version>0.10.4.0</Version>
+    <Version>0.10.5.0</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>

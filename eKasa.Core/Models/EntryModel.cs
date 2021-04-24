@@ -1,21 +1,21 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace eKasa.Core {
 	public record EntryModel {
-		[JsonPropertyName("entry_id")]
+		[JsonProperty("entry_id")]
 		public Guid Id { get; set; }
 
-		[JsonPropertyName("entry_name")]
+		[JsonProperty("entry_name")]
 		public string Name { get; set; }
 
-		[JsonPropertyName("entry_tag")]
+		[JsonProperty("entry_tag")]
 		public string Tag { get; set; }
 
-		[JsonPropertyName("username")]
+		[JsonProperty("username")]
 		public string Username { get; set; }
 
-		[JsonPropertyName("password")]
+		[JsonProperty("password")]
 		public string Password { get; set; }
 	}
 }

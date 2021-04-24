@@ -1,5 +1,5 @@
 <h1 align="center" id="title">
- eKasa: Şifre Yönetici <a href="https://github.com/minwka/eKasa"><img title="Version" src="https://img.shields.io/badge/Sürüm-4.4-blue.svg"></a>
+ eKasa: Şifre Yönetici <a href="https://github.com/minwka/eKasa"><img title="Version" src="https://img.shields.io/badge/Sürüm-4.4.7-blue.svg"></a>
 </h1>
 
 <p align="center" id="version">

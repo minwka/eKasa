@@ -1,24 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace eKasa.Core {
 	public record DatabaseModel {
-		[JsonPropertyName("database_name")]
+		[JsonProperty("database_name")]
 		public string Name { get; set; }
 
-		[JsonPropertyName("owner_name")]
+		[JsonProperty("owner_name")]
 		public string Owner { get; set; }
 
-		[JsonPropertyName("password_hash")]
+		[JsonProperty("password_hash")]
 		public string PwdHash { get; set; }
 
-		[JsonPropertyName("modified_date")]
+		[JsonProperty("modified_date")]
 		public string ModifiedDate { get; set; }
 
-		[JsonPropertyName("app_version")]
+		[JsonProperty("app_version")]
 		public string Version { get; set; }
 
-		[JsonPropertyName("entry_list")]
+		[JsonProperty("entry_list")]
 		public List<EntryModel> Entries { get; set; }
 	}
 }
