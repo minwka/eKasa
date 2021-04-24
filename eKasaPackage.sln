@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eKasa.Library", "eKasa.Libr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eKasa.Core", "eKasa.Core\eKasa.Core.csproj", "{50BB0FC6-D2F9-4252-BBF2-C785F1986594}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eKasa.AutofillHelper", "eKasa.AutofillHelper\eKasa.AutofillHelper.csproj", "{B940C68B-691E-41E6-8333-477B0E085180}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eKasa.Installer", "eKasa.Installer\eKasa.Installer.csproj", "{76F82D94-20CC-410A-A85C-CACA6915D9A5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eKasa.Uninstaller", "eKasa.Uninstaller\eKasa.Uninstaller.csproj", "{D745DB37-D890-4515-93E4-B9DD928851A9}"
@@ -27,10 +25,6 @@ Global
 		{50BB0FC6-D2F9-4252-BBF2-C785F1986594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50BB0FC6-D2F9-4252-BBF2-C785F1986594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50BB0FC6-D2F9-4252-BBF2-C785F1986594}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B940C68B-691E-41E6-8333-477B0E085180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B940C68B-691E-41E6-8333-477B0E085180}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B940C68B-691E-41E6-8333-477B0E085180}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B940C68B-691E-41E6-8333-477B0E085180}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76F82D94-20CC-410A-A85C-CACA6915D9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76F82D94-20CC-410A-A85C-CACA6915D9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76F82D94-20CC-410A-A85C-CACA6915D9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU

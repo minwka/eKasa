@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using GregsStack.InputSimulatorStandard;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -37,7 +37,8 @@ namespace eKasa.Core {
 		private void TypeUserButton_Click(object sender, RoutedEventArgs e) {
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
-				Process.Start("AutofillHelper.exe", $"s {entry.Username}");
+				var ips = new InputSimulator();
+				ips.Keyboard.TextEntry(entry.Username);
 				canvas.Children.Remove(this);
 			}
 		}
@@ -45,7 +46,8 @@ namespace eKasa.Core {
 		private void TypePwdButton_Click(object sender, RoutedEventArgs e) {
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
-				Process.Start("AutofillHelper.exe", $"s {entry.Password}");
+				var ips = new InputSimulator();
+				ips.Keyboard.TextEntry(entry.Password);
 				canvas.Children.Remove(this);
 			}
 		}
@@ -53,7 +55,10 @@ namespace eKasa.Core {
 		private void TypeCredsButton_Click(object sender, RoutedEventArgs e) {
 			if (entry != null) {
 				window.WindowState = WindowState.Minimized;
-				Process.Start("AutofillHelper.exe", $"m {entry.Username} {entry.Password}");
+				var ips = new InputSimulator();
+				ips.Keyboard.TextEntry(entry.Username);
+				ips.Keyboard.KeyPress(GregsStack.InputSimulatorStandard.Native.VirtualKeyCode.TAB);
+				ips.Keyboard.TextEntry(entry.Password);
 				canvas.Children.Remove(this);
 			}
 		}

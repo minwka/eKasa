@@ -63,7 +63,6 @@ eKasa, şifrelerinizi tek bir yerde güvenle saklayabilmek ve yönetebilmek içi
 | - | - | - |
 | Core | WPF | Ana uygulama |
 | Library | Class Library | Ortak özellik kütüphanesi |
-| AutofillHelper | WinForms | Oto-doldurma/yazma yardımcısı|
 | Installer | WPF | Kurulum sihirbazı |
 | Uninstaller | WPF | Kaldırma sihirbazı |
 
