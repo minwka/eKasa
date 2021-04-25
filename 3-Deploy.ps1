@@ -18,7 +18,6 @@ New-Item -ItemType Directory Install_Package\Binaries\Install\Temp
 #region Copy binaries and app files
 Copy-Item Binaries\7z\* Install_Package\Binaries\7z
 Copy-Item Executables\eKasa.exe Install_Package\Binaries\Install\Temp\eKasa.exe
-Copy-Item Executables\AutofillHelper.exe Install_Package\Binaries\Install\Temp\AutofillHelper.exe
 #endregion
 
 #region Copy Installer files
