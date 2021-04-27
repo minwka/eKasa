@@ -3,13 +3,20 @@ using System.Windows;
 using System.Windows.Controls;
 using static eKasa.Core.GlobalSettings;
 
-namespace eKasa.Core {
-	public partial class EditEntryView : UserControl {
+namespace eKasa.Core
+{
+	public partial class EditEntryView : UserControl
+	{
 		public EditEntryView() { InitializeComponent(); }
 
-		private void GenPwdButton_Click(object sender, RoutedEventArgs e) { var gpw = new PasswordGenWindow(); gpw.Show(); }
+		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
+		{
+			var gpw = new PasswordGenWindow();
+			gpw.Show();
+		}
 
-		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e) {
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		{
 			if (pwdToggle.IsChecked == true) {
 				clearPasswordInput.Text = passwordInput.Password;
 				clearPwdPreview.Text = pwdPreview.Password;
@@ -18,7 +25,8 @@ namespace eKasa.Core {
 				clearPasswordInput.Visibility = Visibility.Visible;
 				pwdPreview.Visibility = Visibility.Collapsed;
 				clearPwdPreview.Visibility = Visibility.Visible;
-			} else {
+			}
+			else {
 				passwordInput.Password = clearPasswordInput.Text;
 				pwdPreview.Password = clearPwdPreview.Text;
 
@@ -29,7 +37,8 @@ namespace eKasa.Core {
 			}
 		}
 
-		private void EditButton_Click(object sender, RoutedEventArgs e) {
+		private void EditButton_Click(object sender, RoutedEventArgs e)
+		{
 			try {
 				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPasswordInput.Text;
 
@@ -44,16 +53,17 @@ namespace eKasa.Core {
 						Password = passwordInput.Password == "" ? oldEntry.Password : passwordInput.Password
 					};
 
-					dbSettings.InternalDb.Entries.RemoveAt(ei);
-					dbSettings.InternalDb.Entries.Insert(ei, newEntry);
-					dbSettings.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
+					Database.InternalDb.Entries.RemoveAt(ei);
+					Database.InternalDb.Entries.Insert(ei, newEntry);
+					Database.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
 					HomeWindow.UpdateHomeView();
 				}
 
 				foreach (var child in mainGrid.Children) {
 					if (child.GetType() == typeof(TextBox)) {
 						((TextBox)child).Text = "";
-					} else if (child.GetType() == typeof(PasswordBox)) {
+					}
+					else if (child.GetType() == typeof(PasswordBox)) {
 						((PasswordBox)child).Password = "";
 					}
 				}
@@ -67,7 +77,8 @@ namespace eKasa.Core {
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
-		private void EditControl_Loaded(object sender, RoutedEventArgs e) {
+		private void EditControl_Loaded(object sender, RoutedEventArgs e)
+		{
 			nameInput.Focus();
 
 			var entry = (EntryModel)HomeWindow.homev.entriesDataGrid.SelectedItem;

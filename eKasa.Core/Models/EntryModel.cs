@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace eKasa.Core {
-	public record EntryModel {
+namespace eKasa.Core
+{
+	public record EntryModel
+	{
 		[JsonProperty("entry_id")]
 		public Guid Id { get; set; }
 

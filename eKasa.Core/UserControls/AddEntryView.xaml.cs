@@ -2,19 +2,27 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace eKasa.Core {
-	public partial class AddEntryView : UserControl {
+namespace eKasa.Core
+{
+	public partial class AddEntryView : UserControl
+	{
 		public AddEntryView() { InitializeComponent(); }
 
-		private void GenPwdButton_Click(object sender, RoutedEventArgs e) { var gpw = new PasswordGenWindow(); gpw.Show(); }
+		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
+		{
+			var gpw = new PasswordGenWindow();
+			gpw.Show();
+		}
 
-		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e) {
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		{
 			if (pwdToggle.IsChecked == true) {
 				clearPasswordInput.Text = passwordInput.Password;
 
 				passwordInput.Visibility = Visibility.Collapsed;
 				clearPasswordInput.Visibility = Visibility.Visible;
-			} else {
+			}
+			else {
 				passwordInput.Password = clearPasswordInput.Text;
 
 				passwordInput.Visibility = Visibility.Visible;
@@ -22,7 +30,8 @@ namespace eKasa.Core {
 			}
 		}
 
-		private void AddButton_Click(object sender, RoutedEventArgs e) {
+		private void AddButton_Click(object sender, RoutedEventArgs e)
+		{
 			try {
 				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPasswordInput.Text;
 
@@ -34,8 +43,8 @@ namespace eKasa.Core {
 					Tag = tagInput.Text
 				};
 
-				GlobalSettings.dbSettings.InternalDb.Entries.Add(newEntry);
-				GlobalSettings.dbSettings.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
+				Database.InternalDb.Entries.Add(newEntry);
+				Database.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
 				HomeWindow.UpdateHomeView();
 
 				foreach (var child in mainGrid.Children) {
@@ -58,6 +67,7 @@ namespace eKasa.Core {
 			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
 		}
 
-		private void CreateControl_Loaded(object sender, RoutedEventArgs e) { nameInput.Focus(); }
+		private void CreateControl_Loaded(object sender, RoutedEventArgs e)
+		{ nameInput.Focus(); }
 	}
 }

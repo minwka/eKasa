@@ -3,19 +3,23 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace eKasa.Core {
-	public partial class PasswordGenWindow : Window {
+namespace eKasa.Core
+{
+	public partial class PasswordGenWindow : Window
+	{
 		public PasswordGenWindow() { InitializeComponent(); }
 
 		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) DragMove(); }
 
-		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e) {
+		private void PwdToggle_CheckedChanged(object sender, RoutedEventArgs e)
+		{
 			if (pwdToggle.IsChecked == true) {
 				clearPasswordInput.Text = passwordInput.Password;
 
 				passwordInput.Visibility = Visibility.Collapsed;
 				clearPasswordInput.Visibility = Visibility.Visible;
-			} else {
+			}
+			else {
 				passwordInput.Password = clearPasswordInput.Text;
 
 				passwordInput.Visibility = Visibility.Visible;
@@ -23,7 +27,8 @@ namespace eKasa.Core {
 			}
 		}
 
-		private void PwdLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+		private void PwdLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+		{
 			if (pwdLength != null) {
 				pwdLength.Content = $"{(int)pwdLengthSlider.Value}";
 			}
@@ -31,7 +36,8 @@ namespace eKasa.Core {
 		}
 
 		string randomString = "";
-		private void GenPwdButton_Click(object sender, RoutedEventArgs e) {
+		private void GenPwdButton_Click(object sender, RoutedEventArgs e)
+		{
 			try {
 				const string uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 				const string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
@@ -56,7 +62,8 @@ namespace eKasa.Core {
 			}
 		}
 
-		private void SavePwdButton_Click(object sender, RoutedEventArgs e) {
+		private void SavePwdButton_Click(object sender, RoutedEventArgs e)
+		{
 			HomeWindow.addv.clearPasswordInput.Text = randomString;
 			HomeWindow.editv.clearPasswordInput.Text = randomString;
 			HomeWindow.addv.passwordInput.Password = randomString;

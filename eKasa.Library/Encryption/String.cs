@@ -4,12 +4,15 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace eKasa.Library.Encryption {
-	public static class String {
+namespace eKasa.Library.Encryption
+{
+	public static class String
+	{
 		private const int Keysize = 256;
 		private const int DerivationIterations = 1000;
 
-		static public string Encrypt(string message, string key) {
+		static public string Encrypt(string message, string key)
+		{
 			var saltStringBytes = Generate128BitsOfRandomEntropy();
 			var ivStringBytes = Generate128BitsOfRandomEntropy();
 			var plainTextBytes = Encoding.Unicode.GetBytes(message);
@@ -27,7 +30,8 @@ namespace eKasa.Library.Encryption {
 			return Convert.ToBase64String(cipherTextBytes);
 		}
 
-		static public string Decrypt(string message, string key) {
+		static public string Decrypt(string message, string key)
+		{
 			var cipherTextBytesWithSaltAndIv = Convert.FromBase64String(message);
 			var saltStringBytes = cipherTextBytesWithSaltAndIv.Take(Keysize / 16).ToArray();
 			var ivStringBytes = cipherTextBytesWithSaltAndIv.Skip(Keysize / 16).Take(Keysize / 16).ToArray();
@@ -44,7 +48,8 @@ namespace eKasa.Library.Encryption {
 			return Encoding.Unicode.GetString(plainTextBytes, 0, decryptedByteCount);
 		}
 
-		static private byte[] Generate128BitsOfRandomEntropy() {
+		static private byte[] Generate128BitsOfRandomEntropy()
+		{
 			var randomBytes = new byte[16];
 			using (var rngCsp = new RNGCryptoServiceProvider()) {
 				rngCsp.GetBytes(randomBytes);
@@ -52,7 +57,8 @@ namespace eKasa.Library.Encryption {
 			return randomBytes;
 		}
 
-		static public string Sha256(string input) {
+		static public string Sha256(string input)
+		{
 			using SHA256 sha256Hash = SHA256.Create(); byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
 			StringBuilder builder = new();

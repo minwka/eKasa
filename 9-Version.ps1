@@ -1,11 +1,14 @@
 #region Initialize script
-# Find project files in the directory
+# Find project files in the directory 
 Write-Host -Fore Yellow "Searching for projects..."
 $projects = Get-ChildItem -Filter *.csproj -File -Name -Recurse
-
+# and list them with their versions
 Write-Host -Fore Green "Found projects:"
 foreach ($project in $projects) {
-    Write-Host -Fore Blue "`t"$project
+    [xml]$xml = Get-Content $project -Encoding Default
+    $version = $xml.Project.PropertyGroup.Version
+    Write-Host -Fore Blue "`t$project --> " -NoNewline
+    Write-Host -Fore Yellow $version 
 }
 #endregion
 

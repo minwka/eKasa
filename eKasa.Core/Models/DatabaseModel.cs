@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace eKasa.Core {
-	public record DatabaseModel {
+namespace eKasa.Core
+{
+	public record DatabaseModel
+	{
 		[JsonProperty("database_name")]
 		public string Name { get; set; }
 
