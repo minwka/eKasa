@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace eKasa.Core
@@ -24,7 +25,10 @@ namespace eKasa.Core
 		static public void UpdateHomeView()
 		{
 			try {
-				homev.entriesDataGrid.ItemsSource = Database.InternalDb.Entries;
+				ListCollectionView lcv = new(Database.InternalDb.Entries);
+				lcv.GroupDescriptions.Add(new PropertyGroupDescription("Tag"));
+				homev.entriesDataGrid.ItemsSource = lcv;
+
 				homev.entriesDataGrid.Items.Refresh();
 
 				homev.UpdateDbHint();
@@ -50,6 +54,7 @@ namespace eKasa.Core
 			}
 		}
 
+		#region Sidebar Buttons
 		private void HomeButton_Click(object sender, RoutedEventArgs e)
 		{
 			contentCanvas.Children.Clear();
@@ -85,7 +90,9 @@ namespace eKasa.Core
 			contentCanvas.Children.Clear();
 			contentCanvas.Children.Add(appSettingsv);
 		}
+		#endregion
 
+		#region Window Actions
 		private void ChromeClose_Click(object sender, RoutedEventArgs e)
 		{ TerminateButton_Click(sender, e); }
 
@@ -99,5 +106,6 @@ namespace eKasa.Core
 				Application.Current.Shutdown();
 			}
 		}
+		#endregion
 	}
 }

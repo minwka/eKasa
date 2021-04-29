@@ -1,10 +1,13 @@
-﻿using Microsoft.Win32;
+﻿using GregsStack.InputSimulatorStandard;
+using GregsStack.InputSimulatorStandard.Native;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
 
@@ -12,12 +15,17 @@ namespace eKasa.Core
 {
 	public partial class HomeView : UserControl
 	{
+		Canvas canvas;
+		Grid grid;
+		Window window;
+
 		public HomeView()
 		{
 			InitializeComponent();
 
 			titleLabel.Text = $"Hoşgeldin, {Database.InternalDb.Owner}!";
 			entriesDataGrid.ItemsSource = Database.InternalDb.Entries;
+
 			UpdateDbHint();
 		}
 
@@ -32,15 +40,15 @@ namespace eKasa.Core
 			dbDataLabel.Content = $"DB: {idb.Name}, Son değişiklik: {modifiedDate} - {modifiedTime}";
 		}
 
-		private void OptionsButton_Click(object sender, RoutedEventArgs e)
+		private void HomeControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
-
-			var canvas = (Canvas)Parent;
-			var ouc = new ActionsView();
-			canvas.Children.Add(ouc);
+			canvas = (Canvas)Parent;
+			grid = (Grid)(canvas.Parent);
+			window = (Window)(grid.Parent);
+			HomeWindow.UpdateHomeView();
 		}
 
+		#region Primary Buttons
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
@@ -178,5 +186,95 @@ namespace eKasa.Core
 
 			} catch (Exception ex) { logger.Error(ex); }
 		}
+		#endregion
+
+		#region Context Menu Items
+		private void Autofill_ContextMenuItem(object sender, RoutedEventArgs e)
+		{
+			var entry = (EntryModel)entriesDataGrid.SelectedItem;
+			if (entry != null) {
+				window.WindowState = WindowState.Minimized;
+				var ips = new InputSimulator();
+				ips.Keyboard.TextEntry(entry.Username);
+				ips.Keyboard.KeyPress(VirtualKeyCode.TAB);
+				ips.Keyboard.TextEntry(entry.Password);
+			}
+		}
+
+		private void CopyPassword_ContextMenuItem(object sender, RoutedEventArgs e)
+		{
+			var entry = (EntryModel)entriesDataGrid.SelectedItem;
+			if (entriesDataGrid != null) {
+				Clipboard.SetText(entry.Password);
+				tooltipLabel.Content = "Şifre panoya kopyalandı!";
+			}
+		}
+
+		private void CopyUsername_ContextMenuItem(object sender, RoutedEventArgs e)
+		{
+			var entry = (EntryModel)entriesDataGrid.SelectedItem;
+			if (entriesDataGrid != null) {
+				Clipboard.SetText(entry.Username);
+				tooltipLabel.Content = "Kullanıcı adı panoya kopyalandı!";
+			}
+		}
+
+		private void TypeUsername_ContextMenuItem(object sender, RoutedEventArgs e)
+		{
+			var entry = (EntryModel)entriesDataGrid.SelectedItem;
+			if (entry != null) {
+				window.WindowState = WindowState.Minimized;
+				var ips = new InputSimulator();
+				ips.Keyboard.TextEntry(entry.Username);
+			}
+		}
+
+		private void TypePassword_ContextMenuItem(object sender, RoutedEventArgs e)
+		{
+			var entry = (EntryModel)entriesDataGrid.SelectedItem;
+			if (entry != null) {
+				window.WindowState = WindowState.Minimized;
+				var ips = new InputSimulator();
+				ips.Keyboard.TextEntry(entry.Password);
+			}
+		}
+
+		private void DeleteAll_ContextMenuItem(object sender, RoutedEventArgs e)
+		{
+			var ask = MessageBox.Show("Veritabanındaki TÜM KAYITLARI SİLMEK istediğinize emin misiniz?", "TÜM KAYITLARI SİL!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+			if (ask == MessageBoxResult.Yes) {
+				Database.InternalDb.Entries.Clear();
+				entriesDataGrid.ItemsSource = null;
+				entriesDataGrid.Items.Clear();
+				entriesDataGrid.Items.Refresh();
+
+				tooltipLabel.Content = "Tüm kayıtlar silindi!";
+			}
+		}
+		#endregion
+
+		#region Commands
+		private void Edit_Command(object sender, ExecutedRoutedEventArgs e)
+		{ EditButton_Click(sender, e); }
+
+		private void Delete_Command(object sender, ExecutedRoutedEventArgs e)
+		{ DeleteButton_Click(sender, e); }
+
+		private void Autofill_Command(object sender, ExecutedRoutedEventArgs e)
+		{ Autofill_ContextMenuItem(sender, e); }
+
+		private void CopyPassword_Command(object sender, ExecutedRoutedEventArgs e)
+		{ CopyPassword_ContextMenuItem(sender, e); }
+
+		private void TypePassword_Command(object sender, ExecutedRoutedEventArgs e)
+		{ TypePassword_ContextMenuItem(sender, e); }
+
+		private void CopyUsername_Command(object sender, ExecutedRoutedEventArgs e)
+		{ CopyUsername_ContextMenuItem(sender, e); }
+
+		private void TypeUsername_Command(object sender, ExecutedRoutedEventArgs e)
+		{ TypeUsername_ContextMenuItem(sender, e); }
+		#endregion
 	}
 }

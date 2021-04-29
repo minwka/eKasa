@@ -10,7 +10,7 @@
     <Company>NAMI</Company>
     <Authors>M. Ferit Uzun</Authors>
     <Description>eKasa. Kaldırma sihirbazı.</Description>
-    <Version>0.10.7.0</Version>
+    <Version>0.10.8.0</Version>
     <Copyright>NAMI. Tüm Hakları Saklıdır.</Copyright>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>

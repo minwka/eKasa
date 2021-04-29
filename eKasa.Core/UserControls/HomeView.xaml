@@ -1,9 +1,25 @@
 ﻿<UserControl x:Name="homeControl" x:Class="eKasa.Core.HomeView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" Foreground="White">
+				 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				 mc:Ignorable="d" Foreground="White" Loaded="HomeControl_Loaded">
+
+	<UserControl.Resources>
+		<Style x:Key="GroupHeaderStyle" TargetType="GroupItem">
+			<Setter Property="Foreground" Value="#FFF" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="GroupItem">
+						<StackPanel>
+							<TextBlock Text="{Binding Name}" Background="#202225" Foreground="#FFA91B" />
+							<ItemsPresenter />
+						</StackPanel>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
 
 	<Grid x:Name="mainGrid" Height="498" Width="733" Grid.Column="4">
 		<Grid.ColumnDefinitions>
@@ -33,8 +49,60 @@
 
 		<Separator x:Name="titleSeperator" VerticalAlignment="Top" Foreground="{x:Null}" Background="#FF7289DA" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" Grid.Row="1" Margin="10,10,10,0" Grid.RowSpan="2"/>
 
-		<DataGrid x:Name="entriesDataGrid" BorderBrush="#FF7289DA" FontSize="14" BorderThickness="0,0,0,0" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" AlternationCount="1" GridLinesVisibility="All" HorizontalGridLinesBrush="#FF7289DA" RowBackground="#FF2D2D30" AlternatingRowBackground="#FF363A3F" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="10,20,10,10" TabIndex="49" VerticalAlignment="Stretch" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="All" AutoGenerateColumns="False" MinColumnWidth="100" FontFamily="Exo 2 Light" VerticalGridLinesBrush="#7F7289DA" Background="{x:Null}">
+		<DataGrid x:Name="entriesDataGrid" BorderBrush="#FF7289DA" FontSize="14" BorderThickness="0,0,0,0" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" AlternationCount="1" GridLinesVisibility="All" HorizontalGridLinesBrush="#FF7289DA" RowBackground="#FF2D2D30" AlternatingRowBackground="#FF363A3F" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="10,20,10,10" TabIndex="49" VerticalAlignment="Stretch" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="All" AutoGenerateColumns="False" MinColumnWidth="100" FontFamily="Exo 2 Light" VerticalGridLinesBrush="#7F7289DA" Background="{x:Null}" SelectedItem="{Binding SelectedRow, Mode=TwoWay}" ClipboardCopyMode="None">
 			<DataGrid.Resources>
+				<RoutedUICommand x:Key="Edit"/>
+				<RoutedUICommand x:Key="Delete"/>
+				<RoutedUICommand x:Key="AutofillCredentials"/>
+				<RoutedUICommand x:Key="CopyPassword"/>
+				<RoutedUICommand x:Key="TypePassword"/>
+				<RoutedUICommand x:Key="CopyUsername"/>
+				<RoutedUICommand x:Key="TypeUsername"/>
+
+				<ContextMenu x:Key="RowMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+					<MenuItem Header="Hızlı Eylemler"  FontWeight="Bold" StaysOpenOnClick="True"/>
+					<Separator/>
+					<MenuItem Header="Düzenle" Click="EditButton_Click" InputGestureText="CTRL+E">
+						<MenuItem.Icon>
+							<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;" FontSize="15"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Sil" Click="DeleteButton_Click" InputGestureText="CTRL+D">
+						<MenuItem.Icon>
+							<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74D;" FontSize="15"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Şifreyi Kopyala" InputGestureText="CTRL+C" Click="CopyPassword_ContextMenuItem">
+						<MenuItem.Icon>
+							<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE730;" FontSize="15"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Diğer Eylemler" FontWeight="DemiBold">
+						<MenuItem.Icon>
+							<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="16"/>
+						</MenuItem.Icon>
+
+						<MenuItem Header="Bilgileri Otomatik Doldur" Click="Autofill_ContextMenuItem" FontWeight="Regular" InputGestureText="CTRL+X">
+							<MenuItem.Icon>
+								<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xF714;" FontSize="16"/>
+							</MenuItem.Icon>
+						</MenuItem>
+						<MenuItem Header="Şifreyi Yazdır" Click="TypePassword_ContextMenuItem" FontWeight="Regular" InputGestureText="CTRL+V">
+							<MenuItem.Icon>
+								<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE730;" FontSize="16"/>
+							</MenuItem.Icon>
+						</MenuItem>
+						<MenuItem Header="Kullanıcı Adını Kopyala" Click="CopyUsername_ContextMenuItem" FontWeight="Regular" InputGestureText="CTRL+A"/>
+						<MenuItem Header="Kullanıcı Adını Yazdır" Click="TypeUsername_ContextMenuItem" FontWeight="Regular" InputGestureText="CTRL+Z"/>
+						<Separator/>
+						<MenuItem Header="Tüm Kayıtları Sil" Click="DeleteAll_ContextMenuItem" FontWeight="Regular">
+							<MenuItem.Icon>
+								<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE750;" FontSize="16"/>
+							</MenuItem.Icon>
+						</MenuItem>
+					</MenuItem>
+				</ContextMenu>
+
 				<Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
 					<Setter Property="Background" Value="#00000000" />
 				</Style>
@@ -42,34 +110,73 @@
 					<Setter Property="Background" Value="#00000000" />
 				</Style>
 			</DataGrid.Resources>
+
+			<!-- Fix conflicting key presses issue -->
+			<DataGrid.InputBindings>
+				<KeyBinding Key="E" Modifiers="Ctrl" Command="{StaticResource Edit}" />
+				<KeyBinding Key="D" Modifiers="Ctrl" Command="{StaticResource Delete}" />
+				<KeyBinding Key="X" Modifiers="Ctrl" Command="{StaticResource AutofillCredentials}" />
+				<KeyBinding Key="C" Modifiers="Ctrl" Command="{StaticResource CopyPassword}" />
+				<KeyBinding Key="V" Modifiers="Ctrl" Command="{StaticResource TypePassword}" />
+				<KeyBinding Key="A" Modifiers="Ctrl" Command="{StaticResource CopyUsername}" />
+				<KeyBinding Key="Z" Modifiers="Ctrl" Command="{StaticResource TypeUsername}" />
+			</DataGrid.InputBindings>
+			<DataGrid.CommandBindings>
+				<CommandBinding Command="{StaticResource Edit}" Executed="Edit_Command" />
+				<CommandBinding Command="{StaticResource Delete}" Executed="Delete_Command" />
+				<CommandBinding Command="{StaticResource AutofillCredentials}" Executed="Autofill_Command" />
+				<CommandBinding Command="{StaticResource CopyPassword}" Executed="CopyPassword_Command" />
+				<CommandBinding Command="{StaticResource TypePassword}" Executed="TypePassword_Command" />
+				<CommandBinding Command="{StaticResource CopyUsername}" Executed="CopyUsername_Command" />
+				<CommandBinding Command="{StaticResource TypeUsername}" Executed="TypeUsername_Command" />
+			</DataGrid.CommandBindings>
+
+			<DataGrid.RowStyle>
+				<Style TargetType="DataGridRow">
+					<Setter Property="ContextMenu" Value="{StaticResource RowMenu}" />
+				</Style>
+			</DataGrid.RowStyle>
 			<DataGrid.Foreground>
-				<SolidColorBrush Color="#FFD9D9D9"/>
+				<SolidColorBrush Color="#FFD9D9D9" />
 			</DataGrid.Foreground>
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Kayıt Adı" Binding="{Binding Name}"/>
-				<DataGridTextColumn Header="Kullanıcı Adı" Binding="{Binding Username}"/>
-				<DataGridTextColumn Header="Etiket" Binding="{Binding Tag}"/>
+				<DataGridTextColumn Header="Kayıt Adı" Binding="{Binding Name}" />
+				<DataGridTextColumn Header="Kullanıcı Adı" Binding="{Binding Username}" />
+				<DataGridTextColumn Header="Etiket" Binding="{Binding Tag}" />
 			</DataGrid.Columns>
+			<DataGrid.GroupStyle>
+				<GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+					<GroupStyle.Panel>
+						<ItemsPanelTemplate>
+							<DataGridRowsPresenter />
+						</ItemsPanelTemplate>
+					</GroupStyle.Panel>
+				</GroupStyle>
+			</DataGrid.GroupStyle>
 		</DataGrid>
 
 		<Button x:Name="reloadButton" Content='Yenile' VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ReloadButton_Click" Grid.Row="10" Grid.Column="5" Margin="0,0,10,10" TabIndex="51" Style="{DynamicResource SuccessButton}" FontSize="13"/>
 
-		<Button x:Name="editButton" Content="Kaydı Düzenle" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="EditButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="52" Style="{DynamicResource WarningButton}" FontSize="13"/>
+		<Button x:Name="editButton" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="EditButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,10,10" TabIndex="52" Style="{DynamicResource OutlineWarningButton}" FontSize="13" Width="52"/>
 
-		<Button x:Name="actionsButton" Content="Eylemler" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="OptionsButton_Click" Grid.Row="10" Grid.Column="4" Margin="0,0,10,10" TabIndex="50" Style="{DynamicResource SecondaryButton}" FontSize="13"/>
+		<Button x:Name="deleteButton" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Stretch" HorizontalAlignment="Left" Click="DeleteButton_Click" Grid.Row="11" Grid.Column="5" Margin="0,0,70,10" TabIndex="53" Style="{DynamicResource OutlineDangerButton}" FontSize="13" Width="50"/>
 
-		<Button x:Name="deleteButton" Content="Kaydı Sil" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="DeleteButton_Click" Grid.Row="11" Grid.Column="4" Margin="0,0,10,10" TabIndex="53" Style="{DynamicResource DangerButton}" FontSize="13"/>
+		<Button x:Name="saveButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="SaveButton_Click" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="54" Style="{DynamicResource OutlineSuccessButton}" Grid.Column="4" IsDefault="True">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74E;" FontSize="24"/>
+				<Label Content="Kaydet" FontSize="13" Margin="5,0,0,0" Foreground="#42B27F"/>
+			</StackPanel>
+		</Button>
 
-		<Button x:Name="saveButton" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" FontSize="24" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="SaveButton_Click" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="54" Style="{DynamicResource OutlineSuccessButton}" Width="40" Grid.Column="3" IsDefault="True"/>
+		<Button x:Name="lockButton" Content="Veritabanını Kilitle" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="LockButton_Click" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="55" Style="{DynamicResource OutlineDangerButton}" IsCancel="True" Grid.Column="4" Grid.RowSpan="1"/>
 
-		<Button x:Name="lockButton" FontFamily="Segoe MDL2 Assets" Content="&#xE72E;" FontSize="24" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="LockButton_Click" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="55" Width="40" Style="{DynamicResource OutlineDangerButton}" IsCancel="True" Grid.Column="3" Grid.RowSpan="1"/>
+		<Button x:Name="exportButton" FontFamily="Segoe MDL2 Assets" Content="&#xE8E5;" FontSize="24" HorizontalAlignment="Right" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="56" Style="{DynamicResource OutlineWarningButton}" Width="40" Grid.Column="3" Click="ExportButton_Click"/>
 
-		<Button x:Name="exportButton" FontFamily="Segoe MDL2 Assets" Content="&#xE8E5;" FontSize="24" HorizontalAlignment="Right" Grid.Row="10" Grid.ColumnSpan="1" Margin="0,0,60,10" TabIndex="56" Style="{DynamicResource OutlineWarningButton}" Width="40" Grid.Column="3" Click="ExportButton_Click"/>
-
-		<Button x:Name="importButton" FontFamily="Segoe MDL2 Assets" Content="&#xE896;" FontSize="24" HorizontalAlignment="Right" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,60,10" TabIndex="57" Width="40" Style="{DynamicResource OutlineWarningButton}" Grid.Column="3" Grid.RowSpan="1" Click="ImportButton_Click"/>
+		<Button x:Name="importButton" FontFamily="Segoe MDL2 Assets" Content="&#xE896;" FontSize="24" HorizontalAlignment="Right" Grid.Row="11" Grid.ColumnSpan="1" Margin="0,0,10,10" TabIndex="57" Width="40" Style="{DynamicResource OutlineWarningButton}" Grid.Column="3" Grid.RowSpan="1" Click="ImportButton_Click"/>
 
 		<Label x:Name="tooltipLabel" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF7289DA" FontSize="13" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,110,-20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Padding="5,0,5,10" Background="{x:Null}" FontFamily="Exo 2"/>
 
 		<Label x:Name="dbDataLabel" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF7289DA" Background="{x:Null}" FontSize="13" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,110,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Padding="5,0,5,5" Grid.RowSpan="2" FontFamily="Exo 2"/>
 	</Grid>
+
 </UserControl>
