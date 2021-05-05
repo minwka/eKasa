@@ -45,7 +45,7 @@ namespace eKasa.Core
 
 				Database.InternalDb.Entries.Add(newEntry);
 				Database.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
-				HomeWindow.UpdateHomeView();
+				HomeWindow.homeView.UpdateHomeView();
 
 				foreach (var child in mainGrid.Children) {
 					if (child.GetType() == typeof(TextBox)) {
@@ -57,13 +57,11 @@ namespace eKasa.Core
 				}
 
 				if (stayHereToggle.IsChecked == false) {
-					var parent = (Canvas)Parent;
-					parent.Children.Clear();
-					parent.Children.Add(HomeWindow.homev);
+					((ContentControl)Parent).Content = HomeWindow.homeView;
 				}
 
 				nameInput.Focus();
-				HomeWindow.homev.tooltipLabel.Content = "Kayıt eklendi!";
+				HomeWindow.homeView.tooltipLabel.Content = "Kayıt eklendi!";
 			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
 		}
 

@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Initializer" Height="250" Width="475" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderBrush="#FF7289DA" Background="#FF202225" BorderThickness="1,1,10,1" MouseDown="MainWindow_MouseDown" Closing="MainWindow_Closing" FontFamily="Exo 2" Foreground="#FF7289DA">
+        Title="Initializer" Height="250" Width="475" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderBrush="#FF7289DA" Background="#FF202225" BorderThickness="1,1,10,1" MouseDown="UnlockWindow_MouseDown" Closing="UnlockWindow_Closing" FontFamily="Exo 2" Foreground="#FF7289DA">
 
 	<WindowChrome.WindowChrome>
 		<WindowChrome ResizeBorderThickness="0" CaptionHeight="0"/>
@@ -39,7 +39,7 @@
 		<CheckBox x:Name="rememberDb" Content="Veritabanını Hatırla" FontSize="15" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Center" TabIndex="27" Margin="-10,0,0,0" TextBlock.Foreground="#FF7289DA"/>
 		<Button x:Name="confirmButton" Content="Aç" Height="30" FontSize="13" Click="ConfirmButton_Click" IsDefault="True" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,10,10" TabIndex="22" Style="{DynamicResource PrimaryButton}" Grid.ColumnSpan="1"/>
 		<Button x:Name="createButton" Content="Yeni Veritabanı" Height="30" FontSize="13" Click="CreateButton_Click" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,0,10,10" TabIndex="23" Style="{DynamicResource SecondaryButton}" Width="100"/>
-		<Button x:Name="terminateButton" Content="Çık" FontSize="13" Click="TerminateButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,10" TabIndex="25" Style="{DynamicResource OutlineDangerButton}" IsCancel="True" Width="50"/>
+		<Button x:Name="terminateButton" Content="Çık" FontSize="13" Click="Terminate" VerticalAlignment="Stretch" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,10" TabIndex="25" Style="{DynamicResource OutlineDangerButton}" IsCancel="True" Width="50"/>
 		<Button x:Name="helpButton" Content="Yardım" FontSize="13" Click="HelpButton_Click" Grid.Row="5" Margin="70,0,0,10" TabIndex="24" Style="{DynamicResource OutlineWarningButton}" Grid.Column="0" HorizontalAlignment="Left" Width="50" Grid.ColumnSpan="2"/>
 	</Grid>
 </Window>

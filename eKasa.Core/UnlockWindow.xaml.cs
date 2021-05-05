@@ -24,9 +24,29 @@ namespace eKasa.Core
 			}
 		}
 
-		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
-		{ if (e.ChangedButton == MouseButton.Left) DragMove(); }
+		private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (pwdToggle.IsChecked == true) passwordInput.Password = clearPwdInput.Text;
 
+			try {
+				if (Database.FromJson(ofd.FileName).PwdHash == Sha256(passwordInput.Password)) {
+					Database.FilePath = ofd.FileName;
+					Database.Password = passwordInput.Password;
+					Database.Restore();
+
+					HomeWindow mdbw = new();
+					mdbw.Show();
+					Close();
+				}
+				else {
+					MessageBox.Show("Yanlış ya da boş şifre veya geçersiz veritabanı dosyası belirttiniz!", "Hata!", MessageBoxButton.OK, MessageBoxImage.Warning);
+					passwordInput.Password = "";
+					clearPwdInput.Text = "";
+				}
+			} catch (Exception ex) { logger.Error(ex); }
+		}
+
+		#region Window Actions
 		private void CreateButton_Click(object sender, RoutedEventArgs e)
 		{
 			NewDbWindow cdb = new();
@@ -45,9 +65,6 @@ namespace eKasa.Core
 			HelpWindow hw = new();
 			hw.Show();
 		}
-
-		private void TerminateButton_Click(object sender, RoutedEventArgs e)
-		{ Application.Current.Shutdown(); }
 
 		private void PickerButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -75,29 +92,10 @@ namespace eKasa.Core
 			}
 		}
 
-		private void ConfirmButton_Click(object sender, RoutedEventArgs e)
-		{
-			if (pwdToggle.IsChecked == true) passwordInput.Password = clearPwdInput.Text;
+		private void UnlockWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		{ if (e.ChangedButton == MouseButton.Left) DragMove(); }
 
-			try {
-				if (Database.FromJson(ofd.FileName).PwdHash == Sha256(passwordInput.Password)) {
-					Database.FilePath = ofd.FileName;
-					Database.Password = passwordInput.Password;
-					Database.Restore();
-
-					HomeWindow mdbw = new();
-					mdbw.Show();
-					Close();
-				}
-				else {
-					MessageBox.Show("Yanlış ya da boş şifre veya geçersiz veritabanı dosyası belirttiniz!", "Hata!", MessageBoxButton.OK, MessageBoxImage.Warning);
-					passwordInput.Password = "";
-					clearPwdInput.Text = "";
-				}
-			} catch (Exception ex) { logger.Error(ex); }
-		}
-
-		private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void UnlockWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if (rememberDb.IsChecked == true) { appSettings.RememberLastDb = true; }
 			else { appSettings.RememberLastDb = false; }
@@ -106,5 +104,10 @@ namespace eKasa.Core
 
 			SettingsManager<AppSettingsModel>.Save(appSettings, appSettingsPath);
 		}
+
+		private void Terminate(object sender, RoutedEventArgs e)
+		{ Application.Current.Shutdown(); }
+
+		#endregion
 	}
 }

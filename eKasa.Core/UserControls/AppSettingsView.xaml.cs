@@ -52,18 +52,19 @@ namespace eKasa.Core
 
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
-			try {
-				if (pwdToggle.IsChecked == true) pwdInput.Password = clearPwdInput.Text;
+			if (pwdToggle.IsChecked == true) pwdInput.Password = clearPwdInput.Text;
 
+			try {
 				ref var idb = ref Database.InternalDb;
 				idb.Name = string.IsNullOrEmpty(nameInput.Text) ? idb.Name : nameInput.Text;
 				idb.Owner = string.IsNullOrEmpty(ownerInput.Text) ? idb.Owner : ownerInput.Text;
 				idb.PwdHash = string.IsNullOrEmpty(pwdInput.Password) ? idb.PwdHash : Sha256(pwdInput.Password);
 				Database.Password = string.IsNullOrEmpty(pwdInput.Password) ? Database.Password : pwdInput.Password;
+				Database.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
 				Database.Save();
 
 				UpdateSettingsInfo();
-				HomeWindow.UpdateHomeView();
+				HomeWindow.homeView.UpdateHomeView();
 
 				pwdInput.Password = "";
 				clearPwdInput.Text = "";

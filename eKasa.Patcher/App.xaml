@@ -1,0 +1,162 @@
+﻿<Application x:Class="eKasa.Patcher.App"
+				 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				 StartupUri="Startup.xaml">
+
+	<Application.Resources>
+
+		<Style x:Key="PrimaryButton" TargetType="Button">
+			<Setter Property="OverridesDefaultStyle" Value="True" />
+			<Setter Property="FontFamily" Value="Exo 2 Light" />
+			<Setter Property="Foreground" Value="#FFFFFFFF" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#7289DA" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#7289DA" Duration="0" />
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="MouseOver">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#6478BF" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#6478BF" Duration="0" />
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#596AA6" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#596AA6" Duration="0" />
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Rectangle Name="backgroundElement" Fill="#7289DA" Stroke="#7289DA" RadiusX="3" RadiusY="3" />
+							<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style x:Key="SuccessButton" TargetType="Button">
+			<Setter Property="OverridesDefaultStyle" Value="True" />
+			<Setter Property="FontFamily" Value="Exo 2 Light" />
+			<Setter Property="Foreground" Value="#FFFFFF" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#42B27F" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#42B27F" Duration="0" />
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="MouseOver">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#39996D" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#39996D" Duration="0" />
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#2F805B" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#2F805B" Duration="0" />
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Rectangle Name="backgroundElement" Fill="#42B27F" Stroke="#42B27F" RadiusX="3" RadiusY="3" />
+							<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		
+		<Style x:Key="OutlineWarningButton" TargetType="Button">
+			<Setter Property="OverridesDefaultStyle" Value="True" />
+			<Setter Property="FontFamily" Value="Exo 2 Light" />
+			<Setter Property="Foreground" Value="#FFA91B" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#2C2F33" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#FFA91B" Duration="0" />
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="MouseOver">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#363A3F" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#E59818" Duration="0" />
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#202225" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#CC8716" Duration="0" />
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Rectangle Name="backgroundElement" Fill="#2C2F33" Stroke="#FFA91B" RadiusX="3" RadiusY="3" />
+							<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		
+		<Style x:Key="OutlineDangerButton" TargetType="Button">
+			<Setter Property="OverridesDefaultStyle" Value="True" />
+			<Setter Property="FontFamily" Value="Exo 2 Light" />
+			<Setter Property="Foreground" Value="#F24848" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#2C2F33" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#F24848" Duration="0" />
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="MouseOver">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#363A3F" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#D84040" Duration="0" />
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#202225" Duration="0" />
+											<ColorAnimation Storyboard.TargetName="backgroundElement" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" To="#C03939" Duration="0" />
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Rectangle Name="backgroundElement" Fill="#2C2F33" Stroke="#7289DA" RadiusX="3" RadiusY="3" />
+							<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+	</Application.Resources>
+
+</Application>

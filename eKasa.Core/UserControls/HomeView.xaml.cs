@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using static eKasa.Core.GlobalSettings;
 using static eKasa.Library.Encryption.String;
@@ -15,9 +16,9 @@ namespace eKasa.Core
 {
 	public partial class HomeView : UserControl
 	{
-		Canvas canvas;
+		ContentControl content;
 		Grid grid;
-		Window window;
+		HomeWindow window;
 
 		public HomeView()
 		{
@@ -25,8 +26,34 @@ namespace eKasa.Core
 
 			titleLabel.Text = $"Hoşgeldin, {Database.InternalDb.Owner}!";
 			entriesDataGrid.ItemsSource = Database.InternalDb.Entries;
-
 			UpdateDbHint();
+		}
+
+		private void HomeControl_Loaded(object sender, RoutedEventArgs e)
+		{
+			content = (ContentControl)Parent;
+			grid = (Grid)(content.Parent);
+			window = (HomeWindow)(grid.Parent);
+		}
+
+		private void EntriesDataGrid_Loaded(object sender, RoutedEventArgs e)
+		{
+			ListCollectionView lcv = new(Database.InternalDb.Entries);
+			lcv.GroupDescriptions.Add(new PropertyGroupDescription("Tag"));
+			entriesDataGrid.ItemsSource = lcv;
+		}
+
+		#region Helper Methods
+		public void UpdateHomeView()
+		{
+			try {
+				EntriesDataGrid_Loaded(null, null);
+				entriesDataGrid.Items.Refresh();
+				entriesDataGrid.SelectedIndex = -1;
+
+				UpdateDbHint();
+				tooltipLabel.Content = "Veritabanı yenilendi!";
+			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
 		}
 
 		public void UpdateDbHint()
@@ -35,28 +62,18 @@ namespace eKasa.Core
 			var modifiedDate = Convert.ToDateTime(idb.ModifiedDate).ToLocalTime().ToShortDateString();
 			var modifiedTime = Convert.ToDateTime(idb.ModifiedDate).ToLocalTime().ToShortTimeString();
 
-			entriesDataGrid.SelectedIndex = -1;
 			titleLabel.Text = $"Hoşgeldin, {idb.Owner}!";
 			dbDataLabel.Content = $"DB: {idb.Name}, Son değişiklik: {modifiedDate} - {modifiedTime}";
 		}
+		#endregion
 
-		private void HomeControl_Loaded(object sender, RoutedEventArgs e)
-		{
-			canvas = (Canvas)Parent;
-			grid = (Grid)(canvas.Parent);
-			window = (Window)(grid.Parent);
-			HomeWindow.UpdateHomeView();
-		}
-
-		#region Primary Buttons
+		#region Primary Actions
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (entriesDataGrid.SelectedIndex == -1) entriesDataGrid.SelectedIndex = 0;
 
 			if ((EntryModel)entriesDataGrid.SelectedItem != null) {
-				var parent = (Canvas)Parent;
-				parent.Children.Clear();
-				parent.Children.Add(HomeWindow.editv);
+				window.DisplayContent.Content = HomeWindow.editView;
 			}
 		}
 
@@ -66,7 +83,7 @@ namespace eKasa.Core
 
 			Database.InternalDb.Entries.Remove((EntryModel)entriesDataGrid.SelectedItem);
 			Database.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
-			HomeWindow.UpdateHomeView();
+			UpdateHomeView();
 
 			tooltipLabel.Content = "Kayıt silindi!";
 		}
@@ -78,7 +95,7 @@ namespace eKasa.Core
 			try {
 				if (r == MessageBoxResult.Yes) {
 					Database.Restore();
-					HomeWindow.UpdateHomeView();
+					UpdateHomeView();
 					tooltipLabel.Content = "Veritabanı yenilendi!";
 				}
 			} catch (Exception ex) { logger.Error(ex); }
@@ -90,7 +107,7 @@ namespace eKasa.Core
 				Database.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
 
 				Database.Save();
-				HomeWindow.UpdateHomeView();
+				UpdateHomeView();
 				tooltipLabel.Content = "Veritabanı kaydedildi!";
 			} catch (Exception ex) { logger.Error(ex); }
 		}
@@ -174,6 +191,7 @@ namespace eKasa.Core
 						Database.InternalDb.PwdHash = Sha256("password");
 						entriesDataGrid.ItemsSource = Database.InternalDb.Entries;
 						entriesDataGrid.Items.Refresh();
+						UpdateHomeView();
 
 						var dbPath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName) + ".fdbx");
 						Database.FilePath = dbPath;

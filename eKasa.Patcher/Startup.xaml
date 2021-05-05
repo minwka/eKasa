@@ -1,0 +1,25 @@
+﻿<Window x:Name="HostWindow" x:Class="eKasa.Patcher.Startup"
+		  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		  mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="400" WindowStyle="None" Foreground="#FF7289DA" Background="#FF202225" WindowStartupLocation="CenterScreen" TabIndex="0" BorderBrush="#FF7289DA" BorderThickness="1,1,1,1" ResizeMode="NoResize" MouseDown="HostWindow_MouseDown" FontFamily="Exo 2 Light">
+
+	<Grid x:Name="HostGrid">
+
+		<TextBlock x:Name="WindowTitle" Margin="10,10,10,0" Text="Güncelleme Merkezi" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="28" FontFamily="Montserrat Medium"/>
+		<Separator Margin="10,52,10,0" Height="5" VerticalAlignment="Top" Background="#FF7289DA"/>
+		<TextBlock x:Name="UpdateStatus" Margin="10,62,10,0" Text="Güncelleme Durumu Bilinmiyor" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"/>
+		<TextBlock x:Name="VersionInfo" Margin="10,94,10,0" Text="Yüklü sürüm: {0}" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
+		<ScrollViewer x:Name="ScrollViewer" HorizontalAlignment="Center" Height="299" Margin="0,118,0,0" VerticalAlignment="Top" Width="378" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+			<TextBlock x:Name="ReleaseDescription" TextWrapping="Wrap" Width="378"/>
+		</ScrollViewer>
+		<TextBlock x:Name="PatchStatus" Margin="10,422,10,0" Text="Güncelleme durumu bilinmiyor" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="Hidden"/>
+		<ProgressBar x:Name="PatchProgress" HorizontalAlignment="Center" Height="15" Margin="0,443,0,0" VerticalAlignment="Top" Width="378" Background="#FF363A3F" BorderBrush="{x:Null}" Foreground="#FF7289DA" Visibility="Hidden"/>
+		<Button x:Name="CheckPatchButton" Content="Kontrol Et" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="25" Width="150" TabIndex="20" Style="{DynamicResource PrimaryButton}" Click="CheckUpdatesButton"/>
+		<Button x:Name="QuitButton" Content="Çık" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Height="25" Width="80" TabIndex="21" Style="{DynamicResource OutlineDangerButton}" Click="QuitButton_Click"/>
+
+	</Grid>
+
+</Window>

@@ -1,105 +1,86 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Data;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace eKasa.Core
 {
 	public partial class HomeWindow : Window
 	{
-		#region UserControls
-		readonly static public HomeView homev = new();
-		readonly static public AddEntryView addv = new();
-		readonly static public EditEntryView editv = new();
-		readonly static public AboutAppView aboutv = new();
-		readonly static public AppSettingsView appSettingsv = new();
+		#region Views
+		readonly static public HomeView homeView = new();
+		readonly static public AddEntryView addView = new();
+		readonly static public EditEntryView editView = new();
+		readonly static public AboutAppView aboutView = new();
+		readonly static public AppSettingsView appSettingsView = new();
 		#endregion
 
 		public HomeWindow()
 		{
 			InitializeComponent();
-			contentCanvas.Children.Add(homev);
-			chromeDbTitle.Content = $"{Database.InternalDb.Owner} • {Database.InternalDb.Name}";
+			DisplayContent.Content = homeView;
+			windowDbTitle.Content = $"{Database.InternalDb.Owner} • {Database.InternalDb.Name}";
 		}
 
-		static public void UpdateHomeView()
+		private void Navigate(object sender, RoutedEventArgs e)
 		{
-			try {
-				ListCollectionView lcv = new(Database.InternalDb.Entries);
-				lcv.GroupDescriptions.Add(new PropertyGroupDescription("Tag"));
-				homev.entriesDataGrid.ItemsSource = lcv;
+			var source = sender as Button;
 
-				homev.entriesDataGrid.Items.Refresh();
+			switch (source.TabIndex) {
+				case 10:
+					DisplayContent.Content = homeView;
+					break;
 
-				homev.UpdateDbHint();
-				homev.entriesDataGrid.SelectedIndex = -1;
-				homev.tooltipLabel.Content = "Veritabanı yenilendi!";
-			} catch (Exception ex) { GlobalSettings.logger.Error(ex); }
+				case 11:
+					DisplayContent.Content = addView;
+					break;
+
+				case 12:
+					DisplayContent.Content = editView;
+					break;
+
+				case 13:
+					HelpWindow hw = new();
+					hw.Show();
+					break;
+
+				case 14:
+					DisplayContent.Content = aboutView;
+					break;
+
+				case 15:
+					DisplayContent.Content = appSettingsView;
+					break;
+
+				default:
+					break;
+			}
 		}
 
-		private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		#region Window Actions
+		private void HomeWindow_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left) {
 				DragMove();
-				homev.tooltipLabel.Content = "";
-				appSettingsv.tooltipLabel.Content = "";
+				homeView.tooltipLabel.Content = "";
+				appSettingsView.tooltipLabel.Content = "";
 			}
 		}
 
-		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+		private void HomeWindow_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.Key == Key.System && e.SystemKey == Key.F4) {
 				e.Handled = true;
-				TerminateButton_Click(sender, e);
+				Terminate(sender, e);
 			}
 		}
 
-		#region Sidebar Buttons
-		private void HomeButton_Click(object sender, RoutedEventArgs e)
-		{
-			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(homev);
-		}
+		private void WindowClose_Click(object sender, RoutedEventArgs e)
+		{ Terminate(sender, e); }
 
-		private void CreateButton_Click(object sender, RoutedEventArgs e)
-		{
-			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(addv);
-		}
-
-		private void EditButton_Click(object sender, RoutedEventArgs e)
-		{
-			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(editv);
-		}
-
-		private void AboutButton_Click(object sender, RoutedEventArgs e)
-		{
-			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(aboutv);
-		}
-
-		private void HelpButton_Click(object sender, RoutedEventArgs e)
-		{
-			HelpWindow hw = new();
-			hw.Show();
-		}
-
-		private void SettingsButton_Click(object sender, RoutedEventArgs e)
-		{
-			contentCanvas.Children.Clear();
-			contentCanvas.Children.Add(appSettingsv);
-		}
-		#endregion
-
-		#region Window Actions
-		private void ChromeClose_Click(object sender, RoutedEventArgs e)
-		{ TerminateButton_Click(sender, e); }
-
-		private void ChromeMinimize_Click(object sender, RoutedEventArgs e)
+		private void WindowMinimize_Click(object sender, RoutedEventArgs e)
 		{ WindowState = WindowState.Minimized; }
 
-		private void TerminateButton_Click(object sender, RoutedEventArgs e)
+		private void Terminate(object sender, RoutedEventArgs e)
 		{
 			var r = MessageBox.Show("Uygulamadan çıkmak istediğinize emin misiniz?\nKaydedilmemiş tüm değişiklikleriniz kaybolacaktır!", "Çıkışı onayla!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 			if (r == MessageBoxResult.Yes) {

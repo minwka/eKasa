@@ -42,9 +42,8 @@ namespace eKasa.Core
 			try {
 				if (pwdToggle.IsChecked == true) passwordInput.Password = clearPasswordInput.Text;
 
-				var oldEntry = (EntryModel)HomeWindow.homev.entriesDataGrid.SelectedItem;
+				var oldEntry = (EntryModel)HomeWindow.homeView.entriesDataGrid.SelectedItem;
 				if (oldEntry != null) {
-					var ei = HomeWindow.homev.entriesDataGrid.SelectedIndex;
 					EntryModel newEntry = new() {
 						Id = Guid.NewGuid(),
 						Name = nameInput.Text,
@@ -53,10 +52,11 @@ namespace eKasa.Core
 						Password = passwordInput.Password == "" ? oldEntry.Password : passwordInput.Password
 					};
 
-					Database.InternalDb.Entries.RemoveAt(ei);
-					Database.InternalDb.Entries.Insert(ei, newEntry);
+					Database.InternalDb.Entries.Remove(oldEntry);
+					Database.InternalDb.Entries.Add(newEntry);
+
 					Database.InternalDb.ModifiedDate = DateTime.UtcNow.ToString();
-					HomeWindow.UpdateHomeView();
+					HomeWindow.homeView.UpdateHomeView();
 				}
 
 				foreach (var child in mainGrid.Children) {
@@ -69,11 +69,10 @@ namespace eKasa.Core
 				}
 				pwdToggle.IsChecked = false;
 
-				var parent = (Canvas)Parent;
-				parent.Children.Clear();
-				parent.Children.Add(HomeWindow.homev);
+				var parent = (ContentControl)Parent;
+				parent.Content = HomeWindow.homeView;
 
-				HomeWindow.homev.tooltipLabel.Content = "Kayıt düzenlendi!";
+				HomeWindow.homeView.tooltipLabel.Content = "Kayıt düzenlendi!";
 			} catch (Exception ex) { logger.Error(ex); }
 		}
 
@@ -81,7 +80,7 @@ namespace eKasa.Core
 		{
 			nameInput.Focus();
 
-			var entry = (EntryModel)HomeWindow.homev.entriesDataGrid.SelectedItem;
+			var entry = (EntryModel)HomeWindow.homeView.entriesDataGrid.SelectedItem;
 			if (entry != null) {
 				idPreview.Text = entry.Id.ToString();
 				namePreview.Text = entry.Name;
