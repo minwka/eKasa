@@ -31,7 +31,7 @@
 			<Separator x:Name="verticalSeperator" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF7289DA" />
 		</StackPanel>
 
-		<TextBlock x:Name="titleLabel" Text="Hakkında" TextWrapping="Wrap" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Grid.ColumnSpan="6" Margin="10,10,10,0" Grid.RowSpan="2"/>
+		<TextBlock x:Name="titleLabel" Text="Hakkında" TextWrapping="Wrap" FontSize="30" FontFamily="Montserrat Medium" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Grid.ColumnSpan="6" Margin="10,10,10,0" Grid.RowSpan="2"/>
 		<Separator x:Name="titleSeperator" VerticalAlignment="Top" Grid.Row="1" Margin="10,10,10,0" Grid.ColumnSpan="6"/>
 		<TextBlock x:Name="productTitle" Text="Ürün Hakkında" TextWrapping="Wrap" FontSize="20" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
 		<TextBlock x:Name="applicationTitle" Text="Uygulama Hakkında" TextWrapping="Wrap" FontSize="20" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10,0,0,0"/>

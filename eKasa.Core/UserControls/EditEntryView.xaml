@@ -31,7 +31,7 @@
 			<Separator x:Name="verticalSeperator" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF7289DA" />
 		</StackPanel>
 
-		<TextBlock x:Name="titleLabel" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2" Margin="10,10,10,0" Text="Düzenle" TextWrapping="Wrap" FontSize="30" FontFamily="Segoe UI Emoji" FontWeight="Bold" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+		<TextBlock x:Name="titleLabel" Grid.ColumnSpan="6" Grid.RowSpan="2" Margin="10,10,10,0" Text="Düzenle" TextWrapping="Wrap" FontSize="30" FontFamily="Montserrat Medium" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
 		<Separator x:Name="titleSeperator" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1" Margin="10,10,10,0" VerticalAlignment="Top"/>
 		<Label x:Name="updateTitle" Content="Güncellenecek Kayıt" VerticalAlignment="Stretch" Background="{x:Null}" FontSize="16" HorizontalAlignment="Stretch" Grid.Row="2" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
 		<Label x:Name="idTitle" Content="Kimlik:" Margin="10,0,0,0" Background="{x:Null}" FontSize="16" Grid.Row="4" d:LayoutOverrides="Width"/>

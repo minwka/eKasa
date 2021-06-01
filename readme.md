@@ -1,5 +1,5 @@
 <h1 align="center" id="title">
- eKasa: Şifre Yönetici <a href="https://github.com/minwka/eKasa"><img title="Version" src="https://img.shields.io/badge/Sürüm-0.10.8.0-blue.svg"></a>
+ eKasa: Şifre Yönetici <a href="https://github.com/minwka/eKasa"><img title="Version" src="https://img.shields.io/badge/Sürüm-0.10.10.0-blue.svg"></a>
 </h1>
 
 <p align="center" id="version">
@@ -35,6 +35,7 @@ eKasa, şifrelerinizi tek bir yerde güvenle saklayabilmek ve yönetebilmek içi
 - Veritabanı hatırlama
 - Kayıt gruplandırma ve sıralama
 - Şifre oluşturma yardımcısı
+- İnternet üzerinden güncelleme alma
 - Taşınabilir `*.fdbx` | `*.json` veritabanı
 - Kurulum gerektirmeyen taşınabilir uygulama
 
@@ -63,6 +64,7 @@ eKasa, şifrelerinizi tek bir yerde güvenle saklayabilmek ve yönetebilmek içi
 | - | - | - |
 | Core | WPF | Ana uygulama |
 | Library | Class Library | Ortak özellik kütüphanesi |
+| Patcher | WPF | Güncelleme sihirbazı |
 | Installer | WPF | Kurulum sihirbazı |
 | Uninstaller | WPF | Kaldırma sihirbazı |
 
